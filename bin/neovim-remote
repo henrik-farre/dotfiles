@@ -1,0 +1,21 @@
+#!/usr/bin/env python2
+# https://github.com/lahwran/dotfiles/blob/master/bin/nvim-inner
+# https://gist.github.com/tarruda/37f7a3e22996addf8921
+from neovim import attach
+import sys
+import os
+
+addr = os.environ.get("NVIM_LISTEN_ADDRESS", None)
+if not addr:
+    os.execvp('nvim', args)
+
+nvim = attach("socket", path=addr)
+
+files = []
+
+for argument in sys.argv[1:]:
+    files.append(os.path.abspath(argument))
+
+command = "drop " + " ".join(files)
+
+nvim.command(command)

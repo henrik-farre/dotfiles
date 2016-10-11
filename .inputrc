@@ -1,0 +1,43 @@
+# Only used by apps that use readline, i.e. not zsh
+
+# show all if more than one match
+set show-all-if-ambiguous on
+# ignore case
+set completion-ignore-case on
+# ignores difference between - and _
+set completion-map-case on
+# show all posibilities
+set completion-query-items -1
+set visible-stats on
+
+# Do history expansion when space entered
+## Space: magic-space
+
+# fra http://dotfiles.org/~brendano/.inputrc
+## Prefix search!  Type "s" then press up -- only search through history that
+### started with "s" -- e.g. "ssh", "source", etc.
+###
+### Since this is .inputrc, this is automatically turned on for many different
+### programs: bash, irb, python, etc etc.  sweet.
+#
+##"\C-p": history-search-backward
+##"\C-n": history-search-forward
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\eOA": history-search-backward
+"\eOB": history-search-forward
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# fra http://viget.com/extend/level-up-your-shell-game
+# By adding this line you can instead use tab to cycle through all the possible completions stopping on which ever one is the correct one.
+# Makes completion match the first result somehow...
+#"\t": menu-complete
+
+$include /etc/inputrc

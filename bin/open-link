@@ -1,0 +1,31 @@
+#!/bin/bash
+
+URL=$1
+
+PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" Work Home Private);
+
+case $PROFILE in
+  Home)
+    PID=$(pgrep -f -- '-P Home')
+    ;;
+  Private)
+    PID=$(pgrep -f -- '-P Private')
+    ;;
+  Work)
+    PID=$(pgrep -f -- '-P Work')
+    ;;
+  *)
+    exit 0
+    ;;
+esac
+
+if [[ x$PID == 'x' ]]; then
+  firefox -P "$PROFILE" "$URL"
+else
+  # Avoid "Can't consume 1 args; are only 0 available. This is a bug." message: https://github.com/jordansissel/xdotool/issues/14
+  # Pick the last id, as it seems to be the one needed
+  WID=$(xdotool search --any --pid "$PID" --name "random_random_random" | tail -n1)
+
+  xdotool windowactivate --sync "$WID" key --clearmodifiers Control_L+t Control_L+l
+  xdotool type --delay 0 --window "$WID" "$URL"
+fi

@@ -1,0 +1,43 @@
+activity "activity in %n (%t)"
+autodetach on
+bell "bell in %n (%t)"
+caption splitonly "%2n %t"
+crlf off
+debug off
+defbce off # use current bg color for erased chars
+# Fix when running in tmux
+term screen-256color
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm|xterms|xs|rxvt|rxvt-unicode|urxvt|rxvt-256color|rxvt-unicode-256color ti@:te@ # Enables shift+pgup/pgdown
+termcapinfo xterm* ti@:te@ # Enable scrolling
+defhstatus "screen: ^En (^Et)"
+deflogin on
+defmonitor off # turn monitoring off
+defnonblock 5
+defscrollback 8192
+defutf8 on
+defencoding UTF-8
+fit
+hardstatus string "%h"
+caption always "%{= kw} %-w%{= wk}%n*%t%{-}%+w%{= kw} %=%{g}%H%{-}"
+msgminwait 1
+msgwait 2
+pow_detach_msg "ALL YOUR SCREEN ARE BELONG TO US"
+silencewait 5
+sorendition =b ry
+startup_message off
+vbell off
+vbell_msg " WHAT YOU SAY!! "
+vbellwait 1
+verbose off
+windowlist title "Num|Fl|Name"
+windowlist string "%3n%+3=|%f%+3=|%t"
+shell -${SHELL}
+shelltitle '] |'
+
+bindkey "^[Od" prev  # change window with ctrl-left
+bindkey "^[Oc" next  # change window with ctrl-right
+
+altscreen on
+
+setenv SSH_AUTH_SOCK ${HOME}/.ssh/screen_ssh_auth_sock

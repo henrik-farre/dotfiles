@@ -1,0 +1,4 @@
+#!/usr/bin/php
+<?php
+
+echo strtotime($argv[1]).PHP_EOL;

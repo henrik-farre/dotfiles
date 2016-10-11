@@ -1,0 +1,28 @@
+--smart-case
+--follow
+
+--type-set=jinja2=.j2
+--type-set=php=.php
+--type-set=tpl=.tpl
+--type-set=twig=.twig
+--type-set=yml=.yml
+--type-set=xliff=.xliff
+--type-set=drupal=.php,.inc,.module,.install,.info,.engine
+--type-set=markdown=.md,.markdown,.mkd
+--type-set=sass=.scss,.sass
+--type-set=scss=.scss,.sass
+
+# Add types to known types
+--type-add=js=.coffee
+--type-add=js=.json
+
+--type-add=css=.sass
+--type-add=css=.scss
+--type-add=css=.less
+--type-add=vim=.vimrc
+
+# Ignore files
+--ignore-file=is:npm-debug.log
+--ignore-file=is:.netrwhist
+--ignore-file=is:tags
+--ignore-file=is:TAGS

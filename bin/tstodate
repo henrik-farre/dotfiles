@@ -1,0 +1,4 @@
+#!/usr/bin/php
+<?php
+
+echo date("d-m-Y H:i:s", $argv[1]).PHP_EOL;

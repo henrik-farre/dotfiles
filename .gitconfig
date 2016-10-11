@@ -1,0 +1,62 @@
+[user]
+  name = Henrik Farre
+  email = hfa@ordbogen.com
+[diff]
+  tool = vimdiff
+  algorithm = patience
+# http://nuclearsquid.com/writings/git-tricks-tips-workflows/
+# Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
+  mnemonicprefix = true
+[alias]
+  st = status
+  ci = commit
+  co = checkout
+  w = whatchanged
+  pu = push
+  pl = pull
+  ls = log --graph --pretty=format':%s %Cblue%an, %ar %Cgreen(%h)%Creset'
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  dlc = diff --cached HEAD^
+# http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+# Allows to edit file X without the changes being checked in
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+# https://notes.pinboard.in/u:8331337/5c7ac33ed987fb52db09
+# unstage is the opposite of git add.
+# uncommit removes the last commit from your repository, and puts the changes into your index
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
+  dt = difftool
+  df = diff
+  ctags = !.git/hooks/ctags
+# http://gggritso.com/human-git-aliases
+  branches = branch -a
+  tags = tag
+  stashes = stash list
+  remotes = remote -v
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[core]
+  excludesfile = ~/.gitignore
+  editor = /usr/bin/nvim
+  pager = less
+[color]
+  # auto: show in columns if the output is to the terminal
+  ui = auto
+  # pager = false
+[push]
+  default = current
+[apply]
+# ignore whitespace
+  whitespace = nowarn
+[github]
+  user = henrik-farre
+[init]
+  templatedir = ~/.git_template
+[difftool]
+  prompt = false
+[merge]
+  tool = ~/bin/vimdiff
