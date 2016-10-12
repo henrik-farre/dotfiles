@@ -1,0 +1,13 @@
+# ~/.tmuxinator/hugo.yml
+
+name: hugo
+root: ~/Dev/docker/sites/hugo.rockhopper.dk
+
+windows:
+  - editor: nvim
+  - running:
+      layout: tiled
+      panes:
+        - ./dev.sh
+        - ~/Dev/docker/bin/pilotboat start php-dev-debian-jessie
+        - git status
