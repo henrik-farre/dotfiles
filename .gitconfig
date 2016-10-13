@@ -60,3 +60,5 @@
   prompt = false
 [merge]
   tool = ~/bin/vimdiff
+[status]
+  submoduleSummary = true
