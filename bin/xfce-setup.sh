@@ -81,34 +81,34 @@ fi
 #
 CONNECTED_OUTPUTS=$(xrandr | grep "\<connected\>" -c)
 
-BACKGROUNDS="/home/enrique/.btsync/Backgrounds/Laptop/"
+BACKGROUNDS="${HOME}/Documents/backgrounds/"
 PANEL_OUTPUTNAME="LVDS1"
 MAIN_OUTPUTNAME="LVDS1"
 
-if [[ $CONNECTED_OUTPUTS == 1 && $HOST == "ectoplasma" ]]; then
-  BACKGROUNDS="/home/enrique/.sync/Backgrounds/Dual/"
-  # echo "One connected output on ectoplasma"
-  # xrandr --output HDMI1 --off
-  # xrandr --output LVDS1 --auto
-  # xrandr --output HDMI2 --off
-elif [[ $HOST == "workstation" ]]; then
-  xrandr --output VGA-0 --left-of DVI-I-1
-elif [[ $CONNECTED_OUTPUTS == 2 && $HOST == "firehouse" ]]; then
-  # echo "Two connected output on firehouse"
-  MAIN_OUTPUTNAME="HDMI-0"
-  PANEL_OUTPUTNAME="DVI-I-1"
-  BACKGROUNDS="/home/enrique/.btsync/Backgrounds/Dual/"
-elif [[ $CONNECTED_OUTPUTS == 3 ]]; then
-  # echo "Three connected output"
-  # 3 Means LVDS1, HDMI1 and HDMI2
-  MAIN_OUTPUTNAME="HDMI1"
-  PANEL_OUTPUTNAME="HDMI2"
-  BACKGROUNDS="/home/enrique/.btsync/Backgrounds/Dual/"
-  xrandr --output HDMI1 --auto
-  xrandr --output LVDS1 --off
-  xrandr --output HDMI2 --auto
-  xrandr --output HDMI2 --right-of HDMI1
-fi
+#if [[ $HOST == "ectoplasma" ]]; then
+#  # BACKGROUNDS="/home/enrique/.sync/Backgrounds/Dual/"
+#  # echo "One connected output on ectoplasma"
+#  # xrandr --output HDMI1 --off
+#  # xrandr --output LVDS1 --auto
+#  # xrandr --output HDMI2 --off
+#elif [[ $HOST == "workstation" ]]; then
+  xrandr --output HDMI-0 --left-of DVI-I-1
+#elif [[ $CONNECTED_OUTPUTS == 2 && $HOST == "firehouse" ]]; then
+#  # echo "Two connected output on firehouse"
+#  MAIN_OUTPUTNAME="HDMI-0"
+#  PANEL_OUTPUTNAME="DVI-I-1"
+#  # BACKGROUNDS="/home/enrique/.btsync/Backgrounds/Dual/"
+#elif [[ $CONNECTED_OUTPUTS == 3 ]]; then
+#  # echo "Three connected output"
+#  # 3 Means LVDS1, HDMI1 and HDMI2
+#  MAIN_OUTPUTNAME="HDMI1"
+#  PANEL_OUTPUTNAME="HDMI2"
+#  # BACKGROUNDS="/home/enrique/.btsync/Backgrounds/Dual/"
+#  xrandr --output HDMI1 --auto
+#  xrandr --output LVDS1 --off
+#  xrandr --output HDMI2 --auto
+#  xrandr --output HDMI2 --right-of HDMI1
+#fi
 
 # Place panel on correct screen
 #xfconf-query -c xfce4-panel -p "/panels/panel-0/output-name" -s "$PANEL_OUTPUTNAME"
