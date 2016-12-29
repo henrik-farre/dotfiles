@@ -1,0 +1,28 @@
+! Based on https://github.com/daGrevis/Dotfiles/blob/master/xorg/.xinitrc#L26-L40
+! xcape is loaded in ~/.config/xfce4/xinitrc
+!
+! Esc on caps lock
+clear Lock
+! keycode 0x42 = Escape
+
+! xcape trick: set Caps lock to Control and escape
+keycode 66 = Control_L
+add Control = Control_L
+! We need to keep escape somewhere
+keycode 999 = Escape
+
+! {} on fj thanks to TTH
+keysym f = f F f F braceleft
+keysym j = j J j J braceright
+
+! Goldtouch hacks
+! Set Pause to WinKey.
+! keycode 127 = Super_L
+
+! Remap menu to <> on Goldtouch
+! keycode 135 = less greater less greater backslash notsign backslash notsign
+
+! Trying mod4 as prefix for tmux
+! clear mod4
+! keycode 133 = Super_L
+! add mod4 = Super_L Super_R
