@@ -54,9 +54,7 @@ if [[ -d ~/bin ]]; then
   PATH=${PATH}:${HOME}/bin
 fi
 
-if [[ -d ~/.local/lib/ruby/gems/bin ]]; then
-  PATH=${PATH}:${HOME}/.local/lib/ruby/gems/bin
-fi
+PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
 
 if [[ -d ~/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
@@ -74,7 +72,8 @@ export PATH
 
 ############################################
 # Ruby gem installation path
-export GEM_HOME=~/.local/lib/ruby/gems
+# Replaced by ~/.gem
+# export GEM_HOME=~/.local/lib/ruby/gems
 export GEM_SPEC_CACHE=~/.cache/ruby/specs
 
 export SDL_AUDIODRIVER="alsa"
