@@ -1,6 +1,6 @@
 [user]
   name = Henrik Farre
-  email = hfa@ordbogen.com
+  email = hfar@tv2.dk
 [diff]
   tool = vimdiff
   algorithm = patience
@@ -54,8 +54,9 @@
   whitespace = nowarn
 [github]
   user = henrik-farre
-[init]
-  templatedir = ~/.git_template
+# Skip template
+#[init]
+#  templatedir = ~/.git_template
 [difftool]
   prompt = false
 [merge]
