@@ -59,9 +59,7 @@ Kernel: ${alignr}$kernel
 
 ${color white}${font FontAwesome:pixelsize=12}${font} Temperatures $color${hr 1}
 
-CPU: ${alignr}${hwmon 0 temp 2}°C /${hwmon 0 temp 3}°C /${hwmon 0 temp 4}°C /${hwmon 0 temp 5}°C
-GPU:${alignr}${nvidia temp}°C
-DISK: ${alignr}${hddtemp}°C
+CPU: ${alignr}${hwmon 2 temp 2}°C
 
 ${color white}${font FontAwesome:pixelsize=12}${font} CPU $color${hr 1}
 
@@ -114,14 +112,18 @@ Root: $alignr${fs_used /} /${fs_size /} (${fs_free /} / ${fs_free_perc /}% free)
 ${fs_bar 4 /}
 ${color white}${font FontAwesome:pixelsize=12}${font} NETWORK $color${hr 1}
 
-${if_up eth0}Internal IP:$alignr${addr eth0}
+${if_up enp0s25}Internal IP:$alignr${addr enp0s25}
 External IP:$alignr${execi 7200 curl -s http://icanhazip.com/}
 
-Down ${downspeed eth0} ${alignr}Up ${upspeed eth0}
-${downspeedgraph eth0 20,107 0C3CBB 0088ff -t} ${alignr}${upspeedgraph eth0 20,107 0C3CBB 0088ff -t}
-Total ${totaldown eth0} ${alignr}Total ${totalup eth0}
+Down ${downspeed enp0s25} ${alignr}Up ${upspeed enp0s25}
+${downspeedgraph enp0s25 20,107 0C3CBB 0088ff -t} ${alignr}${upspeedgraph enp0s25 20,107 0C3CBB 0088ff -t}
+Total ${totaldown enp0s25} ${alignr}Total ${totalup enp0s25}
 ${endif}
-${color white}Nvidia GPU $color${hr 1}
 
-GPU Freq:${alignr}${nvidia gpufreq} MHz
-Mem Freq:${alignr}${nvidia memfreq} MHz
+${if_up wlp3s0}Internal IP:$alignr${addr wlp3s0}
+External IP:$alignr${execi 7200 curl -s http://icanhazip.com/}
+
+Down ${downspeed wlp3s0} ${alignr}Up ${upspeed wlp3s0}
+${downspeedgraph wlp3s0 20,107 0C3CBB 0088ff -t} ${alignr}${upspeedgraph wlp3s0 20,107 0C3CBB 0088ff -t}
+Total ${totaldown wlp3s0} ${alignr}Total ${totalup wlp3s0}
+${endif}
