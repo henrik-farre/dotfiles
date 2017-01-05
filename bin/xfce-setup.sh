@@ -92,7 +92,7 @@ MAIN_OUTPUTNAME="LVDS1"
 #  # xrandr --output LVDS1 --auto
 #  # xrandr --output HDMI2 --off
 #elif [[ $HOST == "workstation" ]]; then
-  xrandr --output HDMI-0 --left-of DVI-I-1
+#  xrandr --output HDMI-0 --left-of DVI-I-1
 #elif [[ $CONNECTED_OUTPUTS == 2 && $HOST == "firehouse" ]]; then
 #  # echo "Two connected output on firehouse"
 #  MAIN_OUTPUTNAME="HDMI-0"
