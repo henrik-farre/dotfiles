@@ -3,6 +3,8 @@
 background no
 total_run_times 0
 
+xinerama_head 1
+
 use_xft yes
 xftfont mononoki:size=7
 
@@ -37,7 +39,7 @@ default_shade_color black
 # not working:
 #default_outline_color 2a2a2a
 
-alignment top_right
+alignment top_left
 gap_x 12
 gap_y 2
 
