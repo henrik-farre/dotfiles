@@ -50,21 +50,21 @@ export SYSTEMD_LESS=FRXMK
 
 ############################################
 # Path setup
-if [[ -d ~/bin ]]; then
+if [[ -d ${HOME}/bin ]]; then
   PATH=${PATH}:${HOME}/bin
 fi
 
 PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
 
-if [[ -d ~/.local/nodejs/bin ]]; then
+if [[ -d ${HOME}/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
 fi
 
-if [[ -d ~/.composer/vendor/bin ]]; then
-  PATH=${PATH}:${HOME}/.composer/vendor/bin
+if [[ -d ${HOME}/.config/composer/vendor/bin ]]; then
+  PATH=${PATH}:${HOME}/.config/composer/vendor/bin
 fi
 
-if [[ -d ~/Dev/docker/bin ]]; then
+if [[ -d ${HOME}/Dev/docker/bin ]]; then
   PATH=${PATH}:${HOME}/Dev/docker/bin
 fi
 
