@@ -247,7 +247,7 @@ function wake-host() {
       ;;
     *)
       echo "Does not know that host"
-      exit 1
+      return 1
       ;;
   esac
 
