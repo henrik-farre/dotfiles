@@ -54,7 +54,9 @@ if [[ -d ${HOME}/bin ]]; then
   PATH=${PATH}:${HOME}/bin
 fi
 
-PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
+if [[ -e /usr/bin/ruby ]]; then
+  PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
+fi
 
 if [[ -d ${HOME}/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
