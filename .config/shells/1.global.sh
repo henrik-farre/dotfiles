@@ -7,6 +7,8 @@ else
   export DISTRO_IS='unknown'
 fi
 
+export PLATFORM=$(uname)
+
 if [[ x${ZSH_VERSION} != 'x' ]]; then
   export SHELL_IS='zsh'
 elif [[ x${BASH_VERSION} != 'x' ]]; then
