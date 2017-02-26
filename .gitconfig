@@ -47,6 +47,8 @@
   # auto: show in columns if the output is to the terminal
   ui = auto
   # pager = false
+[color "interactive"]
+  error = red bold
 [push]
   default = current
 [apply]
