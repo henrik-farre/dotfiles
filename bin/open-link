@@ -2,7 +2,9 @@
 
 URL=$1
 
-PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" Work Home Private);
+PROFILES=$(grep "Name=" ~/.mozilla/firefox/profiles.ini | cut -f2 -d=)
+
+PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" $PROFILES);
 
 case $PROFILE in
   Home)

@@ -18,6 +18,9 @@ if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
   fi
   export FZF_DEFAULT_OPTS="-x -e"
 
+  # Else fzf will not split using tmux
+  export FZF_TMUX=1
+
   #
   # fe [FUZZY PATTERN] - Open the selected file with the default editor
   #   - Bypass fuzzy finder if there's only one match (--select-1)

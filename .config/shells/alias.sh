@@ -3,8 +3,13 @@
 # Alias'
 
 # Space before so they are not added to history
-alias ls=' ls -Fh --color=auto'
-alias ll=' ls -lFh --color=auto'
+if [[ $PLATFORM == 'Darwin' ]]; then
+  alias ls=' ls -Fh'
+  alias ll=' ls -lFh'
+else
+  alias ls=' ls -Fh --color=auto'
+  alias ll=' ls -lFh --color=auto'
+fi
 alias l=' ll'
 alias lA=' ll -A'
 alias lln=' ls -lFAt | head' # sort after last modified
