@@ -10,9 +10,9 @@ esac
 
 # Prompt
 if [[ "${USER}" == 'root' ]]; then
-  PS1='[\u@\h \W]> '
+  PS1='[\u@\H \W]> '
 else
-  PS1='\[\033[0;32m\]\h\[\033[00m\]:\w> '
+  PS1='\[\033[0;32m\]\H\[\033[00m\]:\w> '
 fi
 
 export PS1 PROMPT_COMMAND
