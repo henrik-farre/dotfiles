@@ -54,7 +54,10 @@ if [[ -d ${HOME}/bin ]]; then
   PATH=${PATH}:${HOME}/bin
 fi
 
-PATH="${PATH}:$(ruby -e 'print Gem.user_dir')/bin"
+# Check if gems module is installed
+if which ruby >/dev/null && which gem >/dev/null; then
+  PATH="${PATH}:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+fi
 
 if [[ -d ${HOME}/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
