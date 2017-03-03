@@ -23,11 +23,6 @@ fi
 # Neovim
 # https://github.com/neovim/neovim/pull/2007
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-# Can be removed when https://github.com/neovim/neovim/pull/4690 lands
-if [[ $TERM == "xterm-256color" || $TERM == "xterm-termite" ]]; then
-  # https://github.com/neovim/neovim/pull/2198
-  export NVIM_TUI_ENABLE_TRUE_COLOR=1
-fi
 if [[ -z $XDG_RUNTIME_DIR ]]; then
   export NVIM_LISTEN_ADDRESS=/tmp/neovim_socket
 else
