@@ -9,8 +9,8 @@ fi
 
 export PLATFORM=$(uname)
 
-if [[ x${ZSH_VERSION} != 'x' ]]; then
+if [[ ${ZSH_VERSION:-x} != 'x' ]]; then
   export SHELL_IS='zsh'
-elif [[ x${BASH_VERSION} != 'x' ]]; then
+elif [[ ${BASH_VERSION:-x} != 'x' ]]; then
   export SHELL_IS='bash'
 fi
