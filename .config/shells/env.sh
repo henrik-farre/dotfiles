@@ -99,3 +99,9 @@ export BROWSER=open-link
 
 # Coreutils quotes ls output
 export QUOTING_STYLE=literal
+
+############################################
+# GO
+if [[ -d ~/Dev/go ]]; then
+  export GOPATH=~/Dev/go
+fi
