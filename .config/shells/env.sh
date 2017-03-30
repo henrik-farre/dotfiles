@@ -105,3 +105,9 @@ export QUOTING_STYLE=literal
 if [[ -d ~/Dev/go ]]; then
   export GOPATH=~/Dev/go
 fi
+
+############################################
+# Python
+if [[ -d ~/.local/lib/python2.7 ]]; then
+  export PYTHONPATH=~/.local/lib/python2.7
+fi
