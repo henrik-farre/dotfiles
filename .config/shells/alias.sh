@@ -34,7 +34,7 @@ alias recall='history | grep'
 alias open='exo-open'
 
 # Vim / NeoVim
-if [[ -l /bin/view ]]; then
+if [[ -L /bin/view ]]; then
   alias view="vim -R"
 fi
 
