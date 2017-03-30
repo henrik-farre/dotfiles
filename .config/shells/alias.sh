@@ -34,11 +34,14 @@ alias recall='history | grep'
 alias open='exo-open'
 
 # Vim / NeoVim
+if [[ -l /bin/view ]]; then
+  alias view="vim -R"
+fi
+
 if [[ -e /usr/bin/nvim ]]; then
   alias vim='nvim'
   alias vimdiff='nvim -d'
   alias view='nvim -R'
-  #alias v='view'
   if [[ -e ~/bin/nvimex.py ]]; then
     alias :e='nvimex.py e'
   fi
