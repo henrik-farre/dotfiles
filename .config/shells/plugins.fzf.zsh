@@ -1,11 +1,15 @@
 ######################################################
 # FZF
 # From https://github.com/junegunn/fzf
+FZF_KEYBINDINGS_PATH=/usr/share/fzf/key-bindings.zsh
+if [[ $PLATFORM == 'Darwin' ]]; then
+  FZF_KEYBINDINGS_PATH=/usr/local/opt/fzf/shell/key-bindings.zsh
+fi
 
 # Use -e if symlink (locally installed)
-if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
+if [[ -f $FZF_KEYBINDINGS_PATH ]]; then
   # System installed:
-  . /usr/share/fzf/key-bindings.zsh
+  . $FZF_KEYBINDINGS_PATH
   # Local installed:
   # source ~/.fzf.zsh
 
