@@ -1,6 +1,5 @@
 function allow_tmux() {
-  [[ -z "${TMUX}" && ! -f /tmp/no_tmux && -f /usr/bin/tmux && -z $SSH_CLIENT ]];
-  # [[ -z "${TMUX}" && ! -f /tmp/no_tmux && -f /usr/bin/tmux && -o login && -z $SSH_CLIENT ]];
+  [[ -z "${TMUX}" && ! -f /tmp/no_tmux && (( $+commands[tmux] )) && -z $SSH_CLIENT ]];
 }
 
 # if [[ -o login ]]; then
