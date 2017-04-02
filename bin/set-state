@@ -156,6 +156,8 @@ case $MODE in
    gsettings set org.cinnamon active-display-scale "2"
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "0.75"
+   sleep 1
+   pkill -HUP conky
    ;;
  macbook-hidpi-off)
    gsettings set org.cinnamon panels-height "['1:56']"
@@ -165,6 +167,8 @@ case $MODE in
    gsettings set org.cinnamon active-display-scale "1"
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "1"
+   sleep 1
+   pkill -HUP conky
    ;;
  wacom-setup)
    DEVICE_ID=$(xsetwacom --list devices | awk '{if ($9 == "STYLUS") print $7}')
