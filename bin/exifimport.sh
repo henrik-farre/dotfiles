@@ -13,7 +13,9 @@ DST_DIR=/shared/pictures
 
 cd $SRC_DIR
 
-exiftool -out . \
+# include "-out ." to copy instead of move
+
+exiftool \
   "-filename<filemodifydate" "-filename<mediacreatedate" "-filename<createdate" "-filename<datetimeoriginal" \
   -preserve \
   --extension mp4 --extension mts \
