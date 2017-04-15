@@ -90,6 +90,11 @@ if [[ ${SHELL_IS} == 'zsh' ]]; then
 fi
 
 ############################################
+# Ensure a11y is disabled (to avoid "Couldn't connect to accessibility bus" errors)
+# Cinnamon unsets env so it can't be in /etc/profile.d/
+export NO_AT_BRIDGE=1
+
+############################################
 # Node.js
 # https://github.com/npm/npm/issues/5392
 export NPM_CONFIG_PREFIX=~/.local/nodejs
