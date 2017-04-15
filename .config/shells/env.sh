@@ -85,10 +85,6 @@ if [[ ${SHELL_IS} == "bash" ]]; then
   export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
 fi
 
-if [[ ${SHELL_IS} == 'zsh' ]]; then
-  export WORDCHARS='' # Choose word delimiter characters in line editor
-fi
-
 ############################################
 # Ensure a11y is disabled (to avoid "Couldn't connect to accessibility bus" errors)
 # Cinnamon unsets env so it can't be in /etc/profile.d/
