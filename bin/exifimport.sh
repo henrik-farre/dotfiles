@@ -11,7 +11,7 @@ IFS=$'\n\t'
 SRC_DIR=/shared/backup/image_cleanup_not_found
 DST_DIR=/shared/pictures
 
-cd "$SRC_DIR"
+cd $SRC_DIR
 
 exiftool -out . \
   "-filename<filemodifydate" "-filename<mediacreatedate" "-filename<createdate" "-filename<datetimeoriginal" \
@@ -19,5 +19,5 @@ exiftool -out . \
   --extension mp4 --extension mts \
   -ignoreMinorErrors \
   -quiet -quiet \
-  -dateFormat "$DST_DIR/%Y/%m/%Y-%m-%d_%H:%M:%S.%%le" \
+  -dateFormat "$DST_DIR/%Y/%m/%Y-%m-%d_%H:%M:%S_%%c_%%f.%%le" \
   -recurse "$SRC_DIR"
