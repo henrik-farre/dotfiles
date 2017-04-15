@@ -1,19 +1,20 @@
-function allow_tmux() {
-  [[ -z "${TMUX}" && ! -f /tmp/no_tmux && (( $+commands[tmux] )) && -z $SSH_CLIENT ]];
-}
+if [[ -o login ]]; then
+  #echo "I'm login shell"
+  return
+fi
 
-# if [[ -o login ]]; then
-#   echo "I'm a login shell"
-# fi
-#
-# if [[ -o interactive ]]; then
-#   echo "I'm interactive"
-# fi
+#if [[ -o interactive ]]; then
+#  echo "I'm interactive shell"
+#fi
 
 ####################################################
 # Launch tmux
 # Placed at top of file else the entire file is run, and then run again when tmux creates a new session
 #
+function allow_tmux() {
+  [[ -z "${TMUX}" && ! -f /tmp/no_tmux && (( $+commands[tmux] )) && -z $SSH_CLIENT ]];
+}
+
 if allow_tmux; then
   SESSION_NAME=$USER
   tmux -q has-session -t ${SESSION_NAME} &>/dev/null
