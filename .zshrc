@@ -1,7 +1,6 @@
-if [[ -o login ]]; then
-  #echo "I'm login shell"
-  return
-fi
+#if [[ -o login ]]; then
+#  echo "I'm login shell"
+#fi
 
 #if [[ -o interactive ]]; then
 #  echo "I'm interactive shell"
