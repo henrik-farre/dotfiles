@@ -160,7 +160,7 @@ case $MODE in
    pkill -HUP conky
    ;;
  macbook-hidpi-off)
-   gsettings set org.cinnamon panels-height "['1:56']"
+   gsettings set org.cinnamon panels-height "['1:34']"
    sleep 1
    gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 1"
    sleep 1
