@@ -8,6 +8,8 @@ set -o errexit
 set -o pipefail
 IFS=$'\n\t'
 
+# Based on https://matts.org/organizing-photos-by-date-on-the-linux-command-line/
+
 SRC_DIR=/shared/backup/incomming-pictures
 PIC_DST_DIR=/shared/pictures
 VID_DST_DIR=/shared/clips
