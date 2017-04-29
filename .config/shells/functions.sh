@@ -300,3 +300,13 @@ function switch-dns() {
   nmcli connection modify eth0 ipv4.dns "$NEW_DNS"
   nmcli con up eth0
 }
+
+function check_if_ip_is_free() {
+  local IP=$1
+  ping -c1 -w2 "${IP}"
+  wget -S -T 2 --tries 1 "http://${IP}" -O /dev/null
+  wget -S -T 2 --tries 1 "http://${IP}:8080" -O /dev/null
+  wget -S -T 2 --tries 1 "https://${IP}" -O /dev/null
+  ssh -oConnectTimeout=2 "${IP}"
+  dig -x "${IP}" @ns.tv2.dk
+}
