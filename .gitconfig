@@ -1,7 +1,6 @@
 [user]
   name = Henrik Farre
   email = hfar@tv2.dk
-  signingkey = DD7DD214
 [diff]
   tool = vimdiff
   algorithm = patience
@@ -66,9 +65,3 @@
   tool = ~/bin/vimdiff
 [status]
   submoduleSummary = true
-
-[commit]
-  gpgSign = true
-  # "other people can trust that the changes you've made really were made by you"
-  # https://help.github.com/articles/about-gpg/
-# https://git-scm.com/docs/git-config#git-config-commitgpgSign
