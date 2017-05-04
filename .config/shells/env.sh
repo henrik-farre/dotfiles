@@ -7,7 +7,7 @@
 # Don't use vim as GIT_PAGER as colors for e.g. git ls are not shown
 if [[ -f /usr/share/nvim/runtime/macros/less.sh ]]; then
   export PAGER="/usr/share/nvim/runtime/macros/less.sh"
-  export MANPAGER="sh -c \"col -b | /usr/share/nvim/runtime/macros/less.sh -c 'set ft=man nomod nolist number!' -\""
+  export MANPAGER="nvim '+set background=dark' '+set ft=man' -"
 elif [[ -f /usr/share/vim/vim72/macros/less.sh ]]; then
   export PAGER="/usr/share/vim/vim72/macros/less.sh"
   export MANPAGER="sh -c \"col -b | /usr/share/vim/vim72/macros/less.sh -c 'set ft=man nomod nolist number!' -\""
@@ -21,8 +21,6 @@ fi
 
 ############################################
 # Neovim
-# https://github.com/neovim/neovim/pull/2007
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 if [[ -z $XDG_RUNTIME_DIR ]]; then
   export NVIM_LISTEN_ADDRESS=/tmp/neovim_socket
 else
