@@ -56,8 +56,10 @@ if [[ -e /usr/bin/pacman ]]; then
   alias pup='sudo pacman -Syu'
 fi
 
-alias ack="ack --follow"
 # Ack
+if [[ -e '/usr/bin/ack' ]]; then
+  alias ack="ack --follow"
+fi
 if [[ -e /usr/bin/ack-grep ]]; then
   alias ack="ack-grep --follow"
 fi
