@@ -6,15 +6,18 @@ if [[ -z $1 ]]; then
 fi
 
 function cpupowersave {
-  sudo cpupower frequency-set -g powersave
+  return 0
+  # sudo cpupower frequency-set -g powersave
 }
 
 function cpuondemand {
-  sudo cpupower frequency-set -g ondemand
+  return 0
+  # sudo cpupower frequency-set -g ondemand
 }
 
 function cpuperformance {
-  sudo cpupower frequency-set -g performance
+  return 0
+  # sudo cpupower frequency-set -g performance
 }
 
 function backlight_control {
@@ -42,17 +45,19 @@ function pstate_control {
 }
 
 function servicesstop {
-  pkill dropboxd
-  pkill synergyc
-  systemctl --user stop conky
-  systemctl --user stop syncthing
-  systemctl --user stop syncthing-inotify
+  return 0
+  #pkill dropboxd
+  #pkill synergyc
+  #systemctl --user stop conky
+  #systemctl --user stop syncthing
+  #systemctl --user stop syncthing-inotify
 }
 
 function servicesstart {
-  systemctl --user start syncthing
-  systemctl --user start syncthing-inotify
-  systemctl --user start conky
+  return 0
+  #systemctl --user start syncthing
+  #systemctl --user start syncthing-inotify
+  #systemctl --user start conky
 }
 
 function modulesunload {
@@ -74,20 +79,22 @@ function nvidiaadaptive {
 }
 
 function disablealt {
-  xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Ingen"
+  return 0
+  # xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Ingen"
 }
 
 function enablealt {
-  xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Alt"
+  return 0
+  # xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Alt"
 }
 
 function screensetup_single {
-  xrandr --output HDMI-0 --off
+  xrandr --output DVI-I-1 --off
 }
 
 function screensetup_dual {
-  xrandr --output HDMI-0 --auto
-  xrandr --output HDMI-0 --right-of DVI-I-1
+  xrandr --output DVI-I-1 --auto
+  xrandr --output DVI-I-1 --left-of HDMI-0
 }
 
 MODE=$1
