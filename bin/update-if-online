@@ -1,0 +1,17 @@
+#!/bin/bash
+
+GIT_REPOSITORIES=(
+    "$HOME/Documents/Zim"
+    "$HOME/.config/nvim"
+    "$HOME/.dotfiles"
+)
+
+if nm-online -q; then
+    for DIR in "${GIT_REPOSITORIES[@]}"; do
+        (
+        cd "$DIR" || exit
+        echo "updating $DIR"
+        git pull -q
+        )
+    done
+fi
