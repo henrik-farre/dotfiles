@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Wait until ssh keys are loaded
-sleep 5
+sleep 10
 
 GIT_REPOSITORIES=(
     "$HOME/Documents/Zim"
