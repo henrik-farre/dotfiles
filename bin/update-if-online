@@ -3,6 +3,8 @@
 # Wait until ssh keys are loaded
 sleep 10
 
+export SSH_AUTH_SOCK=/run/user/1001/keyring/ssh
+
 GIT_REPOSITORIES=(
     "$HOME/Documents/Zim"
     "$HOME/.config/nvim"
