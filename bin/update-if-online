@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Wait until ssh keys are loaded
-sleep 10
+#sleep 10
 
-export SSH_AUTH_SOCK=/run/user/1001/keyring/ssh
+export SSH_AUTH_SOCK="/run/user/$UID/keyring/ssh"
 
 GIT_REPOSITORIES=(
     "$HOME/Documents/Zim"
