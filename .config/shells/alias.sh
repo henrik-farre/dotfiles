@@ -14,7 +14,9 @@ alias l=' ll'
 alias lA=' ll -A'
 alias lln=' ls -lFAt | head' # sort after last modified
 
-alias chmod='chmod -c' #-c like verbose but report only when a change is made
+if [[ $PLATFORM != 'Darwin' ]]; then
+  alias chmod='chmod -c' #-c like verbose but report only when a change is made
+fi
 
 alias cd-="cd -"
 alias cd.='cd ..'
