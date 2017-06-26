@@ -64,6 +64,11 @@ if [[ -d ${HOME}/Dev/docker/bin ]]; then
   PATH=${PATH}:${HOME}/Dev/docker/bin
 fi
 
+# Packages installed by pip and others
+if [[ -d ${HOME}/.local/bin ]]; then
+  PATH=${PATH}:${HOME}/.local/bin
+fi
+
 export PATH
 
 ############################################
