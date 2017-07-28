@@ -1,6 +1,7 @@
 [user]
   name = Henrik Farre
   email = hfar@tv2.dk
+# http://pliutau.com/using-different-git-emails/ by using includeIf
 [diff]
   tool = vimdiff
   algorithm = patience
