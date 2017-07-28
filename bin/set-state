@@ -94,7 +94,7 @@ function screensetup_single {
 
 function screensetup_dual {
   xrandr --output DVI-I-1 --auto
-  xrandr --output DVI-I-1 --left-of HDMI-0
+  xrandr --output DVI-I-1 --right-of HDMI-0
 }
 
 MODE=$1
