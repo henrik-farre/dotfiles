@@ -1,0 +1,4 @@
+logs/*
+sec.conf
+weechat.log
+plugins.conf
