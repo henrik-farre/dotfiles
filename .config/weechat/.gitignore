@@ -1,5 +1,4 @@
 logs/*
 sec.conf
 weechat.log
-plugins.conf
 script/plugins.xml.gz
