@@ -1,0 +1,94 @@
+#!/bin/bash
+set -o nounset
+set -o errexit
+set -o pipefail
+# set -o xtrace
+IFS=$'\n\t'
+
+GREEN='\033[0;32m'
+YELLOW='\033[0;93m'
+RED='\033[0;91m'
+RESET='\033[0m'
+DARK_GREY='\e[90m'
+# export LC_ALL=C
+
+ssh -q -fN -M -o ControlPersist=600 git@github.com
+
+printf "%-50s │ %-30s │ %-2s │ %-2s │ %-2s\n" "Repo path" "branch (!master)" "M" " M" "??"
+echo ──────────────────────────────────────────────────────────────────────────────────────────────────
+
+function getStatus() {
+  (
+    local REPO="$1"
+    cd "$REPO" || exit
+    local REPO_STATUS
+    local REPO_BRANCH
+    local MODIFIED
+    local MODIFIED_2
+    local UNKNOWN
+    local REPO_BRANCH_COLOR=$GREEN
+    local REPO_MOD_COLOR=$GREEN
+    local REPO_MOD2_COLOR=$GREEN
+    local REPO_UN_COLOR=$GREEN
+    local DIRTY=0
+    local REPO_PATH
+    local REPO_NAME
+
+    REPO_STATUS=$(git status --porcelain || true)
+    REPO_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+    MODIFIED=$(grep -c "^M" <<< "$REPO_STATUS" || true)
+    MODIFIED_2=$(grep -c "^ M" <<< "$REPO_STATUS" || true)
+    UNKNOWN=$(grep -c "^??" <<< "$REPO_STATUS" || true)
+
+    if [[ "$REPO_BRANCH" != 'master' ]]; then
+      REPO_BRANCH_COLOR="${YELLOW}"
+      DIRTY=1
+    else
+      REPO_BRANCH=" "
+    fi
+
+    if [[ "$MODIFIED" -gt 0 ]]; then
+      REPO_MOD_COLOR="${RED}"
+      DIRTY=1
+    else
+      MODIFIED=" "
+    fi
+
+    if [[ "$MODIFIED_2" -gt 0 ]]; then
+      REPO_MOD2_COLOR="${RED}"
+      DIRTY=1
+    else
+      MODIFIED_2=" "
+    fi
+
+    if [[ "$UNKNOWN" -gt 0 ]]; then
+      REPO_UN_COLOR="${RED}"
+      DIRTY=1
+    else
+      UNKNOWN=" "
+    fi
+
+    if [[ $DIRTY -gt 0 ]]; then
+      REPO_PATH=$(dirname "$REPO")
+      REPO_NAME=$(basename "$REPO")
+      # http://wiki.bash-hackers.org/commands/builtin/printf
+      # %b: Print the associated argument while interpreting backslash escapes in there
+      # Adjust size for escape chars
+      printf "%-59b │ ${REPO_BRANCH_COLOR}%-30s${RESET} │ ${REPO_MOD_COLOR}%-2s${RESET} │ ${REPO_MOD2_COLOR}%-2s${RESET} │ ${REPO_UN_COLOR}%-2s${RESET}\n" "${DARK_GREY}$REPO_PATH/${RESET}$REPO_NAME" "$REPO_BRANCH" "$MODIFIED" "$MODIFIED_2" "$UNKNOWN"
+    fi
+  )
+}
+
+DIR_TO_CHECK=${1:-.}
+
+(
+  cd "$DIR_TO_CHECK" || exit
+  for REPO in $(find . -name ".git" -type d 2>/dev/null| cut -c 3-); do
+    REPO=${REPO%/*}
+    getStatus "$REPO" &
+  done
+
+  wait
+)
+
+ssh -O exit git@github.com &>/dev/null
