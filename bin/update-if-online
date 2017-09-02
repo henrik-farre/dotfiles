@@ -11,7 +11,7 @@ while [ ! -S "$SSH_AUTH_SOCK"  ]
 do
     if [ "$TRY" -ge "$MAX_TRIES" ]; then
         echo "Exceeded max tries"
-        /usr/bin/notify-send -i "emblem-important" "GIT repositories" "Not updated!" -t 1000000
+        /usr/bin/notify-send -u low -i "emblem-important" "GIT repositories" "Not updated!" -t 1000000
         exit 1
     fi
     TRY=$((TRY + 1))
@@ -35,4 +35,4 @@ if nm-online -q; then
     done
 fi
 
-/usr/bin/notify-send -i "emblem-generic" "GIT repositories updated" "... yeah" -t 1000000
+/usr/bin/notify-send -u low -i "emblem-generic" "GIT repositories updated" "... yeah" -t 1000000
