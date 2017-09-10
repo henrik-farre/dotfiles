@@ -40,8 +40,6 @@ zstyle ':completion:*' list-dirs-first true
 # Completion caching
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-# zstyle ':completion:*' use-cache 1
-# zstyle ':completion:*' cache-path ~/.zsh/cache/$HOST
 
 ####################################################
 # Approximate
