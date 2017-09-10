@@ -34,6 +34,9 @@ zstyle ':completion::prefix-1:*' completer _complete
 zstyle ':completion:incremental:*' completer _complete _correct
 zstyle ':completion:predict:*' completer _complete
 
+# Keep directories and files separated
+zstyle ':completion:*' list-dirs-first true
+
 # Completion caching
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
