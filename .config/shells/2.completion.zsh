@@ -104,7 +104,7 @@ zstyle ':completion:*:*:pacman:*' menu yes select
 # Ignore users
 zstyle ':completion:*:*:*:users' ignored-patterns \
         adm amanda apache avahi beaglidx bin cacti canna clamav daemon \
-        dbus distcache dovecot fax ftp games gdm gkrellmd gopher \
+        dbus distcache dnsmasq dovecot fax ftp games gdm gkrellmd gopher \
         hacluster hal haldaemon halt hsqldb http ident junkbust ldap lp mail \
         mailman mailnull mldonkey mysql nagios \
         named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
