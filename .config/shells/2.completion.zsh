@@ -78,6 +78,9 @@ zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 ####################################################
 # Grouping
 #
+# Group results by category
+zstyle ':completion:*' group-name ''
+
 # Separate matches into groups, e.g. "external command, builtin command"
 zstyle ':completion:*:matches' group 'yes'
 
