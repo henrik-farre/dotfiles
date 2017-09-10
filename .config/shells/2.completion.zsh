@@ -26,7 +26,8 @@ autoload -U compinit; compinit
 # - _correct: spelling correction
 # - _approximate: complete the word typed but allow for spelling mistakes
 #
-zstyle ':completion:*' menu select=1 # Highlite selected completion
+# Select using menu
+zstyle ':completion:*' menu select
 # zstyle ':completion:*' completer _complete _prefix _approximate
 zstyle ':completion:*' completer _complete
 zstyle ':completion::prefix-1:*' completer _complete
