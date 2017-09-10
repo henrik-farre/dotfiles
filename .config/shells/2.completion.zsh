@@ -110,3 +110,6 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 [ -f ~/.ssh/config ] && : ${(A)ssh_config_hosts:=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
 [ -f ~/.ssh/known_hosts ] && : ${(A)ssh_known_hosts:=${${${(f)"$(<~/.ssh/known_hosts)"}%%\ *}%%,*}}
 zstyle ':completion:*:*:*' hosts $ssh_config_hosts $ssh_known_hosts
+
+# Automatically rehash
+zstyle ':completion:*' rehash true
