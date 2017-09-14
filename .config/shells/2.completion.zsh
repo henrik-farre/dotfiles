@@ -109,6 +109,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
         mailman mailnull mldonkey mysql nagios \
         named netdump news nfsnobody nobody nscd ntp nut nx openvpn \
         operator pcap postfix postgres privoxy pulse pvm quagga radvd \
+        systemd-bus-proxy systemd-coredump systemd-journal-gateway systemd-journal-remote systemd-journal-upload systemd-network systemd-resolve systemd-timesync \
         rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs '_*'
 
 # SSH completion from ~/.ssh/known_hosts and ~/.ssh/config
