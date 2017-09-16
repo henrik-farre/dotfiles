@@ -31,7 +31,9 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 # - _approximate: complete the word typed but allow for spelling mistakes
 #
 # Select using menu, yes means do not ask for "do you wish to see all possibilities"
-zstyle ':completion:*' menu yes select
+# But will also select first item instead of completing until difference in item
+# zstyle ':completion:*' menu yes select
+zstyle ':completion:*' menu yes select=1 interactive
 # zstyle ':completion:*' completer _complete _prefix _approximate
 zstyle ':completion:*' completer _complete
 zstyle ':completion::prefix-1:*' completer _complete
