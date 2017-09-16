@@ -40,6 +40,8 @@ zstyle ':completion::prefix-1:*' completer _complete
 zstyle ':completion:incremental:*' completer _complete _correct
 zstyle ':completion:predict:*' completer _complete
 
+zstyle ':completion:*' insert-unambiguous true
+
 # Keep directories and files separated
 zstyle ':completion:*' list-dirs-first true
 
