@@ -73,7 +73,7 @@ zstyle ':completion:*:history-words' menu yes
 # for certain commands
 zstyle ':completion::complete:*' '\'
 
-#  tag-order 'globbed-files directories' all-files
+# tag-order 'globbed-files directories' all-files
 zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
 
 # Don't complete backup files as executables
