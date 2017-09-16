@@ -5,6 +5,10 @@
 #
 autoload -U compinit; compinit
 
+# Completion caching
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+
 # Compctl
 # compctl -g '*.pdf' evince
 # compctl -g '*.gz' + -g '*(-/)' gunzip gzcat
@@ -36,10 +40,6 @@ zstyle ':completion:predict:*' completer _complete
 
 # Keep directories and files separated
 zstyle ':completion:*' list-dirs-first true
-
-# Completion caching
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
 ####################################################
 # Approximate
