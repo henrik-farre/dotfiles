@@ -99,6 +99,9 @@ zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
 
+## cd will never select the parent directory (e.g.: cd ../<TAB>):
+zstyle ':completion:*:(cd|mv|cp):*' ignore-parents parent pwd
+
 ####################################################
 # Pacman
 # Instead of just output all results after -S , show list
