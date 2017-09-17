@@ -33,7 +33,8 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 # Select using menu, yes means do not ask for "do you wish to see all possibilities"
 # But will also select first item instead of completing until difference in item
 # zstyle ':completion:*' menu yes select
-zstyle ':completion:*' menu yes select=1 interactive
+zstyle ':completion:*' menu select
+# zstyle ':completion:*' menu yes select=1 interactive
 # zstyle ':completion:*' completer _complete _prefix _approximate
 zstyle ':completion:*' completer _complete
 zstyle ':completion::prefix-1:*' completer _complete
