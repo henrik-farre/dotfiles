@@ -12,8 +12,8 @@ add Control = Control_L
 keycode 999 = Escape
 
 ! {} on fj thanks to TTH
-keysym f = f F f F braceleft
-keysym j = j J j J braceright
+! keysym f = f F f F braceleft
+! keysym j = j J j J braceright
 
 ! Goldtouch hacks
 ! Set Pause to WinKey.
