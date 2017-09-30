@@ -3,3 +3,7 @@ sec.conf
 weechat.log
 hipchat/*
 script/plugins.xml.gz
+lua/
+python/autoload/hipchat.py
+python/autoload/html.py
+weechat-plugins/
