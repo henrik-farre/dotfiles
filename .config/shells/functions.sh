@@ -313,5 +313,5 @@ function check_if_ip_is_free() {
   wget -S -T 2 --tries 1 "http://${IP}:8080" -O /dev/null
   wget -S -T 2 --tries 1 "https://${IP}" -O /dev/null
   ssh -oConnectTimeout=2 "${IP}"
-  dig -x "${IP}" @ns.tv2.dk
+  dig -x +timeout=1 "${IP}" @ns.tv2.dk
 }
