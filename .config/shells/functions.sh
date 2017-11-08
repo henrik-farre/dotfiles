@@ -303,10 +303,15 @@ function switch-dns() {
 
 function check_if_ip_is_free() {
   local IP=$1
-  ping -c1 -w2 "${IP}"
+  echo "================ $IP ================"
+  if [[ $PLATFORM == 'Darwin' ]]; then
+    ping -c1 -t2 "${IP}"
+  else
+    ping -c1 -w2 "${IP}"
+  fi
   wget -S -T 2 --tries 1 "http://${IP}" -O /dev/null
   wget -S -T 2 --tries 1 "http://${IP}:8080" -O /dev/null
   wget -S -T 2 --tries 1 "https://${IP}" -O /dev/null
   ssh -oConnectTimeout=2 "${IP}"
-  dig -x "${IP}" @ns.tv2.dk
+  dig -x +timeout=1 "${IP}" @ns.tv2.dk
 }
