@@ -97,6 +97,10 @@ function screensetup_dual {
   xrandr --output DVI-I-1 --right-of HDMI-0
 }
 
+function conky_reload {
+   pkill -HUP conky
+}
+
 MODE=$1
 
 case $MODE in
@@ -130,6 +134,7 @@ case $MODE in
     cpuperformance
     servicesstop
     nvidiaperformance
+    conky_reload
     ;;
   gameoff)
     screensetup_dual
@@ -138,6 +143,7 @@ case $MODE in
     cpupowersave
     servicesstart
     nvidiaadaptive
+    conky_reload
    ;;
  vga-right)
    xrandr --output VGA1 --auto
@@ -164,7 +170,7 @@ case $MODE in
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "0.75"
    sleep 1
-   pkill -HUP conky
+   conky_reload
    ;;
  macbook-hidpi-off)
    gsettings set org.cinnamon panels-height "['1:34']"
@@ -175,7 +181,7 @@ case $MODE in
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "1"
    sleep 1
-   pkill -HUP conky
+   conky_reload
    ;;
  wacom-setup)
    DEVICE_ID=$(xsetwacom --list devices | awk '{if ($9 == "STYLUS") print $7}')
