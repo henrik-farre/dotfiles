@@ -115,3 +115,10 @@ fi
 if [[ -d ~/.local/lib/python2.7 ]]; then
   export PYTHONPATH=~/.local/lib/python2.7
 fi
+
+############################################
+# Wine
+# Prevent wine from creating filetype associations: https://wiki.archlinux.org/index.php/Wine#Unregister_existing_Wine_file_associations
+if [[ -e /usr/bin/wine ]]; then
+  export WINEDLLOVERRIDES="winemenubuilder.exe=d"
+fi
