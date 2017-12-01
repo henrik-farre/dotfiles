@@ -285,20 +285,18 @@ function encoding_demunger() {
 
 function switch-dns() {
   local DNS
-  local NEW_DNS
+  local NEW_DNS="192.168.0.1"
+  local CONNECTION=$(nmcli -g name,device con show --active| grep eth0 | cut -f1 -d:)
   DNS=$(nmcli -t -f IP4.DNS device show eth0)
   case "$DNS" in
     "IP4.DNS[1]:192.168.0.1" )
-      NEW_DNS="185.37.37.37"
-      ;;
-    "IP4.DNS[1]:185.37.37.37" )
-      NEW_DNS="192.168.0.1"
+      NEW_DNS="8.8.8.8 8.8.4.4"
       ;;
   esac
 
-  nmcli con down eth0
-  nmcli connection modify eth0 ipv4.dns "$NEW_DNS"
-  nmcli con up eth0
+  nmcli con down "$CONNECTION"
+  nmcli connection modify "$CONNECTION" ipv4.dns "$NEW_DNS"
+  nmcli con up "$CONNECTION"
 }
 
 function check_if_ip_is_free() {
