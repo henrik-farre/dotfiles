@@ -272,6 +272,8 @@ function switch-dns() {
   nmcli con down "$CONNECTION"
   nmcli connection modify "$CONNECTION" ipv4.dns "$NEW_DNS"
   nmcli con up "$CONNECTION"
+
+  cat /etc/resolv.conf
 }
 
 function check_if_ip_is_free() {
