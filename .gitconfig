@@ -1,6 +1,7 @@
 [user]
   name = Henrik Farre
   email = hfar@tv2.dk
+  signingkey = 2FC49A21DD7DD214
 # http://pliutau.com/using-different-git-emails/ by using includeIf
 [diff]
   tool = vimdiff
@@ -66,3 +67,5 @@
   tool = ~/bin/vimdiff
 [status]
   submoduleSummary = true
+[commit]
+  gpgsign = true
