@@ -48,8 +48,9 @@ if [[ -d ${HOME}/bin ]]; then
 fi
 
 # Check if gems module is installed
-if which ruby &>/dev/null && which gem &>/dev/null; then
-  PATH="${PATH}:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+# TODO: ruby 2.5
+if which ruby-2.4 &>/dev/null && which gem-2.4 &>/dev/null; then
+  PATH="${PATH}:$(ruby-2.4 -rubygems -e 'puts Gem.user_dir')/bin"
 fi
 
 if [[ -d ${HOME}/.local/nodejs/bin ]]; then

@@ -1,11 +1,4 @@
 #!/bin/bash
-# https://github.com/neovim/neovim/issues/1670#issuecomment-67423125
-fel () {
-  local file
-  file=$(grep --line-buffered --color=never -r "" ./* | fzf --query="$1" --select-1 --exit-0)
-  [ -n "$file" ] && ${EDITOR:-vim} "$file"
-}
-
 # Fix cd filename
 function cd () {
 if [[ -z $2 ]]; then
@@ -17,24 +10,6 @@ if [[ -z $2 ]]; then
 else
   builtin cd $*
 fi
-}
-
-# This is a helper function that splits the current pane to start the given
-# command ($1) and sends its output back to the original pane with any number of
-# optional keys (shift; $*).
-fzf_tmux_helper() {
-  [ -n "$TMUX_PANE" ] || return
-  local cmd=$1
-  shift
-  tmux split-window -p 40 \
-    "bash -c \"\$(tmux send-keys -t $TMUX_PANE \"\$(source ~/.fzf.bash; $cmd)\" $*)\""
-}
-
-fzf-git-changed-files() {
-  fzf_tmux_helper \
-      'git status -s --porcelain | fzf +s -m | sed -e "s/^[A-Z ?]\{3\}//" |
-      sed "s/ /\\\\ /g" |
-      paste -sd" " -' Space
 }
 
 function error() {
@@ -285,20 +260,20 @@ function encoding_demunger() {
 
 function switch-dns() {
   local DNS
-  local NEW_DNS
+  local NEW_DNS="192.168.0.1"
+  local CONNECTION=$(nmcli -g name,device con show --active| grep eth0 | cut -f1 -d:)
   DNS=$(nmcli -t -f IP4.DNS device show eth0)
   case "$DNS" in
     "IP4.DNS[1]:192.168.0.1" )
-      NEW_DNS="185.37.37.37"
-      ;;
-    "IP4.DNS[1]:185.37.37.37" )
-      NEW_DNS="192.168.0.1"
+      NEW_DNS="8.8.8.8 8.8.4.4"
       ;;
   esac
 
-  nmcli con down eth0
-  nmcli connection modify eth0 ipv4.dns "$NEW_DNS"
-  nmcli con up eth0
+  nmcli con down "$CONNECTION"
+  nmcli connection modify "$CONNECTION" ipv4.dns "$NEW_DNS"
+  nmcli con up "$CONNECTION"
+
+  cat /etc/resolv.conf
 }
 
 function check_if_ip_is_free() {
