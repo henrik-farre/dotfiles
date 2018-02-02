@@ -69,6 +69,11 @@ if [[ -d ${HOME}/.local/bin ]]; then
   PATH=${PATH}:${HOME}/.local/bin
 fi
 
+# Pip packages on MacOS
+if [[ -d /Users/hfar/Library/Python/2.7/bin/ ]]; then
+  PATH=${PATH}:/Users/hfar/Library/Python/2.7/bin/
+fi
+
 export PATH
 
 ############################################
