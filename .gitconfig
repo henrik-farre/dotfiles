@@ -43,7 +43,7 @@
   untracked = cyan
 [core]
   excludesfile = ~/.gitignore
-  editor = /usr/bin/nvim
+  editor = nvim
   pager = less
 [color]
   # auto: show in columns if the output is to the terminal
