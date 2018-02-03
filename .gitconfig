@@ -1,8 +1,9 @@
 [user]
   name = Henrik Farre
-  email = hfar@tv2.dk
+  email = henrik@rockhopper.dk
   signingkey = 2FC49A21DD7DD214
-# http://pliutau.com/using-different-git-emails/ by using includeIf
+[includeIf "gitdir:~/Dev/work/"]
+    path = ~/.gitconfig-work
 [diff]
   tool = vimdiff
   algorithm = patience
