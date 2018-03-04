@@ -9,4 +9,4 @@ repos:
     sha: 1.0.2
     hooks:
       - id: shell-lint
-        files: \.(sh|bash|zsh)$
+        files: \.(sh|bash)$
