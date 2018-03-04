@@ -41,3 +41,4 @@ setopt interactivecomments     # escape commands so i can use them later
 setopt printexitvalue          # alert me if something's failed
 setopt prompt_subst            # Allow for functions/variable expansion in the prompt.
 setopt transientrprompt        # Remove any right prompt from display when accepting a command line. This may be useful with terminals with other cut/paste methods.
+setopt rm_star_silent          # Remove double verification: "zsh: sure you want to delete all the files in ..."
