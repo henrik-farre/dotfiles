@@ -32,6 +32,7 @@ exiftool -v . \
   "-filename<filemodifydate" "-filename<mediacreatedate" "-filename<createdate" "-filename<datetimeoriginal" \
   -preserve \
   --extension jpg --extension jpeg \
+  -ext mts \
   -ignoreMinorErrors \
   -dateFormat "$VID_DST_DIR/%Y/%m/%Y-%m-%d_%H:%M:%S_%%c_%%f.%%le" \
   -recurse "$SRC_DIR"
