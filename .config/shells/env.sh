@@ -85,15 +85,6 @@ export GEM_SPEC_CACHE=~/.cache/ruby/specs
 
 export SDL_AUDIODRIVER="alsa"
 
-# History options, TODO: bash vs zsh?
-export HISTFILESIZE=5000
-export HISTIGNORE=ls:l:ll:mc:cd:..
-export HISTCONTROL=ignoreboth:erasedups
-
-if [[ ${SHELL_IS} == "bash" ]]; then
-  export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
-fi
-
 ############################################
 # Ensure a11y is disabled (to avoid "Couldn't connect to accessibility bus" errors)
 # Cinnamon unsets env so it can't be in /etc/profile.d/
