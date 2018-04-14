@@ -70,6 +70,11 @@ if [[ -d ${HOME}/.local/bin ]]; then
   PATH=${PATH}:${HOME}/.local/bin
 fi
 
+# Pip packages on MacOS
+if [[ -d /Users/hfar/Library/Python/2.7/bin/ ]]; then
+  PATH=${PATH}:/Users/hfar/Library/Python/2.7/bin/
+fi
+
 export PATH
 
 ############################################
@@ -79,15 +84,6 @@ export PATH
 export GEM_SPEC_CACHE=~/.cache/ruby/specs
 
 export SDL_AUDIODRIVER="alsa"
-
-# History options, TODO: bash vs zsh?
-export HISTFILESIZE=5000
-export HISTIGNORE=ls:l:ll:mc:cd:..
-export HISTCONTROL=ignoreboth:erasedups
-
-if [[ ${SHELL_IS} == "bash" ]]; then
-  export HISTTIMEFORMAT='%Y-%m-%d %H:%M:%S '
-fi
 
 ############################################
 # Ensure a11y is disabled (to avoid "Couldn't connect to accessibility bus" errors)

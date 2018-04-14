@@ -1,7 +1,9 @@
 [user]
   name = Henrik Farre
-  email = hfar@tv2.dk
-# http://pliutau.com/using-different-git-emails/ by using includeIf
+  email = henrik@rockhopper.dk
+  signingkey = 2FC49A21DD7DD214
+[includeIf "gitdir:~/Dev/work/"]
+    path = ~/.gitconfig-work
 [diff]
   tool = vimdiff
   algorithm = patience
@@ -42,7 +44,7 @@
   untracked = cyan
 [core]
   excludesfile = ~/.gitignore
-  editor = /usr/bin/nvim
+  editor = nvim
   pager = less
 [color]
   # auto: show in columns if the output is to the terminal
@@ -66,3 +68,5 @@
   tool = ~/bin/vimdiff
 [status]
   submoduleSummary = true
+[commit]
+  gpgsign = true
