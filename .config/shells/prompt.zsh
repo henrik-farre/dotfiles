@@ -160,3 +160,6 @@ zstyle ':vcs_info:git*' formats " %b %u%c%m"
 
 build_prompt
 export SPROMPT
+
+# Removes % from lines with no EOL
+export PROMPT_EOL_MARK=""
