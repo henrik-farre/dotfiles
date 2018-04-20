@@ -12,7 +12,13 @@ IFS=$'\n\t'
 source ~/.config/jira_issue.sh
 
 SUMMARY=${1:-}
-DESC=${2:-}
+DESC=${2:-TODO}
+
+if [[ -z $SUMMARY ]]; then
+    echo "Usage:"
+    echo "$0 'Summary' 'Description'"
+    exit 1
+fi
 
 DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
 
