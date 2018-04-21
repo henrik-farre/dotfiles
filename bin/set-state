@@ -6,18 +6,18 @@ if [[ -z $1 ]]; then
 fi
 
 function cpupowersave {
+  sudo cpupower frequency-set -g powersave
   return 0
-  # sudo cpupower frequency-set -g powersave
 }
 
 function cpuondemand {
+  sudo cpupower frequency-set -g ondemand
   return 0
-  # sudo cpupower frequency-set -g ondemand
 }
 
 function cpuperformance {
+  sudo cpupower frequency-set -g performance
   return 0
-  # sudo cpupower frequency-set -g performance
 }
 
 function backlight_control {
@@ -98,7 +98,7 @@ function screensetup_dual {
 }
 
 function conky_reload {
-   pkill -HUP conky
+   pkill -HUP conky || true
 }
 
 MODE=$1
