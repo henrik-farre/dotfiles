@@ -11,15 +11,24 @@ IFS=$'\n\t'
 
 source ~/.config/jira_issue.sh
 
-SUMMARY=${1:-}
-DESC=${2:-TODO}
+COMMAND=$(basename $0)
 
-if [[ -z $SUMMARY ]]; then
-    echo "Usage:"
-    echo "$0 'Summary' 'Description'"
-    exit 1
-fi
+case $COMMAND in
+    jira_transition)
+        echo her
+    ;;
+    jira_create)
+        SUMMARY=${1:-}
+        DESC=${2:-TODO}
 
-DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
+        if [[ -z $SUMMARY ]]; then
+            echo "Usage:"
+            echo "$0 'Summary' 'Description'"
+            exit 1
+        fi
 
-curl -D- -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data $DATA -H "Content-Type: application/json" https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/
+        DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
+
+        curl -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data $DATA -H "Content-Type: application/json" https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/ | jq .
+        ;;
+esac
