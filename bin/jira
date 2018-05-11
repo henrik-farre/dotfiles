@@ -14,9 +14,44 @@ source ~/.config/jira_issue.sh
 COMMAND=$(basename $0)
 
 case $COMMAND in
+    jira_get)
+        ISSUE=${1:-}
+
+        curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" "https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/${ISSUE}" | jq .
+        ;;
     jira_transition)
-        echo her
-    ;;
+        ISSUE=${1:-}
+        OUTPUT=$(curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" "https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/${ISSUE}")
+        CURRENT_TRANS=$(echo "$OUTPUT" | jq -r ".fields.status.id" )
+
+        case "${CURRENT_TRANS}" in
+            111)
+                TRANSITION_ID=11
+                ;;
+            12400)
+                TRANSITION_ID=31
+                ;;
+            12402)
+                TRANSITION_ID=41
+                ;;
+            12403)
+                TRANSITION_ID=51
+                ;;
+            11900)
+                TRANSITION_ID=61
+                ;;
+            10809)
+                TRANSITION_ID=71
+                ;;
+            *)
+                echo "Unknown transition: $CURRENT_TRANS"
+                exit 1
+                ;;
+        esac
+
+        DATA=$(printf '{"transition": {"id": "%d"}}' "$TRANSITION_ID")
+        curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data "$DATA" -H "Content-Type: application/json" "https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/${ISSUE}/transitions" | jq .
+        ;;
     jira_create)
         SUMMARY=${1:-}
         DESC=${2:-TODO}
@@ -29,7 +64,7 @@ case $COMMAND in
 
         DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
 
-        curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data $DATA -H "Content-Type: application/json" https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/ | jq .
+        curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data "$DATA" -H "Content-Type: application/json" "https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/" | jq .
         ;;
     *)
         echo "Unknown command $COMMAND"
