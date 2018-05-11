@@ -29,6 +29,10 @@ case $COMMAND in
 
         DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
 
-        curl -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data $DATA -H "Content-Type: application/json" https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/ | jq .
+        curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data $DATA -H "Content-Type: application/json" https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/ | jq .
+        ;;
+    *)
+        echo "Unknown command $COMMAND"
+        exit 1
         ;;
 esac
