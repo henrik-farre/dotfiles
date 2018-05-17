@@ -110,7 +110,12 @@ fi
 ############################################
 # Python
 if [[ -d ~/.local/lib/python2.7 ]]; then
-  export PYTHONPATH=~/.local/lib/python2.7
+  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
+fi
+
+# MacOS
+if [[ -d ~/Library/Python/3.6/lib/python/site-packages ]]; then
+  export PYTHONPATH=${PYTHONPATH}:~/Library/Python/3.6/lib/python/site-packages
 fi
 
 ############################################
