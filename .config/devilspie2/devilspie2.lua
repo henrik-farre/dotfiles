@@ -7,6 +7,6 @@
 -- setup. (String comparison are case sensitive, please note this when
 -- creating rule scripts.)
 if (get_application_name() == "neovim") then
-  xy(0, 0);
+  xy(2881, 0);
   maximize();
 end
