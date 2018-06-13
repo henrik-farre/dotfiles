@@ -6,6 +6,7 @@
 set -o nounset
 set -o errexit
 set -o pipefail
+# set -o xtrace
 # Note this breaks passing a variable as args to a command
 IFS=$'\n\t'
 
@@ -25,7 +26,12 @@ case $COMMAND in
         CURRENT_TRANS=$(echo "$OUTPUT" | jq -r ".fields.status.id" )
 
         case "${CURRENT_TRANS}" in
+            # Oops
             111)
+                TRANSITION_ID=11
+                ;;
+            # Backlog
+            10808)
                 TRANSITION_ID=11
                 ;;
             12400)
