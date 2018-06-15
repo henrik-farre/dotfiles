@@ -52,8 +52,12 @@ case $COMMAND in
                 TRANSITION_ID=61
                 ;;
             10809)
-                echo "=> Done"
+                echo "=> Deploying"
                 TRANSITION_ID=71
+                ;;
+            12404)
+                echo "=> Done"
+                TRANSITION_ID=91
                 ;;
             *)
                 echo "Unknown transition: $CURRENT_TRANS"
