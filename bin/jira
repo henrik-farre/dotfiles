@@ -34,19 +34,25 @@ case $COMMAND in
             10808)
                 TRANSITION_ID=11
                 ;;
+            # Visiteres
             12400)
+                echo "=> Visiteret"
                 TRANSITION_ID=31
                 ;;
             12402)
+                echo "=> Analyse"
                 TRANSITION_ID=41
                 ;;
             12403)
+                echo "=> Ready"
                 TRANSITION_ID=51
                 ;;
             11900)
+                echo "=> In progress"
                 TRANSITION_ID=61
                 ;;
             10809)
+                echo "=> Done"
                 TRANSITION_ID=71
                 ;;
             *)
