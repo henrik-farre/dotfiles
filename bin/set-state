@@ -187,6 +187,16 @@ case $MODE in
    DEVICE_ID=$(xsetwacom --list devices | awk '{if ($9 == "STYLUS") print $7}')
    xsetwacom --set "$DEVICE_ID" MapToOutput "1920x1200+0+0"
    ;;
+ steam-bigpicture)
+    screensetup_single
+    disablealt
+    cpuperformance
+    servicesstop
+    nvidiaperformance
+    conky_reload
+    export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+    /usr/bin/steam-native -bigpicture
+   ;;
  *)
    echo "Unknown mode"
    ;;

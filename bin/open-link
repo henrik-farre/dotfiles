@@ -1,28 +1,34 @@
 #!/bin/bash
+set -o nounset
+set -o errexit
+set -o pipefail
+# set -o xtrace
+IFS=$'\n\t'
 
 URL=$1
 
 PROFILES=$(grep "Name=" ~/.mozilla/firefox/profiles.ini | cut -f2 -d=)
 
-PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" $PROFILES);
+declare -a RUNNING_PROFILES
+RUNNING_PROFILES=()
 
-case $PROFILE in
-  Home)
-    PID=$(pgrep -f -- '-P Home')
-    ;;
-  Private)
-    PID=$(pgrep -f -- '-P Private')
-    ;;
-  Work)
-    PID=$(pgrep -f -- '-P Work')
-    ;;
-  *)
-    exit 0
-    ;;
-esac
+for PROFILE in $PROFILES; do
+  if pgrep -f -- "firefox -P ${PROFILE}"; then
+    RUNNING_PROFILES+=("$PROFILE")
+    echo $PROFILE
+  fi
+done
+
+if [[ ${#RUNNING_PROFILES[@]} -gt 1 ]]; then
+  SELECTED_PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" "${RUNNING_PROFILES[@]}");
+else
+  SELECTED_PROFILE="${RUNNING_PROFILES[@]:1}"
+fi
+
+PID=$(pgrep -f -- "firefox -P ${SELECTED_PROFILE}")
 
 if [[ x$PID == 'x' ]]; then
-  firefox -P "$PROFILE" "$URL"
+  firefox -P"$PROFILE" -no-remote "$URL"
 else
   # Avoid "Can't consume 1 args; are only 0 available. This is a bug." message: https://github.com/jordansissel/xdotool/issues/14
   # Pick the last id, as it seems to be the one needed
