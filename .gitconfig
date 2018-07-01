@@ -4,12 +4,6 @@
   signingkey = 2FC49A21DD7DD214
 [includeIf "gitdir:~/Dev/work/"]
     path = ~/.gitconfig-work
-[diff]
-  tool = vimdiff
-  algorithm = patience
-# http://nuclearsquid.com/writings/git-tricks-tips-workflows/
-# Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
-  mnemonicprefix = true
 [alias]
   st = status
   ci = commit
@@ -62,13 +56,21 @@
 # Skip template
 #[init]
 #  templatedir = ~/.git_template
+[diff]
+  tool = vimdiff
+  algorithm = patience
+# http://nuclearsquid.com/writings/git-tricks-tips-workflows/
+# Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
+  mnemonicprefix = true
 [difftool]
   prompt = false
 [merge]
   tool = vimdiff
   conflictstyle = diff3
+[mergetool]
+  prompt = true
 [mergetool "vimdiff"]
-  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [status]
   submoduleSummary = true
 [commit]
