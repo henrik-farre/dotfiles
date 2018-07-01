@@ -51,3 +51,13 @@ autoload colors; colors
 # Source shared *.sh and *.zsh files
 for sourcefile in ~/.config/shells/*.{sh,zsh}; do source ${sourcefile}; done
 unset sourcefile
+
+# Based on coreos /usr/share/baselayout/coreos-profile.sh
+if [[ $- == *i* ]]; then
+  FAILED=$(systemctl list-units --state=failed --no-legend)
+  if [[ ! -z "${FAILED}" ]]; then
+    COUNT=$(wc -l <<<"${FAILED}")
+    echo -e "Failed Units: \033[31m${COUNT}\033[39m"
+    awk '{ print "  " $1 }' <<<"${FAILED}"
+  fi
+fi
