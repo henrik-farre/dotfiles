@@ -189,6 +189,7 @@ case $MODE in
    ;;
  steam-bigpicture)
     screensetup_single
+    xrandr --output HDMI-0 --mode 1920x1080
     disablealt
     cpuperformance
     servicesstop
