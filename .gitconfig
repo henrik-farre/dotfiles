@@ -24,8 +24,6 @@
 # uncommit removes the last commit from your repository, and puts the changes into your index
   unstage = reset HEAD
   uncommit = reset --soft HEAD^
-  dt = difftool
-  df = diff
   ctags = !.git/hooks/ctags
 # http://gggritso.com/human-git-aliases
   branches = branch -a
@@ -57,18 +55,20 @@
 #[init]
 #  templatedir = ~/.git_template
 [diff]
-  tool = vimdiff
+  tool = nvr
   algorithm = patience
 # http://nuclearsquid.com/writings/git-tricks-tips-workflows/
 # Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
   mnemonicprefix = true
-[difftool]
-  prompt = false
+[difftool "nvr"]
+  cmd = nvr -s -d $LOCAL $REMOTE
 [merge]
-  tool = vimdiff
-  conflictstyle = diff3
+  tool = nvr
+  ; conflictstyle = diff3
 [mergetool]
   prompt = true
+[mergetool "nvr"]
+  cmd = nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [status]
