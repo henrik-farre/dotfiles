@@ -72,6 +72,7 @@ case $COMMAND in
     jira_create)
         SUMMARY=${1:-}
         DESC=${2:-TODO}
+        LABELS=${3:-}
 
         if [[ -z $SUMMARY ]]; then
             echo "Usage:"
@@ -79,7 +80,15 @@ case $COMMAND in
             exit 1
         fi
 
-        DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}}}' "$PROJECT_KEY" "$SUMMARY" "$DESC")
+        FORMATED_LABELS=''
+        if [[ ! -z $LABELS ]]; then
+            if [ -z "${LABELS##*,*}" ]; then
+                LABELS=(${LABELS//,/\", \"})
+            fi
+            FORMATED_LABELS=$(printf ', "labels": ["%s"]' $LABELS)
+        fi
+
+        DATA=$(printf '{"fields":{"project":{"key": "%s"},"summary": "%s","description": "%s","issuetype": {"name": "Task"}%s}}' "$PROJECT_KEY" "$SUMMARY" "$DESC" "$FORMATED_LABELS")
 
         curl -s -u "${JIRA_USER}:${JIRA_PASSWORD}" -X POST --data "$DATA" -H "Content-Type: application/json" "https://${JIRA_HOST}.atlassian.net/rest/api/2/issue/" | jq .
         ;;
