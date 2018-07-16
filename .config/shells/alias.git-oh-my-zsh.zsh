@@ -4,6 +4,9 @@ alias g='git'
 compdef g=git
 alias gst='git status'
 compdef _git gst=git-status
+# Fix typo "gs" when I ment "gst"
+alias gs='git status'
+compdef _git gs=git-status
 alias gd='git diff'
 compdef _git gd=git-diff
 alias gdc='git diff --cached'
