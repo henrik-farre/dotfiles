@@ -101,6 +101,14 @@ function conky_reload {
    pkill -HUP conky || true
 }
 
+function xcape_stop {
+  systemctl --user stop xcape
+}
+
+function xcape_start {
+  systemctl --user start xcape
+}
+
 MODE=$1
 
 case $MODE in
@@ -135,6 +143,7 @@ case $MODE in
     servicesstop
     nvidiaperformance
     conky_reload
+    xcape_stop
     ;;
   gameoff)
     screensetup_dual
@@ -144,6 +153,7 @@ case $MODE in
     servicesstart
     nvidiaadaptive
     conky_reload
+    xcape_start
    ;;
  vga-right)
    xrandr --output VGA1 --auto
