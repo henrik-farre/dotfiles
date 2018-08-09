@@ -3,6 +3,6 @@
 [[ -d ~/.config/rancher ]] || mkdir -p  ~/.config/rancher
 [[ -e ~/.config/rancher/cli.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/cli.json
 
-IMAGE=${IMAGE:-rancher/cli}
+IMAGE=${IMAGE:-rancher/cli:v0.6.4}
 
 exec docker run --rm -it -v ~/.config/rancher/cli.json:/root/.rancher/cli.json -v ~/.ssh/known_hosts:/root/.ssh/known_hosts -v $(pwd):/mnt ${IMAGE} "$@"
