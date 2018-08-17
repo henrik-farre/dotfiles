@@ -42,3 +42,6 @@ Thumbs.db
 
 # Neovim is in own repository
 .config/nvim
+
+# Neomake tmp files
+*@neomake_*
