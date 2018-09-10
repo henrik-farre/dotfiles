@@ -1,22 +1,30 @@
 #!/bin/bash
 
+exec > >(tee "/tmp/hest.log") 2>&1
+
 if [[ -z $1 ]]; then
   echo "Missing arg"
   exit 1
 fi
 
-function cpupowersave {
-  sudo cpupower frequency-set -g powersave
-  return 0
-}
-
-function cpuondemand {
-  sudo cpupower frequency-set -g ondemand
-  return 0
-}
-
-function cpuperformance {
-  sudo cpupower frequency-set -g performance
+function cpu_powersetting {
+  local MODE
+  case $1 in
+    powersave)
+      MODE=$1
+      ;;
+    ondemand)
+      MODE=$1
+      ;;
+    performance)
+      MODE=$1
+      ;;
+    *)
+      echo "Unknown cpu power setting $1"
+      return 1
+      ;;
+  esac
+  sudo cpupower frequency-set -g "$MODE"
   return 0
 }
 
@@ -28,13 +36,7 @@ function backlight_control {
   fi
 }
 
-function powertop_control {
-  if [[ -e /usr/bin/powertop ]]; then
-    sudo powertop --auto-tune
-  fi
-}
-
-function pstate_control {
+function cpu_pstate_control {
   if [[ $1 == 'off' ]]; then
     sudo sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"
     sudo sh -c "echo 25 > /sys/devices/system/cpu/intel_pstate/max_perf_pct"
@@ -60,21 +62,16 @@ function servicesstart {
   #systemctl --user start conky
 }
 
-function modulesunload {
- if [[ $HOST == 'ectoplasma' ]]; then
-  sudo -i sh -c "rmmod v4l2_common; rmmod ssb; rmmod pcmcia; rmmod pcmcia_core; rmmod uvcvideo; rmmod videobuf2_core; rmmod videodev; rmmod videobuf2_vmalloc; rmmod videobuf2_memops; rmmod btusb; rmmod parport_pc; rmmod ppdev; rmmod parport; rmmod joydev; rmmod bluetooth; rmmod e1000e; rmmod sr_mod; rmmod cdrom; rmmod firewire_ohci; rmmod firewire_core; rmmod hp-wmi"
- fi
-}
-
-function nvidiaperformance {
+function nvidia_gpu_powersetting {
   if [[ -f /usr/bin/nvidia-settings ]]; then
-    nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1
-  fi
-}
-
-function nvidiaadaptive {
-  if [[ -f /usr/bin/nvidia-settings ]]; then
-    nvidia-settings -a [gpu:0]/GPUPowerMizerMode=0
+    case $1 in
+      power)
+        nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1
+        ;;
+      adaptive)
+        nvidia-settings -a [gpu:0]/GPUPowerMizerMode=0
+        ;;
+    esac
   fi
 }
 
@@ -113,63 +110,35 @@ MODE=$1
 
 case $MODE in
   powersave)
-    cpupowersave
+    cpu_powersetting powersave
     backlight_control on
-    pstate_control off
-    powertop_control
+    cpu_pstate_control off
     servicesstop
-    nvidiaadaptive
-    modulesunload
+    nvidia_gpu_powersetting adaptive
     ;;
-  # ondemand)
-    # cpuondemand
-    # nvidiaadaptive
-    # servicesstart
-    # ;;
   performance)
-    cpuperformance
+    cpu_powersetting performance
     servicesstart
-    powertop_control
-    pstate_control on
+    cpu_pstate_control on
     backlight_control off
-    ;;
-  cpu_turbo_allow)
-    pstate_control on
     ;;
   gameon)
     screensetup_single
     disablealt
-    cpuperformance
+    cpu_powersetting performance
     servicesstop
-    nvidiaperformance
+    nvidia_gpu_powersetting power
     conky_reload
     xcape_stop
     ;;
   gameoff)
     screensetup_dual
     enablealt
-    # cpuondemand
-    cpupowersave
+    cpu_powersetting powersave
     servicesstart
-    nvidiaadaptive
+    nvidia_gpu_powersetting adaptive
     conky_reload
     xcape_start
-   ;;
- vga-right)
-   xrandr --output VGA1 --auto
-   xrandr --output VGA1 --right-of LVDS1
-   ;;
- laptop-screen-only)
-   xrandr --output HDMI1 --off
-   xrandr --output LVDS1 --auto
-   xrandr --output HDMI2 --off
-   xfconf-query -c xfce4-panel -p "/panels/panel-0/output-name" -s "LVDS1"
-   ;;
- laptop-screen-dual)
-   xrandr --output HDMI1 --auto
-   xrandr --output LVDS1 --off
-   xrandr --output HDMI2 --auto
-   xrandr --output HDMI2 --right-of HDMI1
    ;;
  macbook-hidpi-on)
    gsettings set org.cinnamon panels-height "['1:28']"
@@ -198,15 +167,15 @@ case $MODE in
    xsetwacom --set "$DEVICE_ID" MapToOutput "1920x1200+0+0"
    ;;
  steam-bigpicture)
-    screensetup_single
-    xrandr --output HDMI-0 --mode 1920x1080
-    disablealt
-    cpuperformance
-    servicesstop
-    nvidiaperformance
-    conky_reload
-    export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
-    /usr/bin/steam-native -bigpicture
+   screensetup_single
+   xrandr --output HDMI-0 --mode 1920x1080
+   disablealt
+   cpu_powersetting performance
+   servicesstop
+   nvidia_gpu_powersetting power
+   conky_reload
+   export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
+   /usr/bin/steam-native -bigpicture
    ;;
  *)
    echo "Unknown mode"
