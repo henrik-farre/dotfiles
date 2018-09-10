@@ -13,7 +13,7 @@ function updateGit() {
         local REPO="$1"
         cd "$REPO" || exit
         printf "${GREEN}%s${RESET}\n" "$REPO"
-        git pull
+        git pull || true
     )
 }
 
