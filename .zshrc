@@ -53,7 +53,7 @@ for sourcefile in ~/.config/shells/*.{sh,zsh}; do source ${sourcefile}; done
 unset sourcefile
 
 # Based on coreos /usr/share/baselayout/coreos-profile.sh
-if [[ $- == *i* ]]; then
+if [[ $- == *i* && $PLATFORM != 'Darwin' ]]; then
   FAILED=$(systemctl list-units --state=failed --no-legend)
   if [[ ! -z "${FAILED}" ]]; then
     COUNT=$(wc -l <<<"${FAILED}")
