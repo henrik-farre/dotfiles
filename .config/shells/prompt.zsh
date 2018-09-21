@@ -1,9 +1,9 @@
 #!/bin/zsh
 
 if [[ $PLATFORM == 'Darwin' ]]; then
-  if [[ -f macos/prompt.zsh ]]; then
-    source macos/prompt.zsh
+  if [[ -f ~/.config/shells/macos/prompt.zsh ]]; then
+    source ~/.config/shells/macos/prompt.zsh
   fi
 else
-  source linux/prompt.zsh
+  source ~/.config/shells/linux/prompt.zsh
 fi
