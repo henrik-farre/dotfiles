@@ -1,3 +1,3 @@
-autolautoload -Uz promptinit
+autoload -Uz promptinit
 promptinit
 prompt fade
