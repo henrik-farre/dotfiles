@@ -232,5 +232,7 @@ bindkey "^?" backward-delete-char  # vi-backward-delete-char
 # The prompt contains a Unicode non-breaking space
 # This removes the prompt when pasting
 # From http://chneukirchen.org/blog/archive/2013/03/10-fresh-zsh-tricks-you-may-not-know.html
+if [[ $PLATFORM == 'Linux' ]]; then
 nbsp=$'\u00A0'
 bindkey -s $nbsp '^u'
+fi
