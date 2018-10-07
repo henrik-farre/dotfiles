@@ -175,7 +175,7 @@ case $MODE in
    nvidia_gpu_powersetting power
    conky_reload
    export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
-   /usr/bin/steam-native -bigpicture
+   /usr/bin/steam-native -bigpicture -nochatui -nofriendsui
    ;;
  *)
    echo "Unknown mode"
