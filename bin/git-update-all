@@ -29,7 +29,7 @@ DIR_TO_CHECK=${1:-.}
     cd "$DIR_TO_CHECK" || exit
     for REPO in $(find . -name ".git" -type d 2>/dev/null| cut -c 3-); do
         REPO=${REPO%/*}
-        updateGit "$REPO"
+        updateGit "$REPO" &
     done
 
     wait
