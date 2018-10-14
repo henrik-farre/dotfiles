@@ -1,7 +1,5 @@
 #!/bin/bash
 
-exec > >(tee "/tmp/hest.log") 2>&1
-
 if [[ -z $1 ]]; then
   echo "Missing arg"
   exit 1
