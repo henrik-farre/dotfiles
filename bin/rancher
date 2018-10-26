@@ -1,8 +1,33 @@
 #!/bin/bash
 
+RANCHER_ENV=$(basename $0)
+
 [[ -d ~/.config/rancher ]] || mkdir -p  ~/.config/rancher
-[[ -e ~/.config/rancher/cli.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/cli.json
+
+CONFIG_FILE="~/.config/rancher/cli.json"
+
+case $RANCHER_ENV in
+    rancher-dev)
+        [[ -e ~/.config/rancher/dev.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/dev.json
+        CONFIG_FILE="~/.config/rancher/dev.json"
+        ;;
+    rancher-stage)
+        [[ -e ~/.config/rancher/stage.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/stage.json
+        CONFIG_FILE="~/.config/rancher/stage.json"
+        ;;
+    rancher-prod)
+        [[ -e ~/.config/rancher/prod.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/prod.json
+        CONFIG_FILE="~/.config/rancher/prod.json"
+        ;;
+    rancher)
+        [[ -e ~/.config/rancher/cli.json ]] || echo '{"accessKey":"","secretKey":"","url":"","environment":""}' > ~/.config/rancher/cli.json
+        ;;
+    *)
+        echo "Unknown Rancher environment $RANCHER_ENV"
+        exit 1
+        ;;
+esac
 
 IMAGE=${IMAGE:-rancher/cli:v0.6.4}
 
-exec docker run --rm -it -v ~/.config/rancher/cli.json:/root/.rancher/cli.json -v ~/.ssh/known_hosts:/root/.ssh/known_hosts -v $(pwd):/mnt ${IMAGE} "$@"
+exec docker run --rm -it -v $CONFIG_FILE:/root/.rancher/cli.json -v ~/.ssh/known_hosts:/root/.ssh/known_hosts -v $(pwd):/mnt ${IMAGE} "$@"
