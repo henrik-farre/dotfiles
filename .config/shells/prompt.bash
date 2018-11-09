@@ -12,17 +12,19 @@ function render_prompt()
   esac
   TITLEBAR='\[\033]0;\u:${NEW_PWD}\007\]'
 
-  local ENV_COLOR
-  ENV_COLOR='\033[1;33m'
+  # local ENV_COLOR
+  # local RESET
+  ENV_COLOR="$(tput setaf 3)"
+  RESET="$(tput sgr0)"
   case "$(hostname)" in
-    *.production.* )
-      ENV_COLOR='\033[30m\033[41m'
+    *.production.*)
+      ENV_COLOR="$(tput setab 1)$(tput setaf 0)"
       ;;
-    *.backend.* )
-      ENV_COLOR='\033[0;31m'
+    *.backend.*)
+      ENV_COLOR="$(tput setaf 1)"
       ;;
     *.dev.* )
-      ENV_COLOR='\033[0;32m'
+      ENV_COLOR="$(tput setaf 3)"
       ;;
   esac
 
@@ -30,7 +32,7 @@ function render_prompt()
   if [[ "${USER}" == 'root' ]]; then
     PS1="${TITLEBAR}\[\033[0;31m\]\u@\H\[\033[00m\]:\w> "
   else
-    PS1="${TITLEBAR}${ENV_COLOR}\H\[\033[00m\]:\w> "
+    PS1='${TITLEBAR}\[${ENV_COLOR}\]\H\[${RESET}\]:\w> '
   fi
 
   # export PS1
