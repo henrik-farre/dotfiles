@@ -24,7 +24,7 @@ function render_prompt()
       ENV_COLOR="$(tput setaf 1)"
       ;;
     *.dev.* )
-      ENV_COLOR="$(tput setaf 3)"
+      ENV_COLOR="$(tput setaf 2)"
       ;;
   esac
 
