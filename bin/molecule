@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ -f ~/.local/bin/molecule ]]; then
+    ~/.local/bin/molecule $*
+else
+    DOCKER_IMAGE=devops-molecule:latest
+    docker run --rm --name molecule -it \
+    -v "$(pwd)":/tmp/$(basename "$(pwd)") \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "molecule-state-$(basename "$(pwd)"):/tmp/molecule/" \
+    -w /tmp/$(basename "$(pwd)") \
+    $DOCKER_IMAGE \
+    sudo molecule $*
+fi
