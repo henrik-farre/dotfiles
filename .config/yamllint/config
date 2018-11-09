@@ -6,3 +6,4 @@ rules:
     max-spaces-inside: -1
     max-spaces-inside-empty: -1
   truthy: disable
+  comments-indentation: disable
