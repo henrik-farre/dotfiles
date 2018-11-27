@@ -3,7 +3,7 @@
 if [[ -f ~/.local/bin/molecule ]]; then
     ~/.local/bin/molecule $*
 else
-    DOCKER_IMAGE=devops-molecule:latest
+    DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:latest
 
     DOCKER_ENVS=''
     if [[ -n $VMWARE_USER ]]; then
