@@ -5,16 +5,7 @@ if [[ -f ~/.local/bin/molecule ]]; then
 else
     DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:latest
 
-    DOCKER_ENVS=''
-    if [[ -n $VMWARE_USER ]]; then
-        DOCKER_ENVS+=" -e VMWARE_USER=$VMWARE_USER"
-    fi
-    if [[ -n $VMWARE_PASSWORD ]]; then
-        DOCKER_ENVS+=" -e VMWARE_PASSWORD=$VMWARE_PASSWORD"
-    fi
-
     docker run --rm --name molecule -it \
-    $DOCKER_ENVS \
     -v "$(pwd)":/tmp/$(basename "$(pwd)") \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v molecule-state-$(basename "$(pwd)"):/tmp/molecule/ \
