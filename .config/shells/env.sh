@@ -71,8 +71,8 @@ if [[ -d ${HOME}/.local/bin ]]; then
 fi
 
 # Pip packages on MacOS
-if [[ -d /Users/hfar/Library/Python/2.7/bin/ ]]; then
-  PATH=${PATH}:/Users/hfar/Library/Python/2.7/bin/
+if [[ -d /Users/hfar/Library/Python/3.7/bin/ ]]; then
+  PATH=${PATH}:/Users/hfar/Library/Python/3.7/bin/
 fi
 
 if [[ $PLATFORM == 'Darwin' ]]; then
