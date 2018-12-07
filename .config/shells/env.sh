@@ -118,8 +118,8 @@ if [[ -d ~/.local/lib/python2.7 ]]; then
 fi
 
 # MacOS
-if [[ -d ~/Library/Python/3.6/lib/python/site-packages ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/Library/Python/3.6/lib/python/site-packages
+if [[ -d ~/Library/Python/3.7/lib/python/site-packages ]]; then
+  export PYTHONPATH=${PYTHONPATH}:~/Library/Python/3.7/lib/python/site-packages
 fi
 if [[ -d ~/Library/Python/2.7/lib/python/site-packages ]]; then
   export PYTHONPATH=${PYTHONPATH}:~/Library/Python/2.7/lib/python/site-packages
