@@ -113,8 +113,12 @@ fi
 
 ############################################
 # Python
-if [[ -d ~/.local/lib/python2.7 ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
+# if [[ -d ~/.local/lib/python2.7 ]]; then
+  # export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
+# fi
+
+if [[ -d ~/.local/lib/python3.7 ]]; then
+  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python3.7
 fi
 
 # MacOS
