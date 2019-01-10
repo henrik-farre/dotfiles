@@ -93,7 +93,7 @@ function screensetup_dual {
 }
 
 function conky_reload {
-   pkill -HUP conky || true
+  killall -SIGUSR1 conky || true
 }
 
 function xcape_stop {
