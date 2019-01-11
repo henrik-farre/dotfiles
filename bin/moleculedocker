@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:latest
+
+docker run --rm --name molecule -it \
+    -v "$(pwd)":/tmp/$(basename "$(pwd)") \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v molecule-state-$(basename "$(pwd)"):/tmp/molecule/ \
+    -w /tmp/$(basename "$(pwd)") \
+    $DOCKER_IMAGE \
+    sudo molecule $*
+
+if [[ $* == 'destroy' ]]; then
+    docker volume rm molecule-state-$(basename "$(pwd)")
+fi
