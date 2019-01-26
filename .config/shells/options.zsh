@@ -2,11 +2,6 @@
 autoload -U select-word-style
 select-word-style bash
 
-# History settings
-HISTFILE=~/.zhistory
-HISTSIZE=15000
-SAVEHIST=15000
-
 # Options
 setopt NO_CORRECT_ALL # correct_all wants to replace vim with .vim
 setopt NO_AUTO_REMOVE_SLASH
@@ -16,15 +11,6 @@ setopt AUTO_LIST
 setopt AUTO_CD
 
 ############################################################################################
-# History
-setopt INC_APPEND_HISTORY      # Add comamnds as they are typed, don't wait until shell exit
-setopt SHARE_HISTORY
-setopt EXTENDED_HISTORY
-setopt HIST_IGNORE_SPACE
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt HIST_FIND_NO_DUPS       # When searching history don't display results already cycled through twice
-
 setopt NO_BG_NICE
 setopt NO_CHECKJOBS
 setopt NO_HUP
