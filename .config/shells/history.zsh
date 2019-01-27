@@ -2,7 +2,7 @@
 HISTFILE=~/.zhistory
 HISTSIZE=15000
 SAVEHIST=15000
-HISTORY_IGNORE="(bg|fg|cd*|rm*|clear|ls|pwd|history|exit|make*|* --help|gst|..)"
+HISTORY_IGNORE="(bg|fg|cd*|rm*|clear|ls|pwd|history|exit|make*|* --help|gst|git pull|git pull|pacsearch *|..)"
 
 setopt INC_APPEND_HISTORY      # Add comamnds as they are typed, don't wait until shell exit
 setopt SHARE_HISTORY           # Share history between all sessions.
