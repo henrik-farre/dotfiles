@@ -290,3 +290,12 @@ function check_if_ip_is_free() {
   ssh -oConnectTimeout=2 "${IP}"
   dig -x +timeout=1 "${IP}" @ns.tv2.dk
 }
+
+# Prettier mount output
+function mount() {
+  if [[ $# -gt 0 ]]; then
+    /usr/bin/mount @*
+  else
+    /usr/bin/mount | column -t
+  fi
+}

@@ -82,6 +82,3 @@ fi
 if [[ -e '/usr/bin/htop' ]]; then
   alias top="htop"
 fi
-
-# Prettier mount output
-alias mount="mount | column -t"
