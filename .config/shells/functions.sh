@@ -294,8 +294,8 @@ function check_if_ip_is_free() {
 # Prettier mount output
 function mount() {
   if [[ $# -gt 0 ]]; then
-    /usr/bin/mount @*
+    /bin/mount @*
   else
-    /usr/bin/mount | column -t
+    /bin/mount | column -t
   fi
 }
