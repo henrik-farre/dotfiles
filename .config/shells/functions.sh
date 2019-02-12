@@ -25,22 +25,26 @@ function notice() {
 }
 
 function f() {
-  # Based on https://github.com/cyphunk/humanism.sh/blob/master/humanism.sh
-  FOLLOWSYMLNK="-L"
-  if [ $# -eq 0 ]; then
-    /usr/bin/env find .
-  elif [ $# -eq 1 ]; then
-    # If it is a directory in cwd, file list
-    if [ -d "$1" ]; then
-      /usr/bin/env find $FOLLOWSYMLNK "$1"
-      # else fuzzy find
-    else
-      /usr/bin/env find $FOLLOWSYMLNK ./ -iname "*$1*" 2>/dev/null
-    fi
-  elif [ $# -eq 2 ]; then
-    /usr/bin/env find $FOLLOWSYMLNK "$1" -iname "*$2*" 2>/dev/null
+  if [[ -e /usr/bin/fd ]]; then
+    /usr/bin/fd $@
   else
-    /usr/bin/env find $@
+    # Based on https://github.com/cyphunk/humanism.sh/blob/master/humanism.sh
+    FOLLOWSYMLNK="-L"
+    if [ $# -eq 0 ]; then
+      /usr/bin/env find .
+    elif [ $# -eq 1 ]; then
+      # If it is a directory in cwd, file list
+      if [ -d "$1" ]; then
+        /usr/bin/env find $FOLLOWSYMLNK "$1"
+        # else fuzzy find
+      else
+        /usr/bin/env find $FOLLOWSYMLNK ./ -iname "*$1*" 2>/dev/null
+      fi
+    elif [ $# -eq 2 ]; then
+      /usr/bin/env find $FOLLOWSYMLNK "$1" -iname "*$2*" 2>/dev/null
+    else
+      /usr/bin/env find $@
+    fi
   fi
 }
 
