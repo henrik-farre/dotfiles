@@ -16,5 +16,6 @@ if (get_application_name() == "neovim") then
     xy(2881, 0);
   end
 
+  set_on_top()
   maximize();
 end
