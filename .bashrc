@@ -12,7 +12,7 @@ if [[ -z "${STY}" && ${HOSTNAME_IS} == "management" ]]; then
 fi
 
 # Source shared *.sh and *.bash files
-for sourcefile in ~/.config/shells/*.{sh,bash}; do source ${sourcefile}; done
+for sourcefile in ~/.config/shell.d/*.{sh,bash}; do source ${sourcefile}; done
 unset sourcefile
 
 # http://www.askapache.com/security/bash_profile-functions-advanced-shell.html
