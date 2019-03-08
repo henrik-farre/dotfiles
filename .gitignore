@@ -45,3 +45,6 @@ Thumbs.db
 
 # Neomake tmp files
 *@neomake_*
+
+# molecule test vault creds
+vault_pass.txt
