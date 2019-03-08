@@ -66,6 +66,11 @@ if [[ -e /usr/bin/ack-grep ]]; then
   alias ack="ack-grep --follow"
 fi
 
+# Ag, ignore .gitignore
+if [[ -e '/usr/bin/ag' ]]; then
+  alias au="ag --unrestricted"
+fi
+
 if [[ -e /usr/bin/python2 && -e /usr/lib/python2.7/SimpleHTTPServer.py ]]; then
   alias webshare='python2 -m SimpleHTTPServer'
 fi
