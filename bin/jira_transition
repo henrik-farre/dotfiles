@@ -1,1 +1,60 @@
-jira
+#!/bin/bash
+
+# Fix common errors:
+# Referencing undefined variables (which default to "")
+# Ignoring failing commands
+set -o nounset
+set -o errexit
+set -o pipefail
+# set -o xtrace
+# Note this breaks passing a variable as args to a command
+IFS=$'\n\t'
+
+
+ISSUE=${1:-}
+CURRENT_TRANS=$(jira view "$ISSUE" -t debug | jq -r ".fields.status.id" )
+
+case "${CURRENT_TRANS}" in
+    # Oops
+    111)
+        TRANSITION_NAME=Oops
+        TRANSITION_ID=11
+        ;;
+    # Backlog
+    10808)
+        TRANSITION_NAME="Visiter"
+        TRANSITION_ID=11
+        ;;
+    # Visiteres
+    12400)
+        TRANSITION_NAME="Accepter"
+        TRANSITION_ID=31
+        ;;
+    12402)
+        TRANSITION_NAME="Analyse"
+        TRANSITION_ID=41
+        ;;
+    12403)
+        TRANSITION_NAME="Analyseret"
+        TRANSITION_ID=51
+        ;;
+    11900)
+        TRANSITION_NAME="Start progress"
+        TRANSITION_ID=61
+        ;;
+    10809)
+        TRANSITION_NAME="Done"
+        TRANSITION_ID=71
+        ;;
+    12404)
+        TRANSITION_NAME="Deployed"
+        TRANSITION_ID=91
+        ;;
+    *)
+        echo "Unknown transition: $CURRENT_TRANS"
+        exit 1
+        ;;
+esac
+
+echo "=> $TRANSITION_NAME"
+jira transition --noedit "$TRANSITION_NAME" "$ISSUE"
