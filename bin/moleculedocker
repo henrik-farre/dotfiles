@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:latest
+DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:2.20
 
 docker pull $DOCKER_IMAGE
 docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-debian-9-systemd:latest
@@ -12,7 +12,7 @@ docker run --rm --name molecule -it \
     -v molecule-state-$(basename "$(pwd)"):/tmp/molecule/ \
     -w /tmp/$(basename "$(pwd)") \
     $DOCKER_IMAGE \
-    sudo molecule $*
+    molecule $*
 
 if [[ $* == 'destroy' ]]; then
     docker volume rm molecule-state-$(basename "$(pwd)")
