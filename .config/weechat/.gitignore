@@ -1,5 +1,6 @@
 logs/*
 sec.conf
+sec_pass
 weechat.log
 hipchat/*
 script/plugins.xml.gz
