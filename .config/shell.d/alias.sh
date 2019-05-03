@@ -87,3 +87,5 @@ fi
 if [[ -e '/usr/bin/htop' ]]; then
   alias top="htop"
 fi
+
+alias dh1="du -h --max-depth=1"
