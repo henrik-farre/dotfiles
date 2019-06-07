@@ -36,3 +36,13 @@ if [[ -z ${BASH_COMPLETION} && -f /etc/bash_completion ]]; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Based on coreos /usr/share/baselayout/coreos-profile.sh
+if [[ $- == *i* && -e /bin/systemctl && $PLATFORM != 'Darwin' ]]; then
+  FAILED=$(systemctl list-units --state=failed --no-legend)
+  if [[ ! -z "${FAILED}" ]]; then
+    COUNT=$(wc -l <<<"${FAILED}")
+    echo -e "Failed Units: \033[31m${COUNT}\033[39m"
+    awk '{ print "  " $1 }' <<<"${FAILED}"
+  fi
+fi
