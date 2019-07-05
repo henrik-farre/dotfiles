@@ -43,11 +43,11 @@ case "${CURRENT_TRANS}" in
         TRANSITION_ID=61
         ;;
     10809)
-        TRANSITION_NAME="Deploying"
+        TRANSITION_NAME="Done"
         TRANSITION_ID=71
         ;;
     12404)
-        TRANSITION_NAME="Done"
+        TRANSITION_NAME="Deployed"
         TRANSITION_ID=91
         ;;
     *)
