@@ -30,4 +30,12 @@ esac
 
 IMAGE=${IMAGE:-rancher/cli:v0.6.4}
 
-exec docker run --rm -it -v $CONFIG_FILE:/root/.rancher/cli.json -v $HOME/.ssh/known_hosts:/root/.ssh/known_hosts -v $(pwd):/mnt ${IMAGE} "$@"
+CONTAINER_NAME="$RANCHER_ENV"
+
+EXISTING_CONTAINER=$(docker ps -qa --filter "name=$CONTAINER_NAME")
+
+if [[ -z "$EXISTING_CONTAINER" ]]; then
+    docker run --rm -d -it --name "$CONTAINER_NAME" -v "$CONFIG_FILE:/root/.rancher/cli.json" -v "$HOME/.ssh/known_hosts:/root/.ssh/known_hosts" -v "$(pwd):/mnt" --entrypoint=/bin/cat "${IMAGE}"
+fi
+
+exec docker exec -ti "$CONTAINER_NAME" /usr/bin/rancher "$@"
