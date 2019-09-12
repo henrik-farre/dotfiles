@@ -15,7 +15,7 @@ RUNNING_PROFILES=()
 for PROFILE in $PROFILES; do
   if pgrep -f -- "firefox -P ${PROFILE}"; then
     RUNNING_PROFILES+=("$PROFILE")
-    echo $PROFILE
+    # echo $PROFILE
   fi
 done
 
@@ -36,4 +36,9 @@ else
 
   xdotool windowactivate --sync "$WID" key --clearmodifiers Control_L+t Control_L+l
   xdotool type --delay 0 --window "$WID" "$URL"
+fi
+
+# When using `man -H something` the html file will be removed as soon as the script exits, so we wait
+if [[ $URL == "/tmp/hman"* ]]; then
+  sleep 5
 fi
