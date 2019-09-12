@@ -1,7 +1,7 @@
 -- the debug_print command does only print anything to stdout
 -- if devilspie2 is run using the --debug option
-debug_print("Window Name: " .. get_window_name());
-debug_print("Application name: " .. get_application_name())
+-- debug_print("Window Name: " .. get_window_name());
+-- debug_print("Application name: " .. get_application_name())
 
 -- Needed to make switch on hostname
 -- local socket = require "socket"
@@ -17,6 +17,6 @@ if (get_application_name() == "termite") then
   set_window_geometry2(0, 0, 1720, 1440)
 end
 
-if (get_application_name() == "Firefox" and get_window_name() ~= "Password Required") then
+if (get_application_name() == "Firefox" and get_window_type() ~= "WINDOW_TYPE_DIALOG") then
   set_window_geometry2(0, 0, 1720, 1440)
 end
