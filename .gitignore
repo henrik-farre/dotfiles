@@ -48,3 +48,6 @@ Thumbs.db
 
 # molecule test vault creds
 vault_pass.txt
+
+# terraform
+.terraform
