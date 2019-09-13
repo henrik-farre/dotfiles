@@ -49,6 +49,7 @@ case "${CURRENT_TRANS}" in
     12404)
         TRANSITION_NAME="Deployed"
         TRANSITION_ID=91
+        echo "* Last state *"
         ;;
     *)
         echo "Unknown transition: $CURRENT_TRANS"
