@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:2.20.2
+DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:2.22
 DIFF=3601
 
 if [[ -e /tmp/molecule_docker_pull_ts ]]; then
@@ -20,10 +20,10 @@ fi
 docker run --rm --name molecule -it \
     -v "$(pwd)":/tmp/$(basename "$(pwd)") \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v molecule-state-$(basename "$(pwd)"):/tmp/molecule/ \
+    -v molecule-state-$(basename "$(pwd)"):/root/.cache/ \
     -w /tmp/$(basename "$(pwd)") \
     $DOCKER_IMAGE \
-    molecule $*
+    molecule --base-config /tv2-molecule/base-docker-goss.yml $*
 
 if [[ $* == 'destroy' ]]; then
     docker volume rm molecule-state-$(basename "$(pwd)")
