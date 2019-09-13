@@ -1,11 +1,21 @@
 #!/bin/bash
 
 DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:2.20.2
+DIFF=3601
 
-docker pull $DOCKER_IMAGE
-docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-debian-9-systemd:latest
-docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-debian-10-systemd:latest
-docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-centos-7.3-systemd:latest
+if [[ -e /tmp/molecule_docker_pull_ts ]]; then
+    LAST_UPDATE=$(stat -c %Y /tmp/molecule_docker_pull_ts)
+    NOW=$(date +%s)
+    DIFF=$((NOW-LAST_UPDATE))
+fi
+
+if [[ $DIFF -gt 3600 ]]; then
+    docker pull $DOCKER_IMAGE
+    docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-debian-9-systemd:latest
+    docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-debian-10-systemd:latest
+    docker pull tv2-devops-docker-production.jfrog.io/ansible-molecule-centos-7.3-systemd:latest
+    touch /tmp/molecule_docker_pull_ts
+fi
 
 docker run --rm --name molecule -it \
     -v "$(pwd)":/tmp/$(basename "$(pwd)") \
