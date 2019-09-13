@@ -264,16 +264,17 @@ function encoding_demunger() {
 
 function switch-dns() {
   local DNS
-  local NEW_DNS="192.168.0.1"
-  local CONNECTION=$(nmcli -g name,device con show --active| grep eth0 | cut -f1 -d:)
+  local NEW_DNS="192.168.0.7"
+  local CONNECTION
+  CONNECTION=$(nmcli -g name,device con show --active| grep eth0 | cut -f1 -d:)
   DNS=$(nmcli -t -f IP4.DNS device show eth0)
-  case "$DNS" in
-    "IP4.DNS[1]:192.168.0.1" )
-      NEW_DNS="8.8.8.8 8.8.4.4"
-      ;;
-  esac
+  if [[ $DNS == "IP4.DNS[1]:192.168.0.7" ]]; then
+    NEW_DNS="1.1.1.1"
+    nmcli connection modify "$CONNECTION" +ipv4.ignore-auto-dns yes
+  else
+    nmcli connection modify "$CONNECTION" +ipv4.ignore-auto-dns no
+  fi
 
-  nmcli con down "$CONNECTION"
   nmcli connection modify "$CONNECTION" ipv4.dns "$NEW_DNS"
   nmcli con up "$CONNECTION"
 
