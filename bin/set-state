@@ -74,13 +74,11 @@ function nvidia_gpu_powersetting {
 }
 
 function disablealt {
-  return 0
-  # xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Ingen"
+  gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier ''
 }
 
 function enablealt {
-  return 0
-  # xfconf-query -c xfwm4 -p /general/easy_click -n -t string -s "Alt"
+  gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier '<Alt>'
 }
 
 function screensetup_single {
@@ -121,21 +119,19 @@ case $MODE in
     backlight_control off
     ;;
   gameon)
-    screensetup_single
     disablealt
-    cpu_powersetting performance
-    servicesstop
+    # cpu_powersetting performance
+    # servicesstop
     nvidia_gpu_powersetting power
-    conky_reload
+    # conky_reload
     xcape_stop
     ;;
   gameoff)
-    screensetup_dual
     enablealt
-    cpu_powersetting powersave
-    servicesstart
+    # cpu_powersetting powersave
+    # servicesstart
     nvidia_gpu_powersetting adaptive
-    conky_reload
+    # conky_reload
     xcape_start
    ;;
  macbook-hidpi-on)
