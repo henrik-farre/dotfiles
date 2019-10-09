@@ -1,3 +1,4 @@
 #!/bin/bash
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+slack-cli presence away
 cinnamon-screensaver-command --lock
