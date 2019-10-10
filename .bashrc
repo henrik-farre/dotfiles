@@ -1,7 +1,7 @@
 # ~/.bashrc: executed by bash(2) for non-login shells.
 
 # If not running interactively, don't do anything:
-[ -z "${PS1}" ] && return
+if [[ "$-" != *i* ]]; then return; fi
 
 ####################################################
 # Launch screen
