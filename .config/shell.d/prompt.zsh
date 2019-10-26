@@ -59,28 +59,30 @@ function title() {
   # Truncate cmd to 40
   cmd=$(print -Pn "%40>...> $cmd" | tr -d "\n")
 
-  case $TERM in
-    screen|screen-bce|screen-256color|screen-256color-bce|tmux-256color)
-      if [[ -z $SSH_TTY ]]; then
-        #print -Pn "\ek%40<...<%~> $cmd\e\\"
-        # if c (current path with prefix replace, aka ~) is larger than 7,
-        # show first 3 parts, then ... and then last 3 parts, else just %~
-        print -Pn "\ek%7(c:%-3~/.../%3~:%~)$cmd\e\\"
-      else
-        # With user/hostname
-        print -Pn "\ek%m:%40<...<%~> $cmd\e\\"
-      fi
-      ;;
-    xterm*|rxvt*)
-      # plain xterm title
-      if [[ -z $SSH_TTY ]]; then
-        print -Pn "\e]2;%40<...<%~> $cmd\a"
-      else
-        # With user/hostname
-        print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
-      fi
-      ;;
-  esac
+  # print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
+  print -Pn "\e]2;%40<...<%~> $cmd\a"
+
+  # case $TERM in
+  #   screen|screen-bce|screen-256color|screen-256color-bce|tmux-256color)
+  #     if [[ -z $SSH_TTY ]]; then
+  #       #print -Pn "\ek%40<...<%~> $cmd\e\\"
+  #       # if c (current path with prefix replace, aka ~) is larger than 7,
+  #       # show first 3 parts, then ... and then last 3 parts, else just %~
+  #       print -Pn "\ek%7(c:%-3~/.../%3~:%~)$cmd\e\\"
+  #     else
+  #       # With user/hostname
+  #       print -Pn "\ek%m:%40<...<%~> $cmd\e\\"
+  #     fi
+  #     ;;
+  #   xterm*|rxvt*)
+  #     # plain xterm title
+  #     if [[ -z $SSH_TTY ]]; then
+  #     else
+  #       # With user/hostname
+  #       print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
+  #     fi
+  #     ;;
+  # esac
 }
 
 ####################################################
