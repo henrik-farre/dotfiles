@@ -59,8 +59,12 @@ function title() {
   # Truncate cmd to 40
   cmd=$(print -Pn "%40>...> $cmd" | tr -d "\n")
 
-  # print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
-  print -Pn "\e]2;%40<...<%~> $cmd\a"
+  # Updates window title, also when ssh'ed in to a host
+  if [[ -z $SSH_TTY ]]; then
+    print -Pn "\e]2;%40<...<%~> $cmd\a"
+  else
+    print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
+  fi
 
   # case $TERM in
   #   screen|screen-bce|screen-256color|screen-256color-bce|tmux-256color)
