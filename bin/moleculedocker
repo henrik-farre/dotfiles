@@ -4,7 +4,11 @@ DOCKER_IMAGE=tv2-devops-docker-production.jfrog.io/molecule:2.22
 DIFF=3601
 
 if [[ -e /tmp/molecule_docker_pull_ts ]]; then
-    LAST_UPDATE=$(stat -c %Y /tmp/molecule_docker_pull_ts)
+    if [[ $PLATFORM == 'Darwin' ]]; then
+        LAST_UPDATE=$(stat -f %m /tmp/molecule_docker_pull_ts)
+    else
+        LAST_UPDATE=$(stat -c %Y /tmp/molecule_docker_pull_ts)
+    fi
     NOW=$(date +%s)
     DIFF=$((NOW-LAST_UPDATE))
 fi
