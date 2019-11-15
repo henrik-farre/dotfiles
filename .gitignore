@@ -51,3 +51,6 @@ vault_pass.txt
 
 # terraform
 .terraform
+
+# python cache
+__pycache__
