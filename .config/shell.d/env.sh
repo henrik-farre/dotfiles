@@ -117,8 +117,8 @@ fi
   # export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
 # fi
 
-if [[ -d ~/.local/lib/python3.7 ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python3.7
+if [[ -d ~/.local/lib/python3.8 ]]; then
+  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python3.8
 fi
 
 # MacOS
