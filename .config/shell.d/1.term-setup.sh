@@ -27,5 +27,9 @@ if [[ $TERM == "tmux-256color" && -z $TMUX ]]; then
   export TERM="screen-256color"
 fi
 
+if [[ $TERM == "screen-256color" && -n $SSH_TTY && ! -e /usr/bin/screen ]]; then
+  export TERM="xterm-256color"
+fi
+
 # Disable flow control, so CTRL-S / CTRL-Q doesn't freeze the terminal
 stty -ixon -ixoff
