@@ -26,68 +26,12 @@ function cpu_powersetting {
   return 0
 }
 
-function backlight_control {
-  if [[ $1 == 'on' ]]; then
-    xbacklight -set 50
-  else
-    xbacklight -set 100
-  fi
-}
-
-function cpu_pstate_control {
-  if [[ $1 == 'off' ]]; then
-    sudo sh -c "echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo"
-    sudo sh -c "echo 25 > /sys/devices/system/cpu/intel_pstate/max_perf_pct"
-  else
-    sudo sh -c "echo 0 > /sys/devices/system/cpu/intel_pstate/no_turbo"
-    sudo sh -c "echo 100 > /sys/devices/system/cpu/intel_pstate/max_perf_pct"
-  fi
-}
-
-function servicesstop {
-  return 0
-  #pkill dropboxd
-  #pkill synergyc
-  #systemctl --user stop conky
-  #systemctl --user stop syncthing
-  #systemctl --user stop syncthing-inotify
-}
-
-function servicesstart {
-  return 0
-  #systemctl --user start syncthing
-  #systemctl --user start syncthing-inotify
-  #systemctl --user start conky
-}
-
-function nvidia_gpu_powersetting {
-  if [[ -f /usr/bin/nvidia-settings ]]; then
-    case $1 in
-      power)
-        nvidia-settings -a [gpu:0]/GPUPowerMizerMode=1
-        ;;
-      adaptive)
-        nvidia-settings -a [gpu:0]/GPUPowerMizerMode=0
-        ;;
-    esac
-  fi
-}
-
 function disablealt {
   gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier ''
 }
 
 function enablealt {
   gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier '<Alt>'
-}
-
-function screensetup_single {
-  xrandr --output DVI-I-1 --off
-}
-
-function screensetup_dual {
-  xrandr --output DVI-I-1 --auto
-  xrandr --output DVI-I-1 --right-of HDMI-0
 }
 
 function conky_reload {
@@ -105,36 +49,25 @@ function xcape_start {
 MODE=$1
 
 case $MODE in
-  powersave)
-    cpu_powersetting powersave
-    backlight_control on
-    cpu_pstate_control off
-    servicesstop
-    nvidia_gpu_powersetting adaptive
+  busy)
+    luxafor -r 255 color
+    slack-cli presence active
+    slack-cli snooze start 60
     ;;
-  performance)
-    cpu_powersetting performance
-    servicesstart
-    cpu_pstate_control on
-    backlight_control off
+  avaliable)
+    luxafor -g 255 color
+    slack-cli presence away
+    slack-cli snooze end
     ;;
   gameon)
     disablealt
-    # cpu_powersetting performance
-    # servicesstop
-    nvidia_gpu_powersetting power
-    # conky_reload
     xcape_stop
     ;;
   gameoff)
     enablealt
-    # cpu_powersetting powersave
-    # servicesstart
-    nvidia_gpu_powersetting adaptive
-    # conky_reload
     xcape_start
    ;;
- macbook-hidpi-on)
+ hidpi-on)
    gsettings set org.cinnamon panels-height "['1:28']"
    sleep 1
    gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 2"
@@ -145,7 +78,7 @@ case $MODE in
    sleep 1
    conky_reload
    ;;
- macbook-hidpi-off)
+ hidpi-off)
    gsettings set org.cinnamon panels-height "['1:34']"
    sleep 1
    gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 1"
@@ -164,9 +97,7 @@ case $MODE in
    screensetup_single
    xrandr --output HDMI-0 --mode 1920x1080
    disablealt
-   cpu_powersetting performance
    servicesstop
-   nvidia_gpu_powersetting power
    conky_reload
    export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
    /usr/bin/steam-native -bigpicture -nochatui -nofriendsui
