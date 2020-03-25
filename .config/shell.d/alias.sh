@@ -49,7 +49,7 @@ if [[ -e /usr/bin/nvim ]]; then
   fi
 fi
 
-alias df=" df -kHl"
+alias df=" df"
 alias view-="view -"
 
 alias useradd="adduser"
