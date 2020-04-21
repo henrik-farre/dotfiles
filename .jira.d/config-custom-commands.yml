@@ -1,0 +1,73 @@
+custom-commands:
+  - name: env
+    help: print the JIRA environment variables available to custom commands
+    script: |
+      env | grep JIRA
+  - name: mine
+    help: display issues assigned to me
+    script: |-
+      {{jira}} list --query "resolution = unresolved and assignee=currentuser() ORDER BY created"
+  - name: backlog-ls
+    help: display issues in backlog
+    script: |-
+      {{jira}} list --query "resolution = unresolved and status='Open' AND project=$JIRA_PROJECT ORDER BY created"
+  - name: approved-backlog-ls
+    help: display issues in backlog
+    script: |-
+      {{jira}} list --query "resolution = unresolved and status='Approved Backlog' AND project=$JIRA_PROJECT ORDER BY created"
+  - name: board-ls
+    help: display issues on the board
+    script: |-
+      {{jira}} list --query "status in ('In Progress', 'In Review', 'In test', 'Need Info', 'Ready for Production', 'Ready for Test Deployment', 'Ready for test', Resolved, 'Sprint Done') AND project=$JIRA_PROJECT ORDER BY created"
+  # https://github.com/go-jira/jira/issues/230
+  # https://github.com/go-jira/jira/issues/177
+  # https://github.com/go-jira/jira/issues/135
+  - name: sprint-add
+    help: add issue to active sprint for project
+    options:
+      - name: next
+        short: 'n'
+        type: bool
+        help: add issue to next sprint, rather than the active one
+    args:
+      - name: ISSUE
+        required: true
+    script: |
+      state={{if options.next}}future{{else}}active{{end}}
+      board_id=$({{jira}} req "/rest/agile/1.0/board?projectKeyOrId=$JIRA_PROJECT&type=scrum" --gjq values.0.id)
+      sprint_id=$({{jira}} req "/rest/agile/1.0/board/$board_id/sprint?state=$state" --gjq values.0.id)
+      if [ "$sprint_id" = "" ]; then
+        echo "ERROR: No $state sprint" >&2
+        exit 1
+      fi
+      {{jira}} req -M POST "/rest/agile/1.0/sprint/$sprint_id/issue" "{\"issues\":[\"{{args.ISSUE}}\"]}"
+  - name: sprint
+    help: display issues for active sprint
+    options:
+      - name: status
+        short: s
+        default: ""
+    script: |-
+      case "{{options.status}}" in
+        t|todo) STATUS="to do"
+        ;;
+        p|progress) STATUS="in progress"
+        ;;
+        rev|review) STATUS="in review"
+        ;;
+        r) STATUS="resolved"
+        ;;
+        d) STATUS="done"
+        ;;
+        "<no value>") STATUS=""
+        ;;
+        *) STATUS="{{options.status}}"
+      esac
+      if [ -n "$STATUS" ]; then
+        STATUS_QUERY="and status='$STATUS'"
+      fi
+      if [ -n "$JIRA_PROJECT" ]; then
+          {{jira}} list --template table --query "sprint in openSprints() and resolution = unresolved and project=$JIRA_PROJECT $STATUS_QUERY ORDER BY rank asc, created"
+      else
+          echo "\"project: ...\" configuration missing from .jira.d/config.yml"
+      fi

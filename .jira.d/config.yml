@@ -1,0 +1,14 @@
+#!/bin/bash
+cat ~/.jira.d/config-project.yml
+
+case $JIRA_OPERATION in
+  create)
+    echo "issuetype: Task"
+    printf "overrides:\n  priority: Minor\n"
+    ;;
+  list)
+    echo "template: table"
+    ;;
+esac
+
+cat ~/.jira.d/config-custom-commands.yml
