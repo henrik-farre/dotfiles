@@ -54,3 +54,6 @@ vault_pass.txt
 
 # python cache
 __pycache__
+
+# jira
+.jira.d/config-project.yml
