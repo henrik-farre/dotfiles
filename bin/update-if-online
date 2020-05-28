@@ -6,9 +6,12 @@ TRY=1
 ICON="emblem-generic"
 TITLE="Git repositories updated"
 MSG="... yeah"
+URGENCY="low"
 
 export DISPLAY=:0.0
 export SSH_AUTH_SOCK="/run/user/$UID/keyring/ssh"
+
+trap 'rm -rf "/tmp/git_update_error"' EXIT
 
 while [ ! -S "$SSH_AUTH_SOCK"  ]
 do
@@ -27,18 +30,21 @@ GIT_REPOSITORIES=(
     "$HOME/.config/nvim"
     "$HOME/.local/dotfiles"
 )
-
 if nm-online -q; then
     for DIR in "${GIT_REPOSITORIES[@]}"; do
+        echo "updating $DIR"
         (
         cd "$DIR" || exit
-        echo "updating $DIR"
-        if ! git pull -q; then
-            TITLE="Error updating git repositories"
-            MSG=":("
-        fi
+        git pull 2>>/tmp/git_update_error
         )
     done
 fi
 
-/usr/bin/notify-send -u low -i "$ICON" "$TITLE" "$MSG" -t 1000000
+if [[ -f /tmp/git_update_error ]]; then
+    TITLE="Error updating git repositories"
+    MSG=$(cat /tmp/git_update_error)
+    ICON="emblem-important"
+    URGENCY="critical"
+fi
+
+/usr/bin/notify-send -u "$URGENCY" -i "$ICON" "$TITLE" "$MSG" -t 1000000
