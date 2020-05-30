@@ -40,7 +40,7 @@ if nm-online -q; then
     done
 fi
 
-if [[ -f /tmp/git_update_error ]]; then
+if [[ -s /tmp/git_update_error ]]; then
     TITLE="Error updating git repositories"
     MSG=$(cat /tmp/git_update_error)
     ICON="emblem-important"
