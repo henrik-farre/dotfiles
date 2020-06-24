@@ -72,7 +72,7 @@ case $MODE in
    sleep 1
    gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 2"
    sleep 1
-   gsettings set org.cinnamon active-display-scale "2"
+   # gsettings set org.cinnamon active-display-scale "2"
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "0.75"
    sleep 1
@@ -83,7 +83,7 @@ case $MODE in
    sleep 1
    gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 1"
    sleep 1
-   gsettings set org.cinnamon active-display-scale "1"
+   # gsettings set org.cinnamon active-display-scale "1"
    sleep 1
    gsettings set org.cinnamon.desktop.interface text-scaling-factor "1"
    sleep 1
