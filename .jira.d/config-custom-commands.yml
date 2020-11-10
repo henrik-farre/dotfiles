@@ -1,4 +1,7 @@
 custom-commands:
+  - name: epics
+    script: |-
+      {{jira}} list --query "project=DPE AND cf[11955]=Devops"
   - name: env
     help: print the JIRA environment variables available to custom commands
     script: |
@@ -19,6 +22,11 @@ custom-commands:
     help: display issues on the board
     script: |-
       {{jira}} list --query "status in ('In Progress', 'In Review', 'In test', 'Need Info', 'Ready for Production', 'Ready for Test Deployment', 'Ready for test', Resolved, 'Sprint Done') AND project=$JIRA_PROJECT ORDER BY created"
+  - name: sprint-active-id
+    help: get current sprint id
+    script: |-
+      board_id=$({{jira}} req "/rest/agile/1.0/board?projectKeyOrId=$JIRA_PROJECT&type=scrum" --gjq values.0.id)
+      {{jira}} req "/rest/agile/1.0/board/$board_id/sprint?state=active" --gjq values.0.id
   # https://github.com/go-jira/jira/issues/230
   # https://github.com/go-jira/jira/issues/177
   # https://github.com/go-jira/jira/issues/135
@@ -33,6 +41,7 @@ custom-commands:
       - name: ISSUE
         required: true
     script: |
+      # https://developer.atlassian.com/cloud/jira/software/rest/api-group-board/
       state={{if options.next}}future{{else}}active{{end}}
       board_id=$({{jira}} req "/rest/agile/1.0/board?projectKeyOrId=$JIRA_PROJECT&type=scrum" --gjq values.0.id)
       sprint_id=$({{jira}} req "/rest/agile/1.0/board/$board_id/sprint?state=$state" --gjq values.0.id)
@@ -40,7 +49,7 @@ custom-commands:
         echo "ERROR: No $state sprint" >&2
         exit 1
       fi
-      {{jira}} req -M POST "/rest/agile/1.0/sprint/$sprint_id/issue" "{\"issues\":[\"{{args.ISSUE}}\"]}"
+      {{jira}} req -M POST "/rest/agile/1.0/sprint/$sprint_id/issue" "{\"issues\":[\"{{args.ISSUE}}\"]}" &>/dev/null
   - name: sprint
     help: display issues for active sprint
     options:
