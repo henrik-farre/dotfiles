@@ -2,6 +2,12 @@ custom-commands:
   - name: epics
     script: |-
       {{jira}} list --query "project=DPE AND cf[11955]=Devops"
+  - name: in-progress
+    args:
+      - name: ISSUE
+        required: true
+    script: |-
+      {{jira}} transition "In progress" --no-edit "{{args.ISSUE}}"
   - name: env
     help: print the JIRA environment variables available to custom commands
     script: |
