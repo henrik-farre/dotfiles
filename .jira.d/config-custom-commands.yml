@@ -2,7 +2,7 @@ custom-commands:
   - name: epics
     script: |-
       {{jira}} list --query "project=DPE AND cf[11955]=Devops"
-  - name: in-progress
+  - name: set-in-progress
     args:
       - name: ISSUE
         required: true
