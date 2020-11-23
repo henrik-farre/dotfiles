@@ -7,7 +7,7 @@ custom-commands:
       - name: ISSUE
         required: true
     script: |-
-      {{jira}} transition "In progress" --no-edit "{{args.ISSUE}}"
+      {{jira}} transition "In progress" --noedit "{{args.ISSUE}}"
   - name: env
     help: print the JIRA environment variables available to custom commands
     script: |
