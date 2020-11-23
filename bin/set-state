@@ -61,11 +61,11 @@ case $MODE in
     ;;
   gameon)
     disablealt
-    xcape_stop
+    # xcape_stop
     ;;
   gameoff)
     enablealt
-    xcape_start
+    # xcape_start
    ;;
  hidpi-on)
    gsettings set org.cinnamon panels-height "['1:28']"
