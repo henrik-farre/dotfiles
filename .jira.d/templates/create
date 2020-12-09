@@ -13,11 +13,11 @@ fields:
   description: |~
     {{ or .overrides.description "" | indent 4 }}{{if .meta.fields.assignee}}
   timetracking:
-    originalEstimate: 1h
+    originalEstimate: {{ if .overrides.originalEstimate }}{{ .overrides.originalEstimate }}{{else}}1h{{end}}
   assignee:
     emailAddress: {{ or .overrides.assignee "" }}{{end}}{{if .meta.fields.reporter}}
   # sprint:
-  customfield_10007: {{ .overrides.sprint_id }}
+  customfield_10007: {{ or .overrides.sprint_id "" }}
   # epic, 1381: drift
   customfield_10100: "DPE-1381"
   reporter:
