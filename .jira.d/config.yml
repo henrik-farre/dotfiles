@@ -1,11 +1,11 @@
 #!/bin/bash
+# Ignored in git
 cat ~/.jira.d/config-project.yml
-./config-extra-vars.sh
 
 case $JIRA_OPERATION in
   create)
     echo "issuetype: Task"
-    printf "overrides:\n  priority: Minor\n  sprint_id: $JIRA_EXTRAVAR_SPRINT_ACTIVE_ID\n"
+    printf "overrides:\n  priority: Minor\n"
     ;;
   list)
     echo "template: table"
