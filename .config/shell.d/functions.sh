@@ -221,7 +221,11 @@ function wake-host() {
     "fire" | "firehouse")
       # Old gigabyte:
       # MAC="00:24:1D:15:85:99 00:24:1d:15:85:89"
-      # New Asus H170M-Plus
+      # Asus Rog Strix
+      MAC="24:4b:fe:97:2d:21"
+      ;;
+    "sedge" | "sedgewick")
+      # Asus H170M-Plus
       MAC="1c:b7:2c:b1:65:61"
       ;;
     *)
