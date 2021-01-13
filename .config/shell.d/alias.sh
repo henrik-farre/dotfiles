@@ -77,6 +77,11 @@ if [[ -e /usr/bin/python2 && -e /usr/lib/python2.7/SimpleHTTPServer.py ]]; then
   alias webshare='python2 -m SimpleHTTPServer'
 fi
 
+if [[ -e /usr/bin/python3 ]]; then
+  alias webshare='python3 -m http.server'
+fi
+
+
 if [[ -e ~/.local/lib/ruby/gems/bin/jump-bin ]]; then
 # jump ruby gem
 # jump is a function that uses jump-bin
