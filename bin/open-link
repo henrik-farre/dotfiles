@@ -15,28 +15,17 @@ RUNNING_PROFILES=()
 for PROFILE in $PROFILES; do
   if pgrep -f -- "firefox -P ${PROFILE}"; then
     RUNNING_PROFILES+=("$PROFILE")
-    # echo $PROFILE
   fi
 done
 
 if [[ ${#RUNNING_PROFILES[@]} -gt 1 ]]; then
   SELECTED_PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" "${RUNNING_PROFILES[@]}");
 else
-  SELECTED_PROFILE="${RUNNING_PROFILES[@]:1}"
+  SELECTED_PROFILE="${RUNNING_PROFILES[0]}"
+  echo "${RUNNING_PROFILES[0]}"
 fi
 
-PID=$(pgrep -f -- "firefox -P ${SELECTED_PROFILE}")
-
-if [[ x$PID == 'x' ]]; then
-  firefox -P"$PROFILE" -no-remote "$URL"
-else
-  # Avoid "Can't consume 1 args; are only 0 available. This is a bug." message: https://github.com/jordansissel/xdotool/issues/14
-  # Pick the last id, as it seems to be the one needed
-  WID=$(xdotool search --any --pid "$PID" --name "random_random_random" | tail -n1)
-
-  xdotool windowactivate --sync "$WID" key --clearmodifiers Control_L+t Control_L+l
-  xdotool type --delay 0 --window "$WID" "$URL"
-fi
+firefox -P "$SELECTED_PROFILE" --new-tab "$URL"
 
 # When using `man -H something` the html file will be removed as soon as the script exits, so we wait
 if [[ $URL == "/tmp/hman"* ]]; then
