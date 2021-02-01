@@ -9,6 +9,8 @@ set completion-map-case on
 # show all posibilities
 set completion-query-items -1
 set visible-stats on
+# Avoid executing multiple pasted lines
+set enable-bracketed-paste on
 
 # Do history expansion when space entered
 ## Space: magic-space
