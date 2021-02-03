@@ -308,3 +308,12 @@ function mount() {
     /bin/mount | column -t
   fi
 }
+
+function barriers() {
+  if pgrep barriers &> /dev/null; then
+    echo "Barriers is running"
+  else
+    echo "Starting barriers"
+    /usr/bin/barriers
+  fi
+}
