@@ -38,7 +38,6 @@ Thumbs.db
 # Misc
 .ssh/known_hosts
 .composer
-.local
 
 # Neovim is in own repository
 .config/nvim
