@@ -76,7 +76,6 @@
 [commit]
   gpgsign = true
 [pull]
-  # https://salferrarello.com/git-warning-pulling-without-specifying-how-to-reconcile-divergent-branches-is-discouraged/
-  ff = only
+  rebase = false
 [init]
   defaultBranch = master
