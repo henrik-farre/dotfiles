@@ -36,3 +36,24 @@ exiftool -v . \
   -ignoreMinorErrors \
   -dateFormat "$VID_DST_DIR/%Y/%m/%Y-%m-%d_%H:%M:%S_%%c_%%f.%%le" \
   -recurse "$SRC_DIR"
+
+echo "#############################################################"
+echo "Performing backup"
+sudo mount /mnt/3tb
+
+(
+echo "- Pictures"
+cd /shared/pictures
+rsync --ignore-existing -raz --progress * /mnt/3tb/pictures/
+)
+(
+echo "- Clips"
+cd /shared/clips
+rsync --ignore-existing -raz --progress * /mnt/3tb/clips/
+)
+
+sudo umount /mnt/3tb
+
+echo "Putting backup drive to sleep"
+sudo hdparm -y /dev/sdc
+sudo smartctl -i -n standby /dev/sdc
