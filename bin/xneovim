@@ -1,0 +1,9 @@
+#!/bin/bash
+# Opens neovim in an termite window.
+
+FILE=""
+if [[ ! -z "$*" ]]; then
+   FILE="'$*'"
+fi
+COMMAND=$(printf 'bash -ic "nvim %s"' "$FILE")
+exec termite --icon=nvim.png --name="neovim" -e "$COMMAND"
