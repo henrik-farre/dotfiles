@@ -317,3 +317,12 @@ function barriers() {
     /usr/bin/barriers
   fi
 }
+
+function barrierc() {
+  if pgrep barrierc &> /dev/null; then
+    echo "Barrierc is running"
+  else
+    echo "Starting barrierc"
+    /usr/bin/barrierc --no-restart "$@"
+  fi
+}
