@@ -1,4 +1,7 @@
 custom-commands:
+  - name: tasks-with-id-and-description
+    script: |
+      {{jira}} list -t json --query "status not in ('Resolved', 'Sprint Done') AND project=$JIRA_PROJECT ORDER BY status, created" | jq  -r '.issues[] | "\(.key)_\(.fields.summary)" | gsub(" "; "_")'
   - name: epics
     script: |-
       {{jira}} list --query "project=DPE AND cf[11955]=Devops"
@@ -27,7 +30,7 @@ custom-commands:
   - name: board-ls
     help: display issues on the board
     script: |-
-      {{jira}} list --query "status in ('In Progress', 'In Review', 'In test', 'Need Info', 'Ready for Production', 'Ready for Test Deployment', 'Ready for test', Resolved, 'Sprint Done') AND project=$JIRA_PROJECT ORDER BY created"
+      {{jira}} list --query "status not in ('Resolved', 'Sprint Done') AND project=$JIRA_PROJECT ORDER BY status, created"
   - name: sprint-active-id
     help: get current sprint id
     script: |-

@@ -57,7 +57,7 @@ alias useradd="adduser"
 if [[ -e /usr/bin/pacman ]]; then
   alias pup='sudo pacman -Syu'
   # https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks#Browsing_packages
-  alias pacbrowse="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
+  alias pacbrowse="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 fi
 
 # Ack
