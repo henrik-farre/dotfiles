@@ -25,8 +25,8 @@ if allow_tmux; then
     # attach-session -d : Detach existing: aggressive resize does not work will
     if [[ -n $SSH_CLIENT ]]; then
       SESSION_NAME=REMOTE_${USER}
-      exec tmux attach-session -d -t ${SESSION_NAME}
     fi
+    exec tmux attach-session -d -t ${SESSION_NAME}
   fi
 fi
 
