@@ -322,7 +322,8 @@ function barrierc() {
   if pgrep barrierc &> /dev/null; then
     echo "Barrierc is running"
   else
-    echo "Starting barrierc"
+    echo "Starting barrierc and setting keymap"
     /usr/bin/barrierc --no-restart "$@"
+    setxkbmap $(setxkbmap -query | grep "^layout:" | awk -F ": *" '{print $2}')
   fi
 }
