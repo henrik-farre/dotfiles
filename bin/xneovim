@@ -6,4 +6,4 @@ if [[ ! -z "$*" ]]; then
    FILE="'$*'"
 fi
 COMMAND=$(printf 'bash -ic "nvim %s"' "$FILE")
-exec termite --icon=nvim.png --name="neovim" -e "$COMMAND"
+exec termite --icon=nvim.png --class="neovim-editor" --name="Neovim" -e "$COMMAND"
