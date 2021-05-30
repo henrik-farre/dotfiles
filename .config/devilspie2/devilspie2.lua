@@ -21,7 +21,7 @@ screen_x, screen_y = get_screen_geometry()
 
 -- setup. (String comparison are case sensitive, please note this when
 -- creating rule scripts.)
-if (get_application_name() == "neovim") then
+if (get_application_name() == "Neovim") then
   set_window_geometry(screen_x / 2, 0, screen_x / 2, screen_y)
 end
 
