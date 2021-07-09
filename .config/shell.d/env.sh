@@ -79,6 +79,11 @@ if [[ $PLATFORM == 'Darwin' ]]; then
   PATH=${PATH}:/usr/local/sbin
 fi
 
+# krew - kubectl plugin manager
+if [[ -d ${HOME}/.krew/bin ]]; then
+  PATH=${PATH}:${HOME}/.krew/bin
+fi
+
 export PATH
 
 ############################################
