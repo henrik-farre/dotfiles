@@ -5,9 +5,10 @@
 ############################################
 # Use vim/nvim as pager, version 7.2 to 7.4
 # Don't use vim as GIT_PAGER as colors for e.g. git ls are not shown
-if [[ -f /usr/share/nvim/runtime/macros/less.sh ]]; then
+if [[ "$(command -v nvim)" ]]; then
   export PAGER="/usr/share/nvim/runtime/macros/less.sh"
-  export MANPAGER="nvim '+set background=dark' '+set ft=man' -"
+  # From :help man.vim
+  export MANPAGER='nvim +Man!'
 elif [[ -f /usr/share/vim/vim72/macros/less.sh ]]; then
   export PAGER="/usr/share/vim/vim72/macros/less.sh"
   export MANPAGER="sh -c \"col -b | /usr/share/vim/vim72/macros/less.sh -c 'set ft=man nomod nolist number!' -\""
