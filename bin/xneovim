@@ -1,11 +1,18 @@
 #!/bin/bash
-# Opens neovim in an termite window.
 
 export NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim_socket
-nvim-qt
-# FILE=""
-# if [[ ! -z "$*" ]]; then
-#    FILE="'$*'"
-# fi
-# COMMAND=$(printf 'bash -ic "nvim %s"' "$FILE")
-# exec termite --icon=nvim.png --class="neovim-editor" --name="Neovim" -e "$COMMAND"
+
+# Use neovim-qt
+#if [[ $(pgrep nvim-qt) ]]; then
+#    ~/bin/move_app_to_current_workspace.sh nvim-qt.nvim-qt
+#else
+#    nvim-qt
+#fi
+
+# Opens neovim in an termite window.
+FILE=""
+if [[ ! -z "$*" ]]; then
+   FILE="'$*'"
+fi
+COMMAND=$(printf 'bash -ic "nvim %s"' "$FILE")
+exec termite --icon=nvim.png --class="neovim-editor" --name="Neovim" -e "$COMMAND"
