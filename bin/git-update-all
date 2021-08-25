@@ -5,7 +5,6 @@ set -o pipefail
 # set -o xtrace
 IFS=$'\n\t'
 
-GREEN='\033[0;32m'
 YELLOW='\033[0;93m'
 RESET='\033[0m'
 
@@ -14,9 +13,7 @@ function updateGit() {
         local REPO="$1"
         cd "$REPO" || exit
         REPO_STATUS=$(git pull 2>&1 || true)
-        if [[ "$REPO_STATUS" == 'Already up to date.' ]]; then
-            printf "${GREEN}%s${RESET}\n" "$REPO"
-        else
+        if [[ "$REPO_STATUS" != 'Already up to date.' ]]; then
             printf "${YELLOW}%s${RESET}\n" "$REPO"
             echo "$REPO_STATUS"
         fi
