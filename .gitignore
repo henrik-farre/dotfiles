@@ -56,3 +56,6 @@ __pycache__
 
 # jira
 .jira.d/config-project.yml
+
+# asdf
+.tool-versions
