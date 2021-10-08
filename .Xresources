@@ -1,80 +1,3 @@
-! Hide cursor after a while
-URxvt*pointerBlank:true
-! Disable cursor blink
-URxvt*cursorBlink:false
-URxvt*scrollBar:0
-! Use tmux scrollback + save mem
-URxvt*saveLines:0
-!URxvt*saveLines:5000
-URxvt*internalBorder:3
-URxvt*loginShell:true
-URxvt*realBold:true
-URxvt*jumpScroll:True
-! Do not scroll to bottom when tty receives output
-! https://wiki.archlinux.org/index.php/rxvt-unicode#Scrollback_position
-URxvt*scrollTtyOutput:False
-URxvt*scrollTtyKeypress:True
-! Do not scroll with scrollback buffer when tty recieves new lines, adds some speed.. also, I use tmux scrollback buffers.
-URxvt*scrollWithBuffer:false
-URxvt*secondaryScroll:true
-! When receiving lots of lines, urxvt will only scroll once in a while (around 60x/sec), resulting in fewer updates.
-URxvt*skipScroll:true
-!URxvt*fading:50
-!URxvt*shading:40
-!URxvt*meta8: true
-
-! Exclude tmux pane borders
-! http://superuser.com/questions/692988/is-there-a-way-to-set-margins-paddings-in-tmux
-URxvt*cutchars: "`\"'&()*,;:<=>?[]^{|}│"
-
-URxvt*font:xft:Roboto Mono:pixelsize=12
-! URxvt*font:xft:Envy Code R:pixelsize=12,xft:Inconsolata\ For\ Powerline:pixelsize=12
-! URxvt*boldFont:xft:Envy Code R:style=Bold:pixelsize=12,xft:Inconsolata\ For\ Powerline:style=Bold:pixelsize=12
-! URxvt*italicFont:xft:Envy Code R:style=Italic:pixelsize=12,xft:Inconsolata\ For\ Powerline:style=Italic:pixelsize=12
-
-! URxvt*font:xft:Fantasque Sans Mono:pixelsize=12,xft:Inconsolata\ For\ Powerline:pixelsize=12
-! URxvt*boldFont:xft:Fantasque Sans Mono:style=Bold:pixelsize=12,xft:Inconsolata\ For\ Powerline:style=Bold:pixelsize=12
-! URxvt*italicFont:xft:Fantasque Sans Mono:style=Italic:pixelsize=12,xft:Inconsolata\ For\ Powerline:style=Italic:pixelsize=12
-
-URxvt*depth:32
-!URxvt*transparent:true
-URxvt*iconFile: /usr/share/icons/Tango/scalable/apps/utilities-terminal.svg
-
-! Fix ctrl+shift going to iso 14755 mode
-URxvt*iso14755: False
-URxvt*iso14755_52: False
-
-! Get Super_L+a to work in tmux:
-! URxvt.keysym.Mod4-a:\033a
-
-!URxvt*perl-ext-common:        default,matcher,selection-autotransform
-!URxvt*perl-ext-common:        default,matcher,tabbed
-!URxvt*perl-ext-common:        default,matcher,tabbedex
-! Support for middlemouse in tmux: osc-xterm-clipboard, located in ~/.urxvt/ext
-! Support for on the fly font resize: https://github.com/majutsushi/urxvt-font-size
-! URxvt*perl-ext-common:        default,osc-xterm-clipboard,matcher,font-size
-! URxvt*perl-ext-common:        default,osc-xterm-clipboard,matcher
-URxvt*perl-ext-common:        default,matcher
-URxvt.tabbed.title: false
-URxvt*url-launcher:        /usr/bin/exo-open
-URxvt*matcher.button:        1
-!URxvt*matcher.pattern.1:   \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
-!URxvt.matcher.pattern.2:   \\B(/\\S+?):(\\d+)(?=:|$)
-!URxvt.matcher.launcher.2: gvim +$2 $1
-!URxvt.selection-autotransform.0: s/^([^:[:space:]]+):(\\d+):?$/gvimr +$2 \\Q$1\\E\\x0d/
-
-! Font-size
-! URxvt.keysym.C-Up:     perl:font-size:increase
-! URxvt.keysym.C-Down:   perl:font-size:decrease
-! URxvt.keysym.C-S-Up:   perl:font-size:incglobal
-! URxvt.keysym.C-S-Down: perl:font-size:decglobal
-
-! URxvt*background:  rgba:0000/0000/0000/cccc
-! urxvt.depth: 32
-
-!Colors
-URxvt*foreground:gray90
-URxvt*background:black
 ! Black
 *color0:      #121212
 *color8:      #474747
@@ -100,9 +23,6 @@ URxvt*background:black
 *color7:      #FFFFFF
 *color15:     #DEDEDE
 
-URxvt*colorUL: #0064ff
-URxvt*colorRV: white
-
 xterm*jumpScroll:true
 xterm*multiScroll:true
 xterm*faceName:"Bitstream Vera Sans Mono"
@@ -120,8 +40,3 @@ xterm*sessionMgt:false
 xterm*rightScrollBar:true
 xterm*utf8: 1
 xterm*metaSendsEscape: true
-
-*enableThinThickness:True
-*enableEtchedInMenu:True
-*enableToggleColor:True
-*enableToggleVisual:True
