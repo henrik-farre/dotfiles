@@ -22,7 +22,7 @@ if [[ ${#RUNNING_PROFILES[@]} -gt 1 ]]; then
   SELECTED_PROFILE=$(zenity --list --text "Open $1 in which profile?" --column "Profile" "${RUNNING_PROFILES[@]}");
 else
   SELECTED_PROFILE="${RUNNING_PROFILES[0]}"
-  echo "${RUNNING_PROFILES[0]}"
+  # echo "${RUNNING_PROFILES[0]}"
 fi
 
 firefox -P "$SELECTED_PROFILE" --new-tab "$URL"
