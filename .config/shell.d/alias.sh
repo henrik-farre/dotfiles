@@ -44,7 +44,7 @@ if [[ -e /usr/bin/nvim ]]; then
   alias vim='nvim'
   alias vimdiff='nvim -d'
   alias view='nvim -R'
-  if [[ -e ~/.local/bin/nvr ]]; then
+  if [[ -e /usr/bin/nvr ]]; then
     alias :e='nvr --remote-silent'
   fi
 fi
