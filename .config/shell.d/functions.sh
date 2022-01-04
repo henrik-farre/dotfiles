@@ -55,6 +55,7 @@ for archive in "${@}"; do
       *.tar.bz2)  tar xvjf "$archive";;
       *.tar.gz)   tar xvzf "$archive";;
       *.tar.xz)   tar xvJf "$archive";;
+      *.tar.zst)  tar --zstd -xvf "$archive";;
       *.bz2)      bunzip2 "$archive";;
       *.rar)      unrar x "$archive";;
       *.gz)       gunzip "$archive";;
