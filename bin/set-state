@@ -27,11 +27,13 @@ function cpu_powersetting {
 }
 
 function disablealt {
-  gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier ''
+  # gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier ''
+  gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier ''
 }
 
 function enablealt {
-  gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier '<Alt>'
+  # gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier '<Alt>'
+  gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
 }
 
 function conky_reload {
