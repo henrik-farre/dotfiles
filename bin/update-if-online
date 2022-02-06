@@ -3,10 +3,6 @@
 
 MAX_TRIES=6
 TRY=1
-ICON="emblem-generic"
-TITLE="Git repositories updated"
-MSG="... yeah"
-URGENCY="low"
 
 export DISPLAY=:0.0
 export SSH_AUTH_SOCK="/run/user/$UID/keyring/ssh"
@@ -45,6 +41,5 @@ if [[ -s /tmp/git_update_error ]]; then
     MSG=$(cat /tmp/git_update_error)
     ICON="emblem-important"
     URGENCY="critical"
+    /usr/bin/notify-send -u "$URGENCY" -i "$ICON" "$TITLE" "$MSG" -t 1000000
 fi
-
-/usr/bin/notify-send -u "$URGENCY" -i "$ICON" "$TITLE" "$MSG" -t 1000000
