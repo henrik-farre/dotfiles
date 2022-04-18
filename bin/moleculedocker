@@ -21,14 +21,17 @@ if [[ $DIFF -gt 3600 ]]; then
     touch /tmp/molecule_docker_pull_ts
 fi
 
+ROLE_NAME=$(basename "$(pwd)")
+
 docker run --rm --name molecule -it \
-    -v "$(pwd)":/tmp/$(basename "$(pwd)") \
+    -e "JENKINS_BUILD_NUMBER=1" -e "JENKINS_ANSIBLE_ROLENAME=$ROLE_NAME" -e "JENKINS_BUILD_BRANCH=local" \
+    -v "$(pwd):/tmp/$ROLE_NAME" \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v molecule-state-$(basename "$(pwd)"):/root/.cache/ \
-    -w /tmp/$(basename "$(pwd)") \
+    -v "molecule-state-$ROLENAME:/root/.cache/" \
+    -w "/tmp/$ROLE_NAME" \
     $DOCKER_IMAGE \
     molecule --base-config /tv2-molecule/molecule3.yml $*
 
 if [[ $* == 'destroy' ]]; then
-    docker volume rm molecule-state-$(basename "$(pwd)")
+    docker volume rm "molecule-state-$ROLE_NAME"
 fi
