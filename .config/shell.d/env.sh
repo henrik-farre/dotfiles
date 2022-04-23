@@ -29,8 +29,12 @@ else
 fi
 
 if [[ -e /usr/bin/nvim ]]; then
-  export EDITOR=/usr/bin/nvim
   export VISUAL=/usr/bin/nvim
+  if [[ -e /usr/bin/nvr ]]; then
+    export EDITOR='nvr --remote-silent'
+  else
+    export EDITOR=/usr/bin/nvim
+  fi
 else
   export EDITOR=/usr/bin/vim
   export VISUAL=/usr/bin/vim
