@@ -31,7 +31,8 @@ fi
 if [[ -e /usr/bin/nvim ]]; then
   export VISUAL=/usr/bin/nvim
   if [[ -e /usr/bin/nvr ]]; then
-    export EDITOR='nvr --remote-silent'
+    # Note that zsh escapes spaces, this might break things
+    export EDITOR="nvr --remote-wait-silent"
   else
     export EDITOR=/usr/bin/nvim
   fi
