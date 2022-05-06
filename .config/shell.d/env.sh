@@ -55,20 +55,12 @@ fi
 
 # Check if gems module is installed
 # TODO: ruby 2.5
-if which ruby-2.4 &>/dev/null && which gem-2.4 &>/dev/null; then
-  PATH="${PATH}:$(ruby-2.4 -rubygems -e 'puts Gem.user_dir')/bin"
-fi
+# if which ruby-2.4 &>/dev/null && which gem-2.4 &>/dev/null; then
+#   PATH="${PATH}:$(ruby-2.4 -rubygems -e 'puts Gem.user_dir')/bin"
+# fi
 
 if [[ -d ${HOME}/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
-fi
-
-if [[ -d ${HOME}/.config/composer/vendor/bin ]]; then
-  PATH=${PATH}:${HOME}/.config/composer/vendor/bin
-fi
-
-if [[ -d ${HOME}/Dev/docker/bin ]]; then
-  PATH=${PATH}:${HOME}/Dev/docker/bin
 fi
 
 # Packages installed by pip and others
@@ -77,9 +69,9 @@ if [[ -d ${HOME}/.local/bin ]]; then
 fi
 
 # Pip packages on MacOS
-if [[ -d /Users/hfar/Library/Python/3.7/bin/ ]]; then
-  PATH=${PATH}:/Users/hfar/Library/Python/3.7/bin/
-fi
+# if [[ -d /Users/hfar/Library/Python/3.7/bin/ ]]; then
+#   PATH=${PATH}:/Users/hfar/Library/Python/3.7/bin/
+# fi
 
 if [[ $PLATFORM == 'Darwin' ]]; then
   PATH=${PATH}:/usr/local/sbin
@@ -125,20 +117,20 @@ fi
 ############################################
 # Python
 # if [[ -d ~/.local/lib/python2.7 ]]; then
-  # export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
+#   export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python2.7
 # fi
-
-if [[ -d ~/.local/lib/python3.8 ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python3.8
-fi
-
-# MacOS
-if [[ -d ~/Library/Python/3.7/lib/python/site-packages ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/Library/Python/3.7/lib/python/site-packages
-fi
-if [[ -d ~/Library/Python/2.7/lib/python/site-packages ]]; then
-  export PYTHONPATH=${PYTHONPATH}:~/Library/Python/2.7/lib/python/site-packages
-fi
+#
+# if [[ -d ~/.local/lib/python3.8 ]]; then
+#   export PYTHONPATH=${PYTHONPATH}:~/.local/lib/python3.8
+# fi
+#
+# # MacOS
+# if [[ -d ~/Library/Python/3.7/lib/python/site-packages ]]; then
+#   export PYTHONPATH=${PYTHONPATH}:~/Library/Python/3.7/lib/python/site-packages
+# fi
+# if [[ -d ~/Library/Python/2.7/lib/python/site-packages ]]; then
+#   export PYTHONPATH=${PYTHONPATH}:~/Library/Python/2.7/lib/python/site-packages
+# fi
 
 ############################################
 # Wine
