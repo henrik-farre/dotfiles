@@ -97,7 +97,9 @@ export PATH
 # export GEM_HOME=~/.local/lib/ruby/gems
 export GEM_SPEC_CACHE=~/.cache/ruby/specs
 
-export SDL_AUDIODRIVER="alsa"
+############################################
+# SDL settings
+# export SDL_AUDIODRIVER="alsa"
 
 ############################################
 # Ensure a11y is disabled (to avoid "Couldn't connect to accessibility bus" errors)
