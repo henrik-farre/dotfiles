@@ -119,9 +119,9 @@ export QUOTING_STYLE=literal
 
 ############################################
 # GO
-if [[ -d ~/Dev/go ]]; then
-  export GOPATH=~/Dev/go
-fi
+#if [[ -d ~/Dev/go ]]; then
+#  export GOPATH=~/Dev/go
+#fi
 
 ############################################
 # Python
