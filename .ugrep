@@ -8,7 +8,7 @@
 ### TERMINAL DISPLAY ###
 
 # Custom color scheme overrides default GREP_COLORS parameters
-colors=
+# colors=
 # The argument is a colon-separated list of one or more parameters `sl='
 # (selected line), `cx=' (context line), `mt=' (matched text), `ms=' (match
 # selected), `mc=' (match context), `fn=' (file name), `ln=' (line number),
@@ -54,7 +54,7 @@ smart-case
 hidden
 
 # Enable/disable binary files, default: no-ignore-binary
-no-ignore-binary
+ignore-binary
 
 # Enable/disable decompression and archive search, default: no-decompress
 no-decompress
@@ -63,7 +63,7 @@ no-decompress
 zmax=1
 
 # Enable/disable ignore files, default: no-ignore-files
-no-ignore-files
+ignore-files
 
 fuzzy
 
