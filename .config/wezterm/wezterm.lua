@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm';
 return {
   font = wezterm.font("mononoki Nerd Font"),
-  font_size = 10,
+  font_size = 10.5,
   -- color_scheme = "Tango Adapted",
   colors = {
     foreground = "silver",

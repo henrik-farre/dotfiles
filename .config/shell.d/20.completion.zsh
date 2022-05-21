@@ -3,11 +3,13 @@
 #
 # fzf overrides some of these
 #
-autoload -U compinit; compinit
+autoload -U compinit;
+
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 # Completion caching
 zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+zstyle ':completion::complete:*' cache-path $XDG_CACHE_HOME/zsh/$HOST
 
 # Compctl
 # compctl -g '*.pdf' evince

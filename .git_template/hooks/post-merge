@@ -1,7 +1,0 @@
-#!/bin/sh
-TEXT_DEFAULT="\\033[0;39m"
-TEXT_INFO="\\033[1;32m"
-TEXT_BOLD="\\0033[1m"
-echo -e ${TEXT_INFO}${TEXT_BOLD}Generating ctags${TEXT_DEFAULT}
-
-.git/hooks/ctags >/dev/null 2>&1 &

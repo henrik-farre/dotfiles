@@ -35,7 +35,6 @@
   changed = green
   untracked = cyan
 [core]
-  excludesfile = ~/.gitignore
   editor = nvim
   pager = less
 [color]
