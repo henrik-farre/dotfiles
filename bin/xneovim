@@ -8,7 +8,8 @@ if [[ ! -z "$*" ]]; then
    FILE="'$*'"
 fi
 
-TERMINAL=wezterm
+# TERMINAL=wezterm
+TERMINAL=termite
 
 case "$TERMINAL" in
    "termite")
