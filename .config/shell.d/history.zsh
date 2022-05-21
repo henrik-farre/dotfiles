@@ -1,5 +1,5 @@
 # History settings
-HISTFILE=~/.zhistory
+HISTFILE="$XDG_DATA_HOME/zsh/history"
 HISTSIZE=15000
 SAVEHIST=15000
 HISTORY_IGNORE="(bg|fg|cd*|rm*|clear|ls|pwd|history|exit|make*|* --help|gst|git pull|git push|gst|gd|pacsearch *|..)"

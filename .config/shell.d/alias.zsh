@@ -24,16 +24,8 @@ alias recall='history -E 1 | grep'
 alias -s doc='libreoffice'
 alias -s pdf='evince'
 
-alias fuck=' sudo $(fc -ln -1)'
-
 ################################################
 # Github features for git: https://github.com/github/hub
 if [[ -e /usr/bin/hub ]]; then
   eval "$(hub alias -s)"
-fi
-
-################################################
-# Jira https://github.com/Netflix-Skunkworks/go-jira
-if [[ -e ~/.local/bin/jira ]]; then
-  eval "$(jira --completion-script-zsh)"
 fi

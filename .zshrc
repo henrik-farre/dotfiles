@@ -48,8 +48,8 @@ fi
 # Use color names instead of escapecodes
 autoload colors; colors
 
-# Source shared *.sh and *.zsh files
-for sourcefile in ~/.config/shell.d/*.{sh,zsh}; do source ${sourcefile}; done
+# Source shared files
+for sourcefile in ~/.config/shell.d/*; do source ${sourcefile}; done
 unset sourcefile
 
 # Based on coreos /usr/share/baselayout/coreos-profile.sh
