@@ -112,7 +112,7 @@ if [[ -e /usr/bin/ugrep ]]; then
   alias grep='ugrep -G'
   alias egrep='ugrep -E'
   alias fgrep='ugrep -F'
-  alias pgrep='ugrep -P'
+#  alias pgrep='ugrep -P'
   alias xgrep='ugrep -U --hexdump'
   alias zgrep='ugrep -zG'
   alias zegrep='ugrep -zE'
