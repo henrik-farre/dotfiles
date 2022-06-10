@@ -202,9 +202,9 @@ bindkey -M vicmd 'G ' end-of-history
 bindkey -M vicmd '^a' beginning-of-line
 bindkey -M vicmd '^e' end-of-line
 bindkey -M vicmd '^k' kill-line
-# bindkey -M vicmd '^r' history-incremental-search-backward        # enrique
-bindkey -M vicmd '^r' history-incremental-pattern-search-backward
-bindkey -M vicmd '^s' history-incremental-pattern-search-forward
+# used by fzf
+# bindkey -M vicmd '^r' history-incremental-pattern-search-backward
+# bindkey -M vicmd '^s' history-incremental-pattern-search-forward
 bindkey -M vicmd '^o' history-beginning-search-backward
 bindkey -M vicmd '^p' history-beginning-search-backward
 bindkey -M vicmd '^n' history-beginning-search-forward
