@@ -16,6 +16,7 @@ function allow_tmux() {
 
 if allow_tmux; then
   SESSION_NAME=$USER
+  export PATH=${PATH}:${HOME}/.local/bin
   tmux -q has-session -t ${SESSION_NAME} &>/dev/null
   if [ $? != 0 ]; then
     # -n window name
@@ -49,7 +50,7 @@ fi
 autoload colors; colors
 
 # Source shared files
-for sourcefile in ~/.config/shell.d/*; do source ${sourcefile}; done
+for sourcefile in ~/.config/zsh/*; do source ${sourcefile}; done
 unset sourcefile
 
 # Based on coreos /usr/share/baselayout/coreos-profile.sh
