@@ -121,3 +121,6 @@ if [[ -e /usr/bin/ugrep ]]; then
   alias zxgrep='ugrep -zU --hexdump'
   alias xdump='ugrep -X ""'
 fi
+
+alias kubectl="rancher kubectl"
+alias rancher2="rancher"
