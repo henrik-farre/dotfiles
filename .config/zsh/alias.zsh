@@ -23,9 +23,3 @@ alias recall='history -E 1 | grep'
 # Suffix aliases
 alias -s doc='libreoffice'
 alias -s pdf='evince'
-
-################################################
-# Github features for git: https://github.com/github/hub
-if [[ -e /usr/bin/hub ]]; then
-  eval "$(hub alias -s)"
-fi
