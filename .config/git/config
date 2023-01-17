@@ -1,7 +1,7 @@
 [user]
   name = Henrik Farre
   email = henrik@rockhopper.dk
-  signingkey = 2FC49A21DD7DD214
+  signingkey = 0x2FC49A21DD7DD214
 [includeIf "gitdir:~/Dev/work/"]
     path = ~/.config/git/config-work
 [alias]
@@ -54,13 +54,15 @@
 #[init]
 #  templatedir = ~/.git_template
 [diff]
-  tool = nvr
+  tool = nvim
   algorithm = patience
 # http://nuclearsquid.com/writings/git-tricks-tips-workflows/
 # Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
   mnemonicprefix = true
-[difftool "nvr"]
-  cmd = nvr -s -d $LOCAL $REMOTE
+[difftool]
+  prompt = false
+[difftool "nvim"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
   tool = nvr
   ; conflictstyle = diff3
