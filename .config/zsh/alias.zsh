@@ -17,7 +17,11 @@ fi
 # Replaced with cd function
 #alias cd=' builtin cd' # midnight commander history fix
 #
-alias recall='history -E 1 | grep'
+
+################################################
+# History aliases, show full history
+alias recall='fc -l 1 | ag'
+alias history='fc -l 1'
 
 ################################################
 # Suffix aliases
