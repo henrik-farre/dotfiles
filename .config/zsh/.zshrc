@@ -15,7 +15,7 @@ function allow_tmux() {
 }
 
 if allow_tmux; then
-  SESSION_NAME=$USER
+  SESSION_NAME=local
   export PATH=${PATH}:${HOME}/.local/bin
   tmux -q has-session -t ${SESSION_NAME} &>/dev/null
   if [ $? != 0 ]; then
@@ -25,7 +25,7 @@ if allow_tmux; then
     # Only reattach if remote session
     # attach-session -d : Detach existing: aggressive resize does not work will
     if [[ -n $SSH_CLIENT ]]; then
-      SESSION_NAME=REMOTE_${USER}
+      SESSION_NAME=remote
     fi
     exec tmux attach-session -d -t ${SESSION_NAME}
   fi
