@@ -189,30 +189,31 @@ function myip() {
   echo "External ip: ${EXTIP}"
 }
 
-function lc() {
-  # a little bit of help in case of misuse
-  if [ ${#} -lt 2 ]
-  then
-    echo "usage: lc /directory pattern"
-    echo "example: lc /etc config"
-    return 1
-  fi
-
-  # $DIR is the first argument, the path to the directory
-  DIR=${1}
-
-  # $SEARCH is what you are looking for, and it's the second argument
-  SEARCH=${2}
-
-  # $RED sets the text to inverted red, changing the capabilities of the terminal via terminfo parameters
-  # setaf 1 = red, smso = inverted
-  RED=`tput setaf 1; tput smso`
-
-  #  $NORMAL returns text to normal attributes
-  NORMAL=`tput sgr0`
-
-  ls -lA ${DIR} | sed s/"${SEARCH}"/"${RED}${SEARCH}${NORMAL}"/g
-}
+# clashes with litra-driver command
+# function lc() {
+#   # a little bit of help in case of misuse
+#   if [ ${#} -lt 2 ]
+#   then
+#     echo "usage: lc /directory pattern"
+#     echo "example: lc /etc config"
+#     return 1
+#   fi
+# 
+#   # $DIR is the first argument, the path to the directory
+#   DIR=${1}
+# 
+#   # $SEARCH is what you are looking for, and it's the second argument
+#   SEARCH=${2}
+# 
+#   # $RED sets the text to inverted red, changing the capabilities of the terminal via terminfo parameters
+#   # setaf 1 = red, smso = inverted
+#   RED=`tput setaf 1; tput smso`
+# 
+#   #  $NORMAL returns text to normal attributes
+#   NORMAL=`tput sgr0`
+# 
+#   ls -lA ${DIR} | sed s/"${SEARCH}"/"${RED}${SEARCH}${NORMAL}"/g
+# }
 
 function wake-host() {
   case "${1}" in

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim_socket
+# export NVIM_LISTEN_ADDRESS=$XDG_RUNTIME_DIR/neovim_socket
 
 # Opens neovim in an termite window.
 FILE=""
@@ -9,7 +9,8 @@ if [[ ! -z "$*" ]]; then
 fi
 
 # TERMINAL=wezterm
-TERMINAL=termite
+# TERMINAL=termite
+TERMINAL=nvim-gtk
 
 case "$TERMINAL" in
    "termite")
@@ -18,5 +19,9 @@ case "$TERMINAL" in
       ;;
    "wezterm")
       exec wezterm start --class "neovim-editor" -- /usr/bin/nvim --listen "$NVIM_LISTEN_ADDRESS"
+      ;;
+   "nvim-gtk")
+      export NVIM_GTK_NO_HEADERBAR=1
+      exec nvim-gtk
       ;;
 esac
