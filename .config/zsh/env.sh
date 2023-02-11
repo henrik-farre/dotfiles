@@ -105,7 +105,7 @@ export NO_AT_BRIDGE=1
 export NPM_CONFIG_PREFIX=~/.local/nodejs
 
 # Wrapper script to use multiple Firefox profiles
-export BROWSER=open-link
+# export BROWSER=open-link
 
 # Coreutils quotes ls output
 export QUOTING_STYLE=literal
