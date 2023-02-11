@@ -301,31 +301,3 @@ function check_if_ip_is_free() {
   ssh -oConnectTimeout=2 "${IP}"
   dig -x +timeout=1 "${IP}" @ns.tv2.dk
 }
-
-# Prettier mount output
-function mount() {
-  if [[ $# -gt 0 ]]; then
-    /bin/mount @*
-  else
-    /bin/mount | column -t
-  fi
-}
-
-function barriers() {
-  if pgrep barriers &> /dev/null; then
-    echo "Barriers is running"
-  else
-    echo "Starting barriers"
-    /usr/bin/barriers
-  fi
-}
-
-function barrierc() {
-  if pgrep barrierc &> /dev/null; then
-    echo "Barrierc is running"
-  else
-    echo "Starting barrierc and setting keymap"
-    /usr/bin/barrierc --no-restart "$@"
-    setxkbmap $(setxkbmap -query | grep "^layout:" | awk -F ": *" '{print $2}')
-  fi
-}
