@@ -2,7 +2,7 @@
   name = Henrik Farre
   email = henrik@rockhopper.dk
   signingkey = 0x2FC49A21DD7DD214
-[includeIf "gitdir:~/Dev/work/"]
+[includeIf "gitdir:~/work/"]
     path = ~/.config/git/config-work
 [alias]
   st = status

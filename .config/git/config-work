@@ -1,2 +1,4 @@
 [user]
-  email = hfar@tv2.dk
+  email = henrik.farre@se.com
+[commit]
+  gpgsign = false
