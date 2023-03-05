@@ -103,6 +103,11 @@ if [[ -e '/usr/bin/htop' ]]; then
 fi
 
 alias dh1="du -h --max-depth=1"
+# Inspired by https://gist.github.com/thebouv/8657674
+# -s summerize
+# -h human readable
+# -x one file system
+alias ducks="du -shx * | sort -hr | head"
 
 if [[ -e /usr/bin/ugrep ]]; then
   alias uq='ug -Q'
