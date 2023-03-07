@@ -45,48 +45,7 @@ function build_prompt() {
 # Set title function
 # Used in precmd
 function title() {
-  # escape '%' chars in $1, make nonprintables visible
-  local cmd=${(V)1//\%/\%\%}
-
-  # See "Conditional Substrings in Prompts"
-  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
-  # %X>...>                     : truncate to 40 chars followed by ...
-  # %X(c:true-text:false-text)  : if c > %X show true text, else false text
-
-  if [[ -n $cmd ]]; then
-    cmd="  $cmd"
-  fi
-  # Truncate cmd to 40
-  cmd=$(print -Pn "%40>...> $cmd" | tr -d "\n")
-
-  # Updates window title, also when ssh'ed in to a host
-  if [[ -z $SSH_TTY ]]; then
-    print -Pn "\e]2;%40<...<%~> $cmd\a"
-  else
-    print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
-  fi
-
-  # case $TERM in
-  #   screen|screen-bce|screen-256color|screen-256color-bce|tmux-256color)
-  #     if [[ -z $SSH_TTY ]]; then
-  #       #print -Pn "\ek%40<...<%~> $cmd\e\\"
-  #       # if c (current path with prefix replace, aka ~) is larger than 7,
-  #       # show first 3 parts, then ... and then last 3 parts, else just %~
-  #       print -Pn "\ek%7(c:%-3~/.../%3~:%~)$cmd\e\\"
-  #     else
-  #       # With user/hostname
-  #       print -Pn "\ek%m:%40<...<%~> $cmd\e\\"
-  #     fi
-  #     ;;
-  #   xterm*|rxvt*)
-  #     # plain xterm title
-  #     if [[ -z $SSH_TTY ]]; then
-  #     else
-  #       # With user/hostname
-  #       print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
-  #     fi
-  #     ;;
-  # esac
+  printf "\e]2;%s\a" "$1"
 }
 
 ####################################################
@@ -94,7 +53,7 @@ function title() {
 # precmd is called just before the prompt is printed
 # http://grml.org/zsh-pony/#sec-13 about psvar
 function precmd() {
-  title ""
+  title "$(print -Pn "%~")"
   psvar=()
   # Disabled 06-oct-2016 for use on dev:
   # Don't run vcs_info if remote shell
@@ -106,7 +65,13 @@ function precmd() {
 
 # preexec is called just before any command line is executed
 function preexec() {
-  title "$1"
+  local -a cmd; cmd=(${(z)1})
+  executable=$cmd[1]
+  case $executable:t in
+    sudo)  title "#${cmd[2]:t}"  ;;
+    for)   title "()$cmd[7]"     ;;
+    *)     title "${cmd}"   ;;
+  esac
 }
 
 ####################################################
