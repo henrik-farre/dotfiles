@@ -33,7 +33,7 @@ alias cd6='cd ../../../../../..'
 
 alias recall='history | grep'
 
-alias open='exo-open'
+alias open='xdg-open'
 
 # Vim / NeoVim
 if [[ -L /bin/view ]]; then
