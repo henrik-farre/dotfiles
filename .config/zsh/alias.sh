@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Alias'
+# Alias
+# Fix that alias k="kubectl" is not completed
+unsetopt completealiases
 
 # Space before so they are not added to history
 if [[ $PLATFORM == 'Darwin' ]]; then
