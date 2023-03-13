@@ -127,5 +127,7 @@ if [[ -e /usr/bin/ugrep ]]; then
   alias xdump='ugrep -X ""'
 fi
 
-alias kubectl="rancher kubectl"
-alias rancher2="rancher"
+###################################################
+# K8S aliases
+#
+alias k=kubectl
