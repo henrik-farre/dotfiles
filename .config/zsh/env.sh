@@ -59,8 +59,13 @@ fi
 #   PATH="${PATH}:$(ruby-2.4 -rubygems -e 'puts Gem.user_dir')/bin"
 # fi
 
+# NodeJS
 if [[ -d ${HOME}/.local/nodejs/bin ]]; then
   PATH=${PATH}:${HOME}/.local/nodejs/bin
+fi
+# NVM - node version manager
+if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
+  source /usr/share/nvm/init-nvm.sh
 fi
 
 # Packages installed by pip and others
@@ -102,7 +107,8 @@ export NO_AT_BRIDGE=1
 ############################################
 # Node.js
 # https://github.com/npm/npm/issues/5392
-export NPM_CONFIG_PREFIX=~/.local/nodejs
+# Breaks nvm
+# export NPM_CONFIG_PREFIX=~/.local/nodejs
 
 # Wrapper script to use multiple Firefox profiles
 # export BROWSER=open-link
