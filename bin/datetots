@@ -1,4 +1,10 @@
-#!/usr/bin/php
-<?php
+#!/bin/env python
 
-echo strtotime($argv[1]).PHP_EOL;
+from datetime import datetime
+import sys
+
+datetime_str = sys.argv[1]
+
+datetime_object = datetime.strptime(datetime_str, '%d/%m/%y')
+
+print(datetime_object.timestamp())
