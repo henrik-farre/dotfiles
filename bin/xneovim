@@ -9,8 +9,8 @@ if [[ ! -z "$*" ]]; then
 fi
 
 # TERMINAL=wezterm
-# TERMINAL=termite
-TERMINAL=nvim-gtk
+TERMINAL=termite
+# TERMINAL=nvim-gtk
 
 case "$TERMINAL" in
    "termite")
