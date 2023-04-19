@@ -219,7 +219,9 @@ function wake-host() {
   case "${1}" in
     "spook" | "spookcentral")
       # GIGABYTE GA-Z87-D3HP
-      MAC="94:de:80:78:e9:6a"
+      # MAC="94:de:80:78:e9:6a"
+      # Intel NUC
+      MAC="48:21:0b:55:dc:9f"
       ;;
     "fire" | "firehouse")
       # Old gigabyte:
