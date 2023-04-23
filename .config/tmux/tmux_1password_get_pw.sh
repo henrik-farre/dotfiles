@@ -5,16 +5,15 @@ set -o errexit
 set -o pipefail
 # set -x trace
 
-while ! op account get &>/dev/null; do
+export OP_CACHE=true
+
+CFG="$(dirname $0)/tmux_1password.cfg"
+SELECTED=$(cat $CFG | fzf-tmux -p)
+
+while RESULT=$(op read -n "${SELECTED##* }") && [ $? -ne 0 ]; do
   tmux display-message "1Password is locked - please unlock"
   sleep 5
 done
-
-CFG="$(dirname $0)/tmux_1password.cfg"
-
-SELECTED=$(cat $CFG | fzf-tmux -p)
-
-RESULT=$(op read -n "${SELECTED##* }" || true)
 
 if [[ $? -gt 0 ]]; then
   tmux display-message "An error occurred"
