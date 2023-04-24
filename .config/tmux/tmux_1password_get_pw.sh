@@ -10,9 +10,16 @@ export OP_CACHE=true
 CFG="$(dirname $0)/tmux_1password.cfg"
 SELECTED=$(cat $CFG | fzf-tmux -p)
 
-while RESULT=$(op read -n "${SELECTED##* }") && [ $? -ne 0 ]; do
+i=0
+
+# Select everything after // so there can be any text in front
+while RESULT=$(op read -n "op://${SELECTED##*//}") && [ $? -ne 0 ]; do
   tmux display-message "1Password is locked - please unlock"
-  sleep 5
+  if [[ $i == 10 ]]; then
+    break
+  fi
+  ((i++))
+  sleep 2
 done
 
 if [[ $? -gt 0 ]]; then
