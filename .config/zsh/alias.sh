@@ -133,3 +133,6 @@ fi
 # K8S aliases
 #
 alias k=kubectl
+alias kgetrestart="kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'"
+alias kgetevent="kubectl get events --sort-by=.metadata.creationTimestamp"
+alias kgeteventw="kubectl get events --sort-by=.metadata.creationTimestamp -w"
