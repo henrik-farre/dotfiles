@@ -26,7 +26,8 @@ local custom_scheme = wezterm.color.get_builtin_schemes()[base_scheme]
 
 return {
   font = wezterm.font("mononoki Nerd Font"),
-  font_size = 10.5,
+  enable_wayland = true,
+  font_size = 11,
   hide_tab_bar_if_only_one_tab = true,
   default_cursor_style = "BlinkingBlock",
   cursor_blink_ease_in = "Constant",
@@ -62,7 +63,7 @@ return {
     cursor_bg = '#bfceff',
     cursor_border = '#bfceff',
     cursor_fg = '#383a42',
-    foreground = '#383a42',
+    foreground = '#ffffff',
     selection_bg = '#bfceff',
     selection_fg = '#383a42',
     },
