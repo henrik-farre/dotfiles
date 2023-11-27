@@ -6,6 +6,16 @@
 #  echo "I'm interactive shell"
 #fi
 
+if [[ -v WSL_DISTRO_NAME ]]; then
+  declare -a ssh_keys
+
+  for i in ~/.ssh/id_*.pub; do
+    test -f "${i%.*}" && ssh_keys+=("${${i%.*}##*/}");
+  done
+  eval $(keychain --eval --quiet $ssh_keys)
+  unset ssh_keys
+fi
+
 ####################################################
 # Launch tmux
 # Placed at top of file else the entire file is run, and then run again when tmux creates a new session
