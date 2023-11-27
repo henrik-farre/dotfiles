@@ -1,4 +1,5 @@
 if [[ -v WSL_DISTRO_NAME ]]; then
+  source $ZDOTDIR/env.sh
   export GTK_THEME=Adwaita:dark
   export BROWSER=open-link
   export XDG_CACHE_HOME=${HOME}/.cache
