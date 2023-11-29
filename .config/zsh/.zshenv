@@ -5,4 +5,5 @@ if [[ -v WSL_DISTRO_NAME ]]; then
   export XDG_CACHE_HOME=${HOME}/.cache
   export XDG_CONFIG_HOME=${HOME}/.config
   export XDG_DATA_HOME=${HOME}/.local/share
+  export XDG_SESSION_TYPE=wayland
 fi
