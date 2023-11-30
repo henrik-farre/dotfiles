@@ -1,8 +1,10 @@
 [user]
   name = Henrik Farre
   email = henrik@rockhopper.dk
-  signingkey = 0x2FC49A21DD7DD214
-[includeIf "gitdir:~/work/"]
+  signingKey = ~/.ssh/id_ed25519_personal_github_signing
+[gpg]
+  format = ssh
+[includeIf "gitdir:~/Dev/work/"]
     path = ~/.config/git/config-work
 [alias]
   st = status
