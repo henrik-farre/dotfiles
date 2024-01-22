@@ -1,7 +1,7 @@
 [user]
   name = Henrik Farre
   email = henrik@rockhopper.dk
-  signingkey = 0x2FC49A21DD7DD214
+  signingKey = /home/enrique/.ssh/id_ecdsa_sk_github_signing
 [includeIf "gitdir:~/work/"]
     path = ~/.config/git/config-work
 [alias]
@@ -91,3 +91,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	format = ssh
