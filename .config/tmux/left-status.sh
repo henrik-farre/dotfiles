@@ -13,7 +13,7 @@ if [[ -f ~/.kube/config ]]; then
     BLOCK_COLOR="colour178"
   elif [[ $CURRENT_CONTEXT != '""' ]]; then
     SHOW=y
-    BLOCK_COLOR="colour34"
+    BLOCK_COLOR="colour2"
   fi
 
   if [[ "$SHOW" == 'y' ]]; then

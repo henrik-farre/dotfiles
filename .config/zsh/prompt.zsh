@@ -12,7 +12,7 @@ function build_prompt() {
 
   local PROMPT_USER=''
   local PROMPT_USER_SEP=''
-  if [[ "${USER}" != 'enrique' ]]; then
+  if [[ "${USER}" == 'root' ]]; then
     PROMPT_USER=$'%{$fg[black]$bg[red]%} %n '
     PROMPT_USER_SEP='%{$reset_color%}%{$fg[red]$bg[green]%} %{$reset_color%}'
   fi
