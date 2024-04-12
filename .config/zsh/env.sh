@@ -30,11 +30,12 @@ fi
 
 if [[ -e /usr/bin/nvim ]]; then
   export VISUAL=/usr/bin/nvim
+  export EDITOR=/usr/bin/nvim
+
   if [[ -e /usr/bin/nvr ]]; then
     # Note that zsh escapes spaces, this might break things
     export EDITOR="nvr --remote-wait-silent"
-  else
-    export EDITOR=/usr/bin/nvim
+    export VISUAL="nvr --remote-wait-silent"
   fi
 else
   export EDITOR=/usr/bin/vim
