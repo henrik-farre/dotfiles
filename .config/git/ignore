@@ -59,3 +59,8 @@ __pycache__
 
 # asdf
 .tool-versions
+
+#
+yaml_overrides.lua
+hest*
+.vimspector.json*
