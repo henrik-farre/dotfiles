@@ -5,27 +5,6 @@ if [[ -z $1 ]]; then
   exit 1
 fi
 
-function cpu_powersetting {
-  local MODE
-  case $1 in
-    powersave)
-      MODE=$1
-      ;;
-    ondemand)
-      MODE=$1
-      ;;
-    performance)
-      MODE=$1
-      ;;
-    *)
-      echo "Unknown cpu power setting $1"
-      return 1
-      ;;
-  esac
-  sudo cpupower frequency-set -g "$MODE"
-  return 0
-}
-
 function disablealt {
   # gsettings set org.cinnamon.desktop.wm.preferences mouse-button-modifier ''
   gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier ''
@@ -36,73 +15,43 @@ function enablealt {
   gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
 }
 
-function conky_reload {
-  killall -SIGUSR1 conky || true
-}
-
-function xcape_stop {
-  systemctl --user stop xcape
-}
-
-function xcape_start {
-  systemctl --user start xcape
-}
-
 MODE=$1
 
 case $MODE in
-  busy)
-    luxafor -r 255 color
-    slack-cli presence active
-    slack-cli snooze start 60
-    ;;
-  avaliable)
-    luxafor -g 255 color
-    slack-cli presence away
-    slack-cli snooze end
-    ;;
   gameon)
     disablealt
-    # xcape_stop
+    notify-send "Game on" "Remember to allow sudo!"
+    # https://www.kernel.org/doc/Documentation/hwmon/nct6775
+    #
+    # pwm[1-5] - this file stores PWM duty cycle or DC value (fan speed) in range:
+    # * 0 (lowest speed) to 255 (full)
+    #
+    # pwm[1-5]_enable - this file controls mode of fan/temperature control:
+    # * 0 Fan control disabled (fans set to maximum speed)
+    # * 1 Manual mode, write to pwm[0-5] any value 0-255
+    # * 2 "Thermal Cruise" mode
+    # * 3 "Fan Speed Cruise" mode
+    # * 4 "Smart Fan III" mode (NCT6775F only)
+    # * 5 "Smart Fan IV" mode
+    #
+    # pwm[1-5]_mode - controls if output is PWM or DC level
+    # * 0 DC output
+    # * 1 PWM output
+
+    sudo -- bash << EOL
+      echo 0 > /sys/class/hwmon/hwmon5/pwm1_enable
+      echo 0 > /sys/class/hwmon/hwmon5/pwm3_enable
+      echo 0 > /sys/class/hwmon/hwmon5/pwm4_enable
+EOL
     ;;
   gameoff)
     enablealt
-    # xcape_start
-   ;;
- hidpi-on)
-   gsettings set org.cinnamon panels-height "['1:28']"
-   sleep 1
-   gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 2"
-   sleep 1
-   # gsettings set org.cinnamon active-display-scale "2"
-   sleep 1
-   gsettings set org.cinnamon.desktop.interface text-scaling-factor "0.75"
-   sleep 1
-   conky_reload
-   ;;
- hidpi-off)
-   gsettings set org.cinnamon panels-height "['1:34']"
-   sleep 1
-   gsettings set org.cinnamon.desktop.interface scaling-factor "uint32 1"
-   sleep 1
-   # gsettings set org.cinnamon active-display-scale "1"
-   sleep 1
-   gsettings set org.cinnamon.desktop.interface text-scaling-factor "1"
-   sleep 1
-   conky_reload
-   ;;
- wacom-setup)
-   DEVICE_ID=$(xsetwacom --list devices | awk '{if ($9 == "STYLUS") print $7}')
-   xsetwacom --set "$DEVICE_ID" MapToOutput "1920x1200+0+0"
-   ;;
- steam-bigpicture)
-   screensetup_single
-   xrandr --output HDMI-0 --mode 1920x1080
-   disablealt
-   servicesstop
-   conky_reload
-   export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
-   /usr/bin/steam-native -bigpicture -nochatui -nofriendsui
+    notify-send "Game off" "Remember to allow sudo!"
+    sudo -- bash << EOL
+      echo 5 > /sys/class/hwmon/hwmon5/pwm1_enable
+      echo 5 > /sys/class/hwmon/hwmon5/pwm3_enable
+      echo 5 > /sys/class/hwmon/hwmon5/pwm4_enable
+EOL
    ;;
  *)
    echo "Unknown mode"
