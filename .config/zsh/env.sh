@@ -147,3 +147,9 @@ export QUOTING_STYLE=literal
 if [[ -e /usr/bin/wine ]]; then
   export WINEDLLOVERRIDES="winemenubuilder.exe=d"
 fi
+
+############################################
+# 1password cli
+if [[ -e ~/.local/bin/op ]]; then
+  export OP_BIOMETRIC_UNLOCK_ENABLED=true
+fi
