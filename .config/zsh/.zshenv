@@ -8,7 +8,6 @@ if [[ -v WSL_DISTRO_NAME ]]; then
 
   source $ZDOTDIR/env.sh
   source $ZDOTDIR/15.clean-home-dir.sh
-  source $ZDOTDIR/_z.99.work.sh
 
   # Temp fix as GUI are broken
   export LIBGL_ALWAYS_SOFTWARE=1
