@@ -63,6 +63,12 @@ autoload colors; colors
 for sourcefile in ~/.config/zsh/*; do source ${sourcefile}; done
 unset sourcefile
 
+# Source external files if there are any
+if [[ -d ~/.config/zsh/external && -n "$(ls -A ~/.config/zsh/external 2>/dev/null)" ]]; then
+  for sourcefile in ~/.config/zsh/external/*; do source ${sourcefile}; done
+  unset sourcefile
+fi
+
 # Based on coreos /usr/share/baselayout/coreos-profile.sh
 if [[ $- == *i* && $PLATFORM != 'Darwin' ]]; then
   FAILED=$(systemctl list-units --state=failed --no-legend)
