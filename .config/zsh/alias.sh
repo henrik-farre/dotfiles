@@ -90,10 +90,9 @@ if [[ -e /usr/bin/python3 ]]; then
   alias webshare='python3 -m http.server'
 fi
 
-
 if [[ -e ~/.local/lib/ruby/gems/bin/jump-bin ]]; then
-# jump ruby gem
-# jump is a function that uses jump-bin
+  # jump ruby gem
+  # jump is a function that uses jump-bin
   alias j="jump"
   alias jl="jump -l"
   alias ja="jump -a"
@@ -119,7 +118,7 @@ if [[ -e /usr/bin/ugrep ]]; then
   alias grep='ugrep -G'
   alias egrep='ugrep -E'
   alias fgrep='ugrep -F'
-#  alias pgrep='ugrep -P'
+  #  alias pgrep='ugrep -P'
   alias xgrep='ugrep -U --hexdump'
   alias zgrep='ugrep -zG'
   alias zegrep='ugrep -zE'
