@@ -5,6 +5,7 @@
 ############################################
 # Use vim/nvim as pager, version 7.2 to 7.4
 # Don't use vim as GIT_PAGER as colors for e.g. git ls are not shown
+#
 if [[ "$(command -v nvim)" ]]; then
   export PAGER="/usr/share/nvim/runtime/macros/less.sh"
   # From :help man.vim
@@ -22,6 +23,7 @@ fi
 
 ############################################
 # Neovim
+#
 if [[ -z $XDG_RUNTIME_DIR ]]; then
   export NVIM_LISTEN_ADDRESS=/tmp/neovim_socket
 else
@@ -40,6 +42,15 @@ if [[ -e /usr/bin/nvim ]]; then
 else
   export EDITOR=/usr/bin/vim
   export VISUAL=/usr/bin/vim
+fi
+
+############################################
+# Bat
+#
+if [[ -e /usr/sbin/bat ]]; then
+  export BAT_PAGER="less -RF"
+  export PAGER=$BAT_PAGER
+  export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 fi
 
 ############################################
