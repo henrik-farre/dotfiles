@@ -64,13 +64,3 @@ for ZSH_SOURCEFILE ($ZDOTDIR/**/*sh(N.)); do
   source "${ZSH_SOURCEFILE}"
 done
 unset ZSH_SOURCEFILE
-
-# Based on coreos /usr/share/baselayout/coreos-profile.sh
-if [[ $- == *i* && $PLATFORM != 'Darwin' ]]; then
-  FAILED=$(systemctl list-units --state=failed --no-legend)
-  if [[ ! -z "${FAILED}" ]]; then
-    COUNT=$(wc -l <<<"${FAILED}")
-    echo -e "Failed Units: \033[31m${COUNT}\033[39m"
-    printf " %s" ${FAILED}
-  fi
-fi
