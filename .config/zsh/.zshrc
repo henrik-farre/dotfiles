@@ -59,15 +59,11 @@ fi
 # Use color names instead of escapecodes
 autoload colors; colors
 
-# Source shared files
-for sourcefile in ~/.config/zsh/*; do source ${sourcefile}; done
-unset sourcefile
-
-# Source external files if there are any
-if [[ -d ~/.config/zsh/external && -n "$(ls -A ~/.config/zsh/external 2>/dev/null)" ]]; then
-  for sourcefile in ~/.config/zsh/external/*; do source ${sourcefile}; done
-  unset sourcefile
-fi
+# Source all config files beneath $ZDOTDIR ending in sh
+for ZSH_SOURCEFILE ($ZDOTDIR/**/*sh(N.)); do
+  source "${ZSH_SOURCEFILE}"
+done
+unset ZSH_SOURCEFILE
 
 # Based on coreos /usr/share/baselayout/coreos-profile.sh
 if [[ $- == *i* && $PLATFORM != 'Darwin' ]]; then
