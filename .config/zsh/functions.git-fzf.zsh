@@ -1,7 +1,7 @@
 # https://github.com/junegunn/fzf-git.sh
 # Pick branch
 function gcob() {
-  _fzf_git_each_ref --no-multi | xargs git checkout
+  _fzf_git_each_ref --no-multi | xargs git switch
 }
 
 # Pick files to commit
