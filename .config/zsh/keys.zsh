@@ -137,17 +137,14 @@ function change-around {
 zle -N change-around
 
 ####################################################
-# Emacs keybindings
-#bindkey -e
-#bindkey '^R' history-incremental-search-backward # Ctrl+r search history
-# bindkey '^[Od' emacs-backward-word # Ctrl+Leftarrow
-# bindkey '^[Oc' emacs-forward-word  # Ctrl+Rightarrow
-
-####################################################
 # Vim keybindings
 # http://dougblack.io/words/zsh-vi-mode.html
 bindkey -v
-export KEYTIMEOUT=1                # Time Zsh waits for key escape key sequence
+
+# How long to wait (in hundredths of a second) for additional characters in sequence
+# Blocks fzf-git keymaps if to high
+unset KEYTIMEOUT
+
 # # use the vi navigation keys in menu completion
 # # Fails with: no such keymap `menuselect'
 # # bindkey -M menuselect 'h' vi-backward-char
