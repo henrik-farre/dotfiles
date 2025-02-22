@@ -1,18 +1,9 @@
 ######################################################
 # FZF
 # From https://github.com/junegunn/fzf
-FZF_KEYBINDINGS_PATH=/usr/share/fzf/key-bindings.zsh
-FZF_COMPLETION_PATH=/usr/share/fzf/completion.zsh
-if [[ $PLATFORM == 'Darwin' ]]; then
-  FZF_KEYBINDINGS_PATH=/usr/local/opt/fzf/shell/key-bindings.zsh
-fi
-
-# Use -e if symlink (locally installed)
-if [[ -f $FZF_KEYBINDINGS_PATH ]]; then
-  # System installed:
-  source $FZF_KEYBINDINGS_PATH
-  # Local installed:
-  # source ~/.fzf.zsh
+#
+if type fzf &>/dev/null; then
+  source <(fzf --zsh)
 
   # https://github.com/junegunn/fzf/blob/master/fzf#L653
   #export FZF_DEFAULT_COMMAND="find * -path '*/\\.*' -xdev -prune -o -type f -print -o -type l -print 2> /dev/null"
@@ -25,13 +16,14 @@ if [[ -f $FZF_KEYBINDINGS_PATH ]]; then
 
   # Else fzf will not split using tmux
   export FZF_TMUX=1
-fi
 
-if [[ -f $FZF_COMPLETION_PATH ]]; then
-  export FZF_COMPLETION_TRIGGER=''
-  source $FZF_COMPLETION_PATH
+  # Use tmux popup window, see fzf-tmux --help
+  export FZF_TMUX_OPTS="-p 80%"
+
+  export FZF_CTRL_R_OPTS="--prompt='History > '"
+
   # "setopt vi resets TAB key binding, so unless you've assigned a dedicated key, fuzzy completion will become unavailable."
   # - https://github.com/junegunn/fzf/wiki/Configuring-fuzzy-completion
-  bindkey '^T' fzf-completion
-  bindkey '^I' $fzf_default_completion
+  # bindkey '^T' fzf-completion
+  # bindkey '^I' $fzf_default_completion
 fi
