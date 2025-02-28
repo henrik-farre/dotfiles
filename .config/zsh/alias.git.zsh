@@ -1,6 +1,10 @@
 # Feature branch
 alias gfb="git switch -c"
 compdef _git gfb=git-switch
+alias gsw="git switch"
+compdef _git gsw=git-switch
+alias gp="git pull"
+compdef _git gp=git-pull
 
 # https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/plugins/git/git.plugin.zsh
 # Aliases
