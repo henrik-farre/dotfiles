@@ -10,6 +10,7 @@
   st = status
   ci = commit
   co = checkout
+  sw = switch
   w = whatchanged
   pu = push
   pl = pull
@@ -28,7 +29,7 @@
   uncommit = reset --soft HEAD^
   ctags = !.git/hooks/ctags
 # http://gggritso.com/human-git-aliases
-  branches = branch -a
+  branches = "branch --all --format='%(color:#cccc00)%(objectname:short) %(color:red)%(committerdate:short) %(color:bold white)%(refname:short)'"
   tags = tag
   stashes = stash list
   remotes = remote -v
@@ -87,10 +88,10 @@
 [init]
   defaultBranch = master
 [credential "https://github.com"]
-  helper = 
+  helper =
   helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-  helper = 
+  helper =
   helper = !/usr/bin/gh auth git-credential
 [filter "lfs"]
   clean = git-lfs clean -- %f
@@ -99,3 +100,7 @@
   required = true
 [gpg]
   format = ssh
+[branch]
+  sort = -committerdate
+[help]
+	autocorrect = prompt
