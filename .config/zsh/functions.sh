@@ -304,3 +304,8 @@ function check_if_ip_is_free() {
   ssh -oConnectTimeout=2 "${IP}"
   dig -x +timeout=1 "${IP}" @ns.tv2.dk
 }
+
+function pyright_setup() {
+  echo "Creating pyrightconfig.json in current directory"
+  echo '{ "venvPath": ".", "venv": ".venv" }' >pyrightconfig.json
+}
