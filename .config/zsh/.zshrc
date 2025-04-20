@@ -60,7 +60,12 @@ fi
 autoload colors; colors
 
 # Source all config files beneath $ZDOTDIR ending in sh
-for ZSH_SOURCEFILE ($ZDOTDIR/**/*sh(N.)); do
+# (N-.) Means:
+# N: Evaluate to nothing instead of throwing error if nothing is matched
+# -.: Match symlinks (to plain files) and plain files
+# https://zsh.sourceforge.io/Doc/Release/Expansion.html#Glob-Qualifiers
+# https://zsh.sourceforge.io/Doc/Release/Expansion.html#Recursive-Globbing
+for ZSH_SOURCEFILE ($ZDOTDIR/**/*sh(N-.)); do
   source "${ZSH_SOURCEFILE}"
 done
 unset ZSH_SOURCEFILE

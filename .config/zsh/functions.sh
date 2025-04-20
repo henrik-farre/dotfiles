@@ -1,15 +1,15 @@
 #!/bin/bash
 # Fix cd filename
-function cd () {
-if [[ -z $2 ]]; then
-  if [[ -f $1 ]]; then
-    builtin cd $1:h
+function cd() {
+  if [[ -z $2 ]]; then
+    if [[ -f $1 ]]; then
+      builtin cd $1:h
+    else
+      builtin cd $1
+    fi
   else
-    builtin cd $1
+    builtin cd $*
   fi
-else
-  builtin cd $*
-fi
 }
 
 function error() {
@@ -49,23 +49,23 @@ function f() {
 }
 
 function x {
-for archive in "${@}"; do
-  if [ -f "$archive" ] ; then
-    case $archive in
-      *.tar.bz2)  tar xvjf "$archive";;
-      *.tar.gz)   tar xvzf "$archive";;
-      *.tar.xz)   tar xvJf "$archive";;
-      *.tar.zst)  tar --zstd -xvf "$archive";;
-      *.bz2)      bunzip2 "$archive";;
-      *.rar)      unrar x "$archive";;
-      *.gz)       gunzip "$archive";;
-      *.tar)      tar xvf "$archive";;
-      *.tbz2)     tar xvjf "$archive";;
-      *.tgz)      tar xvzf "$archive";;
-      *.ezpkg)    tar zxvf "$archive";;
-      *.7z)       7z x "$archive";;
-      *.xz)       unxz "$archive";;
-      *.deb)      ar vx "$archive";;
+  for archive in "${@}"; do
+    if [ -f "$archive" ]; then
+      case $archive in
+      *.tar.bz2) tar xvjf "$archive" ;;
+      *.tar.gz) tar xvzf "$archive" ;;
+      *.tar.xz) tar xvJf "$archive" ;;
+      *.tar.zst) tar --zstd -xvf "$archive" ;;
+      *.bz2) bunzip2 "$archive" ;;
+      *.rar) unrar x "$archive" ;;
+      *.gz) gunzip "$archive" ;;
+      *.tar) tar xvf "$archive" ;;
+      *.tbz2) tar xvjf "$archive" ;;
+      *.tgz) tar xvzf "$archive" ;;
+      *.ezpkg) tar zxvf "$archive" ;;
+      *.7z) 7z x "$archive" ;;
+      *.xz) unxz "$archive" ;;
+      *.deb) ar vx "$archive" ;;
       *.zip)
         DIRNAME1=$(echo "$archive" | tr ' ' '_')
         DIRNAME=$(basename "${DIRNAME1}" .zip)
@@ -75,15 +75,15 @@ for archive in "${@}"; do
         cd "$DIRNAME" || exit
         unzip "$archive"
         ;;
-      *.Z)        uncompress "$archive"   ;;
-      *.rpm)      rpmextract.sh "$archive" ;;
-      *)          echo "'$archive' cannot be extracted via extract()" ;;
-    esac
-  else
-    echo "'$archive' is not a valid file"
-    return 1
-  fi
-done
+      *.Z) uncompress "$archive" ;;
+      *.rpm) rpmextract.sh "$archive" ;;
+      *) echo "'$archive' cannot be extracted via extract()" ;;
+      esac
+    else
+      echo "'$archive' is not a valid file"
+      return 1
+    fi
+  done
 }
 
 function cmpall() {
@@ -105,8 +105,8 @@ function cmpall() {
     ARGS="-name \"*.${EXT}\""
   fi
 
-  for i in `find ${DIR1} ${ARGS} -type f`;do
-    j=`basename ${i}`
+  for i in $(find ${DIR1} ${ARGS} -type f); do
+    j=$(basename ${i})
     FILE1=${DIR1}/${j}
     FILE2=${DIR2}/${j}
 
@@ -118,30 +118,30 @@ function cmpall() {
         read action
 
         case "${action}" in
-          "d" )
-            vimdiff ${FILE1} ${FILE2}
-            ;;
-          "c" )
-            BAKFILE=${FILE2}.bak_`date +"%d-%m-%Y"`
-            echo "opretter bak fil: ${BAKFILE}"
-            cp -i ${FILE2} ${BAKFILE}
-            cp -iv ${FILE1} ${FILE2}
-            ;;
-          "s" )
-            continue
-            ;;
-          "a" )
-            SKIPALL=true
-            continue
-            ;;
-          "x" )
-            return 0
-            ;;
-          * )
-            echo "vimdiff ${FILE1} ${FILE2}"
-            ;;
+        "d")
+          vimdiff ${FILE1} ${FILE2}
+          ;;
+        "c")
+          BAKFILE=${FILE2}.bak_$(date +"%d-%m-%Y")
+          echo "opretter bak fil: ${BAKFILE}"
+          cp -i ${FILE2} ${BAKFILE}
+          cp -iv ${FILE1} ${FILE2}
+          ;;
+        "s")
+          continue
+          ;;
+        "a")
+          SKIPALL=true
+          continue
+          ;;
+        "x")
+          return 0
+          ;;
+        *)
+          echo "vimdiff ${FILE1} ${FILE2}"
+          ;;
         esac
-      fi;
+      fi
     else
       if [ ${SKIPALL} ]; then
         continue
@@ -152,15 +152,15 @@ function cmpall() {
       read action
 
       case "${action}" in
-        "c" )
-          cp -iv ${FILE1} ${FILE2}
-          ;;
-        "s" )
-          continue
-          ;;
-        "x" )
-          return 0
-          ;;
+      "c")
+        cp -iv ${FILE1} ${FILE2}
+        ;;
+      "s")
+        continue
+        ;;
+      "x")
+        return 0
+        ;;
       esac
     fi
   done
@@ -181,8 +181,8 @@ function forall() {
 }
 
 function myip() {
-  INTIP=`/sbin/ifconfig | egrep -o '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | grep -v "\(^127\|255\)"`
-  EXTIP=`curl http://icanhazip.com/`
+  INTIP=$(/sbin/ifconfig | egrep -o '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | grep -v "\(^127\|255\)")
+  EXTIP=$(curl http://icanhazip.com/)
   # Simpler er http://www.whatismyip.org
   # EXTIP=`wget -q http://checkip.dyndns.org:8245/ -O - | egrep -o '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
   echo "Internal ip: ${INTIP}"
@@ -198,45 +198,45 @@ function myip() {
 #     echo "example: lc /etc config"
 #     return 1
 #   fi
-# 
+#
 #   # $DIR is the first argument, the path to the directory
 #   DIR=${1}
-# 
+#
 #   # $SEARCH is what you are looking for, and it's the second argument
 #   SEARCH=${2}
-# 
+#
 #   # $RED sets the text to inverted red, changing the capabilities of the terminal via terminfo parameters
 #   # setaf 1 = red, smso = inverted
 #   RED=`tput setaf 1; tput smso`
-# 
+#
 #   #  $NORMAL returns text to normal attributes
 #   NORMAL=`tput sgr0`
-# 
+#
 #   ls -lA ${DIR} | sed s/"${SEARCH}"/"${RED}${SEARCH}${NORMAL}"/g
 # }
 
 function wake-host() {
   case "${1}" in
-    "spook" | "spookcentral")
-      # GIGABYTE GA-Z87-D3HP
-      # MAC="94:de:80:78:e9:6a"
-      # Intel NUC
-      MAC="48:21:0b:55:dc:9f"
-      ;;
-    "fire" | "firehouse")
-      # Old gigabyte:
-      # MAC="00:24:1D:15:85:99 00:24:1d:15:85:89"
-      # Asus Rog Strix
-      MAC="24:4b:fe:97:2d:21"
-      ;;
-    "sedge" | "sedgewick")
-      # Asus H170M-Plus
-      MAC="1c:b7:2c:b1:65:61"
-      ;;
-    *)
-      echo "Does not know that host"
-      return 1
-      ;;
+  "spook" | "spookcentral")
+    # GIGABYTE GA-Z87-D3HP
+    # MAC="94:de:80:78:e9:6a"
+    # Intel NUC
+    MAC="48:21:0b:55:dc:9f"
+    ;;
+  "fire" | "firehouse")
+    # Old gigabyte:
+    # MAC="00:24:1D:15:85:99 00:24:1d:15:85:89"
+    # Asus Rog Strix
+    MAC="24:4b:fe:97:2d:21"
+    ;;
+  "sedge" | "sedgewick")
+    # Asus H170M-Plus
+    MAC="1c:b7:2c:b1:65:61"
+    ;;
+  *)
+    echo "Does not know that host"
+    return 1
+    ;;
   esac
 
   wol -v ${MAC}
@@ -248,12 +248,12 @@ function wake-host() {
 # From demunger.sh script
 function encoding_demunger() {
   echo I\'d work on "$@" ...
-  for i in "$@" ; do
+  for i in "$@"; do
     echo -n $i... to $i.new
     sed \
       -e 's/Ã©/é/g' -e 's/Ã¨/è/g' -e 's/Ãª/ê/g' -e 's/Ã«/ë/g' \
       -e 's/Â / /g' -e 's/Â«/«/g' -e 's/Â»/»/g' -e 's/Â°/°/g' \
-      -e 's/Ã¤/ä/g' -e 's/Ã¢/â/g' -e 's/Ã®/î/g' -e 's/Â/’/g'  \
+      -e 's/Ã¤/ä/g' -e 's/Ã¢/â/g' -e 's/Ã®/î/g' -e 's/Â/’/g' \
       -e 's/Ã¯/ï/g' -e 's/Ã¬/ì/g' -e 's/Ã²/ò/g' -e 's/Ã´/ô/g' \
       -e 's/Ã¶/ö/g' -e 's/Ã¿/ÿ/g' -e 's/Ã¹/ù/g' -e 's/Ã¼/ü/g' \
       -e 's/Ã»/û/g' -e 's/Ã§/ç/g' -e 's/Ã‰/É/g' -e 's/Ãˆ/È/g' \
@@ -266,7 +266,7 @@ function encoding_demunger() {
       -e 's/â’€’™/’/g' -e 's/â’€’œ/“/g' -e 's/â’€?/”/g' -e 's/àƒ’©/é/g' \
       -e 's/â’€’¦//g' -e 's/â€“/\&bull;/g' \
       -e 's/Ã…/Å/g' -e 's/Ã¥/å/g' -e 's/Ã¦/æ/g' -e 's/Ã˜/Ø/g' -e 's/Ã¸/ø/g' \
-      -e 's/Ã™/Ù/g' -e 's/Ãœ/Ü/g' -e 's/Ã›/Û/g' -e 's/Ã‡/Ç/g' $i > $i.new
+      -e 's/Ã™/Ù/g' -e 's/Ãœ/Ü/g' -e 's/Ã›/Û/g' -e 's/Ã‡/Ç/g' $i >$i.new
     echo done
   done
 }
@@ -275,7 +275,7 @@ function switch-dns() {
   local DNS
   local NEW_DNS="192.168.0.7"
   local CONNECTION
-  CONNECTION=$(nmcli -g name,device con show --active| grep eth0 | cut -f1 -d:)
+  CONNECTION=$(nmcli -g name,device con show --active | grep eth0 | cut -f1 -d:)
   DNS=$(nmcli -t -f IP4.DNS device show eth0)
   if [[ $DNS == "IP4.DNS[1]:192.168.0.7" ]]; then
     NEW_DNS="1.1.1.1"
@@ -303,4 +303,9 @@ function check_if_ip_is_free() {
   wget -S -T 2 --tries 1 "https://${IP}" -O /dev/null
   ssh -oConnectTimeout=2 "${IP}"
   dig -x +timeout=1 "${IP}" @ns.tv2.dk
+}
+
+function pyright_setup() {
+  echo "Creating pyrightconfig.json in current directory"
+  echo '{ "venvPath": ".", "venv": ".venv" }' >pyrightconfig.json
 }
