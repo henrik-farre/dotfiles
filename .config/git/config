@@ -1,7 +1,7 @@
 [user]
   name = Henrik Farre
   email = henrik@rockhopper.dk
-  signingKey = /home/enrique/.ssh/private-signing-key
+  signingKey = ~/.ssh/private-signing-key
 [gpg]
   format = ssh
 [includeIf "gitdir:~/Dev/work/"]
