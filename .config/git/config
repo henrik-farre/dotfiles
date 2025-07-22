@@ -39,7 +39,9 @@
   untracked = cyan
 [core]
   editor = nvim
-  pager = less
+  pager = delta
+[delta]
+  side-by-side = true
 [color]
   # auto: show in columns if the output is to the terminal
   ui = auto
@@ -64,7 +66,7 @@
 # Tell git diff to use mnemonic prefixes (index, work tree, commit, object) instead of the standard a and b notation
   mnemonicprefix = true
 [difftool]
-  prompt = false
+  prompt = true
 [difftool "nvim"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
