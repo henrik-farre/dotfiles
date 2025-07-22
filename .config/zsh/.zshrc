@@ -1,3 +1,6 @@
+# Profile startup
+# zmodload zsh/zprof
+
 #if [[ -o login ]]; then
 #  echo "I'm login shell"
 #fi
@@ -69,3 +72,6 @@ for ZSH_SOURCEFILE ($ZDOTDIR/**/*sh(N-.)); do
   source "${ZSH_SOURCEFILE}"
 done
 unset ZSH_SOURCEFILE
+
+# Profile startup
+# zprof

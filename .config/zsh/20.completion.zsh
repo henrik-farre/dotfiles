@@ -5,11 +5,33 @@
 #
 autoload -U compinit
 
+if [[ ! -d "$XDG_CACHE_HOME/zsh" ]]; then
+  mkdir "$XDG_CACHE_HOME/zsh"
+fi
+
 # Completion caching
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $XDG_CACHE_HOME/zsh/$HOST
 
-compinit -C -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+if [[ -o interactive ]]; then
+  # based on https://gist.github.com/ctechols/ca1035271ad134841284
+  #
+  # On slow systems, checking the cached .zcompdump file to see if it must be
+  # regenerated adds a noticable delay to zsh startup.  This little hack restricts
+  # it to once a day.  It should be pasted into your own completion file.
+  #
+  # The globbing is a little complicated here:
+  # - '#q' is an explicit glob qualifier that makes globbing work within zsh's [[ ]] construct.
+  # - 'N' makes the glob pattern evaluate to nothing when it doesn't match (rather than throw a globbing error)
+  # - '.' matches "regular files"
+  # - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
+  if [[ -n $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION(#qN.mh+24) ]]; then
+    compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+  else
+    # -C check if any new functions exists
+    compinit -C -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+  fi
+fi
 
 # Compctl
 # compctl -g '*.pdf' evince
