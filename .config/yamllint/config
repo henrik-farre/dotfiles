@@ -9,14 +9,19 @@ ignore: |
 rules:
   line-length: disable
   braces:
-    max-spaces-inside: -1
+    max-spaces-inside: 1
     max-spaces-inside-empty: -1
   truthy: disable
   comments-indentation: disable
   document-start: disable
   new-line-at-end-of-file: disable
-  comments: disable
   commas: disable
   empty-lines:
     max: 2
     max-end: 2
+  # https://ansible.readthedocs.io/projects/lint/rules/yaml/#yamllint-configuration
+  comments:
+    min-spaces-from-content: 1
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
