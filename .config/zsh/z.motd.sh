@@ -11,6 +11,7 @@ Use:
   gcif
   ctrl+g ctrl+f for fzf-git files
   ctrl+g ctrl+b for fzf-git branches
+  smite
 EOF
 
 touch /tmp/.motd_seen
