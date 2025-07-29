@@ -1,7 +1,7 @@
 if [[ -o interactive && ! -f /tmp/.motd_seen ]]; then
-echo -e "\e[42mMotd:\e[0m"
+  echo -e "\e[42mMotd:\e[0m"
 
-cat << EOF
+  cat <<EOF
 Use:
   git switch
   git worktree
@@ -12,7 +12,8 @@ Use:
   ctrl+g ctrl+f for fzf-git files
   ctrl+g ctrl+b for fzf-git branches
   smite
+  ctrl+a F for tmux fingers
 EOF
 
-touch /tmp/.motd_seen
+  touch /tmp/.motd_seen
 fi
