@@ -1,0 +1,3 @@
+[user]
+  email = henrik+codeberg@rockhopper.dk
+  signingKey = ~/.ssh/git@codeberg.org

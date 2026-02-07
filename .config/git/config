@@ -4,6 +4,8 @@
   signingKey = ~/.ssh/private-signing-key
 [gpg]
   format = ssh
+[includeIf "hasconfig:remote.*.url:git@codeberg.org:*/**"]
+  path = ~/.config/git/config-codeberg
 [includeIf "gitdir:~/Dev/work/"]
   path = ~/.config/git/config-work
 [alias]
